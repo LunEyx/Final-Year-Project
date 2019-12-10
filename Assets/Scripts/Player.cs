@@ -39,9 +39,7 @@ public class Player : MonoBehaviour
 
     private void OnCollisionEnter(Collision collision)
     {
-        Debug.Log(jumpCounter);
         jumpCounter += 1;
-        Debug.Log(jumpCounter);
     }
 
     private void OnCollisionStay(Collision collision)
