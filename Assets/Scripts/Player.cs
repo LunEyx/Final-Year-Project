@@ -9,8 +9,6 @@ public class Player : MonoBehaviour
 
     private int jumpCounter = 0;
 
-    private bool onGround = false;
-    
     private float turningSpeed = 400;
 
     // Start is called before the first frame update
@@ -29,7 +27,7 @@ public class Player : MonoBehaviour
         if (Input.GetKey(KeyCode.W))
             rb.velocity = rb.transform.rotation * new Vector3(0, rb.velocity.y, 10);
         if (Input.GetKey(KeyCode.S))
-            rb.velocity = rb.transform.rotation * (new Vector3(0, rb.velocity.y, -10));
+            rb.velocity = rb.transform.rotation * new Vector3(0, rb.velocity.y, -10);
         if (Input.GetKey(KeyCode.A))
             rb.velocity = rb.transform.rotation * new Vector3(-10, rb.velocity.y, 0);
         if (Input.GetKey(KeyCode.D))
@@ -50,18 +48,6 @@ public class Player : MonoBehaviour
 
     private void OnCollisionEnter(Collision collision)
     {
-        
         jumpCounter += 1;
-        
-    }
-
-    private void OnCollisionStay(Collision collision)
-    {
-        onGround = true;
-    }
-
-    private void OnCollisionExit(Collision collision)
-    {
-        onGround = false;
     }
 }
