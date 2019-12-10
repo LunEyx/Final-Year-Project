@@ -17,12 +17,12 @@ public class Player : MonoBehaviour
     void Update()
     {
         if (Input.GetKey(KeyCode.W))
-            rb.AddForce(Vector3.forward * 20);
+            rb.velocity = new Vector3(0, 0, 10);
         if (Input.GetKey(KeyCode.S))
-            rb.AddForce(Vector3.back * 20);
+            rb.velocity = new Vector3(0, 0, -10);
         if (Input.GetKey(KeyCode.A))
-            rb.AddForce(Vector3.left * 20);
+            rb.velocity = new Vector3(-10, 0, 0);
         if (Input.GetKey(KeyCode.D))
-            rb.AddForce(Vector3.right * 20);
+            rb.velocity = new Vector3(10, 0, 0);
     }
 }
