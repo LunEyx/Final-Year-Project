@@ -500,6 +500,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   player: {fileID: 1115406783}
+  health: 100
 --- !u!1 &1115406783
 GameObject:
   m_ObjectHideFlags: 0
