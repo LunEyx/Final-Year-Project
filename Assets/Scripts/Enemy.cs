@@ -8,6 +8,7 @@ public class Enemy : MonoBehaviour
 
     public GameObject player;
     private NavMeshAgent navmesh;
+    public int health = 100;
 
     // Start is called before the first frame update
     void Start()
