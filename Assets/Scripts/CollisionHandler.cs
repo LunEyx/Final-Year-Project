@@ -12,7 +12,8 @@ public class CollisionHandler : MonoBehaviour
 
             if (collision.gameObject.tag == "Enemy" && collision.gameObject.GetComponent<Enemy>().hpSystem.get_hp() > 0){
                 collision.gameObject.GetComponent<Enemy>().hpSystem.damage(skillDamage);
-            } else if (collision.gameObject.tag == "Enemy" && collision.gameObject.GetComponent<Enemy>().hpSystem.get_hp() <= 0){
+            }
+            if (collision.gameObject.tag == "Enemy" && collision.gameObject.GetComponent<Enemy>().hpSystem.get_hp() <= 0){
                 Destroy(collision.gameObject);
             }
 
