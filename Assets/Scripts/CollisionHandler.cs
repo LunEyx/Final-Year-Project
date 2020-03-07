@@ -10,9 +10,10 @@ public class CollisionHandler : MonoBehaviour
         
         if (collision.gameObject.tag == "Enemy" || collision.gameObject.tag == "Obstacle"){
 
-            if (collision.gameObject.tag == "Enemy" && collision.gameObject.GetComponent<Enemy>().health > 0){
-                collision.gameObject.GetComponent<Enemy>().health -= skillDamage;
-            } else if (collision.gameObject.tag == "Enemy" && collision.gameObject.GetComponent<Enemy>().health <= 0){
+            if (collision.gameObject.tag == "Enemy" && collision.gameObject.GetComponent<Enemy>().hpSystem.get_hp() > 0){
+                collision.gameObject.GetComponent<Enemy>().hpSystem.damage(skillDamage);
+            }
+            if (collision.gameObject.tag == "Enemy" && collision.gameObject.GetComponent<Enemy>().hpSystem.get_hp() <= 0){
                 Destroy(collision.gameObject);
             }
 

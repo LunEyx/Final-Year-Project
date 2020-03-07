@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
+using UnityEngine.UI;
 
 public class Enemy : MonoBehaviour
 {
@@ -9,11 +10,12 @@ public class Enemy : MonoBehaviour
     public GameObject skillPrefab;
     private SightOfView sightOfView;
     private NavMeshAgent navmesh;
-    public int health = 100;
     public float skillLife = 1f;
     private readonly float minAttackCooldown = 1f;
     private readonly float maxAttackCooldown = 2f;
     private float attackCooldownTimer;
+    public HpSystem hpSystem = new HpSystem(100);
+    public Image hpBar;
 
     // Start is called before the first frame update
     void Start()
@@ -51,6 +53,7 @@ public class Enemy : MonoBehaviour
                 attackCooldownTimer = Random.Range(minAttackCooldown, maxAttackCooldown);
             }
         }
+        hpBar.fillAmount = hpSystem.currentLifePercentage();
     }
 
     void Attack()
@@ -58,5 +61,7 @@ public class Enemy : MonoBehaviour
         GameObject skill = Instantiate(skillPrefab, transform.position + transform.forward, transform.rotation);
         skill.GetComponent<Rigidbody>().velocity = transform.forward * 40;
         Destroy(skill, skillLife);
+        navmesh.destination = player.transform.position;
+        hpBar.fillAmount = hpSystem.currentLifePercentage();
     }
 }
