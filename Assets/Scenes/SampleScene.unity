@@ -309,7 +309,7 @@ GameObject:
   - component: {fileID: 532075774}
   - component: {fileID: 532075773}
   - component: {fileID: 532075772}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Wall1
   m_TagString: Obstacle
   m_Icon: {fileID: 0}
@@ -464,7 +464,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 534669902}
   m_LocalRotation: {x: 0.2588191, y: 0, z: 0, w: 0.9659258}
-  m_LocalPosition: {x: 1.1368684e-13, y: 5, z: -10.000003}
+  m_LocalPosition: {x: 1.1368684e-13, y: 2.5, z: -10.000003}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 1115406787}
@@ -485,6 +485,7 @@ GameObject:
   - component: {fileID: 749172963}
   - component: {fileID: 749172962}
   - component: {fileID: 749172968}
+  - component: {fileID: 749172969}
   m_Layer: 0
   m_Name: Capsule
   m_TagString: Enemy
@@ -526,9 +527,9 @@ Rigidbody:
   m_Drag: 0
   m_AngularDrag: 0.05
   m_UseGravity: 1
-  m_IsKinematic: 0
+  m_IsKinematic: 1
   m_Interpolate: 0
-  m_Constraints: 0
+  m_Constraints: 112
   m_CollisionDetection: 0
 --- !u!136 &749172964
 CapsuleCollider:
@@ -597,7 +598,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 749172961}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 18.6, y: 2.28, z: -6}
+  m_LocalPosition: {x: -14.8, y: 2.28, z: -6}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 516934309}
@@ -617,7 +618,31 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   player: {fileID: 1115406783}
+  skillPrefab: {fileID: 1068965152822112325, guid: 2f1d5cad6c7784f1084772dab7ef3ebe,
+    type: 3}
+  skillLife: 1
   hpBar: {fileID: 963053628}
+--- !u!114 &749172969
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 749172961}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 18e319689e35140b4978d4aefee17a3d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  viewRadius: 15
+  viewAngle: 90
+  targetMask:
+    serializedVersion: 2
+    m_Bits: 1024
+  obstacleMask:
+    serializedVersion: 2
+    m_Bits: 512
+  visibleTargets: []
 --- !u!1 &963053627
 GameObject:
   m_ObjectHideFlags: 0
@@ -705,7 +730,7 @@ GameObject:
   - component: {fileID: 1115406788}
   - component: {fileID: 1115406790}
   - component: {fileID: 1115406789}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Cube
   m_TagString: Player
   m_Icon: {fileID: 0}
@@ -779,7 +804,7 @@ Transform:
   m_GameObject: {fileID: 1115406783}
   m_LocalRotation: {x: 0, y: -0.7071068, z: 0, w: 0.7071068}
   m_LocalPosition: {x: 22.58, y: 1.14, z: -5.4082355}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 1, y: 2, z: 1}
   m_Children:
   - {fileID: 534669905}
   m_Father: {fileID: 0}
@@ -839,7 +864,7 @@ GameObject:
   - component: {fileID: 1147595686}
   - component: {fileID: 1147595685}
   - component: {fileID: 1147595684}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Wall2
   m_TagString: Obstacle
   m_Icon: {fileID: 0}
@@ -1022,7 +1047,7 @@ GameObject:
   - component: {fileID: 1447457329}
   - component: {fileID: 1447457328}
   - component: {fileID: 1447457327}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Wall3
   m_TagString: Obstacle
   m_Icon: {fileID: 0}
