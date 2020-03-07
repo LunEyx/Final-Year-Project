@@ -17,7 +17,6 @@ public class Enemy : MonoBehaviour
     void Start()
     {
         navmesh = GetComponent<NavMeshAgent>();
-        hpBar.fillAmount = 0.5f;
     }
 
     // Update is called once per frame
