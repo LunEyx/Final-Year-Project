@@ -11,26 +11,15 @@ public class SightOfView : MonoBehaviour
     public LayerMask targetMask;
     public LayerMask obstaclemask;
 
-    public float meshResolution;
     public int edgeResolveIterations;
     public float edgeDstThreshold;
-
-    public MeshFilter viewMeshFilter;
-    Mesh viewMesh;
 
     // [HideInInspector]
     public List<Transform> visibleTargets = new List<Transform>();
 
     void Start()
     {
-        viewMesh = new Mesh();
-        viewMesh.name = "View Mesh";
-        viewMeshFilter.mesh = viewMesh;
         StartCoroutine("FindTargetsWithDelay", .2f);
-    }
-    private void LateUpdate()
-    {
-        DrawFieldOfView();
     }
     
     IEnumerator FindTargetsWithDelay(float delay)
@@ -59,61 +48,6 @@ public class SightOfView : MonoBehaviour
                 }
             }
         }
-    }
-
-    void DrawFieldOfView()
-    {
-        int stepCount = Mathf.RoundToInt(viewAngle * meshResolution);
-        float stepAngleSize = viewAngle / stepCount;
-        List<Vector3> viewPoints = new List<Vector3>();
-        ViewCastInfo oldViewCast = new ViewCastInfo();
-        for (int i = 0; i <= stepCount; i++)
-        {
-            float angle = transform.eulerAngles.y - viewAngle / 2 + stepAngleSize * i;
-            ViewCastInfo newViewCast = ViewCast(angle);
-
-            if (i > 0)
-            {
-                bool edgeDstThresholdExceeded = Mathf.Abs(oldViewCast.dst - newViewCast.dst) > edgeDstThreshold;
-                if (oldViewCast.hit != newViewCast.hit || (oldViewCast.hit && newViewCast.hit && edgeDstThresholdExceeded))
-                {
-                    EdgeInfo edge = FindEdge(oldViewCast, newViewCast);
-                    if (edge.pointA != Vector3.zero)
-                    {
-                        viewPoints.Add(edge.pointA);
-                    }
-                    if (edge.pointB != Vector3.zero)
-                    {
-                        viewPoints.Add(edge.pointB);
-                    }
-                }
-            }
-
-            viewPoints.Add(newViewCast.point);
-            oldViewCast = newViewCast;
-        }
-
-        int vertexCount = viewPoints.Count;
-        Vector3[] vertices = new Vector3[vertexCount];
-        int[] triangles = new int[(vertexCount - 2) * 3];
-
-        vertices[0] = Vector3.zero;
-        for (int i = 0; i < vertexCount - 1; i++)
-        {
-            vertices[i + 1] = transform.InverseTransformPoint(viewPoints[i]);
-
-            if (i < vertexCount - 2)
-            {
-                triangles[i * 3] = 0;
-                triangles[i * 3 + 1] = i + 1;
-                triangles[i * 3 + 2] = i + 2;
-            }
-        }
-
-        viewMesh.Clear();
-        viewMesh.vertices = vertices;
-        viewMesh.triangles = triangles;
-        viewMesh.RecalculateNormals();
     }
 
     EdgeInfo FindEdge(ViewCastInfo minViewCast, ViewCastInfo maxViewCast)

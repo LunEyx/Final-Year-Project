@@ -579,8 +579,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   player: {fileID: 1115406783}
-  sightOfView: {fileID: 0}
+  skillPrefab: {fileID: 1068965152822112325, guid: 2f1d5cad6c7784f1084772dab7ef3ebe,
+    type: 3}
   health: 100
+  skillLife: 1
 --- !u!114 &749172969
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -601,10 +603,8 @@ MonoBehaviour:
   obstaclemask:
     serializedVersion: 2
     m_Bits: 512
-  meshResolution: 1
   edgeResolveIterations: 0
   edgeDstThreshold: 0
-  viewMeshFilter: {fileID: 353634737}
   visibleTargets: []
 --- !u!1 &1115406783
 GameObject:
