@@ -33,7 +33,7 @@ public class MeteorCaster : MonoBehaviour
         float randPosX = Random.Range(0 - range, range);
         float randPosZ = Random.Range(0 - range, range);  
 
-        GameObject meteor = Instantiate(prefab, new Vector3(transform.position.x + randPosX, transform.position.y + 5f, transform.position.z + randPosZ), transform.rotation);
+        GameObject meteor = Instantiate(prefab, new Vector3(transform.position.x + randPosX, transform.position.y + 10f, transform.position.z + randPosZ), transform.rotation);
         meteor.GetComponent<Rigidbody>().velocity = transform.up * -20;
         meteorCounter++;
 
