@@ -35,7 +35,6 @@ public class MeteorCaster : MonoBehaviour
 
         GameObject meteor = Instantiate(prefab, new Vector3(transform.position.x + randPosX, transform.position.y + 5f, transform.position.z + randPosZ), transform.rotation);
         meteor.GetComponent<Rigidbody>().velocity = transform.up * -20;
-        Destroy(meteor, skillLife);
         meteorCounter++;
 
         if (meteorCounter >= meteorNum)
@@ -43,6 +42,7 @@ public class MeteorCaster : MonoBehaviour
             CancelInvoke();
             meteorCounter = 0;
         }
+        
             
     }
 
