@@ -16,5 +16,9 @@ public class SpellCaster : MonoBehaviour
             skill.GetComponent<Rigidbody>().velocity = transform.forward * 40;
             Destroy(skill, skillLife);
         }
+
+        
     }
+
+    
 }
