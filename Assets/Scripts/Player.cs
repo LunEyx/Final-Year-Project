@@ -6,6 +6,7 @@ public class Player : MonoBehaviour
 {
 
     private Rigidbody rb;
+    private Animator animator;
 
     private int jumpCounter = 0;
 
@@ -15,6 +16,7 @@ public class Player : MonoBehaviour
     void Start()
     {
         rb = GetComponent<Rigidbody>();
+        animator = GetComponentInChildren<Animator>();
     }
 
     // Update is called once per frame
@@ -23,7 +25,6 @@ public class Player : MonoBehaviour
         float horizontal = Input.GetAxis("Mouse X") * turningSpeed * Time.deltaTime;
         transform.Rotate(0, horizontal, 0);
         
-
         if (Input.GetKey(KeyCode.W))
             rb.velocity = rb.transform.rotation * new Vector3(0, rb.velocity.y, 10);
         if (Input.GetKey(KeyCode.S))
@@ -32,6 +33,15 @@ public class Player : MonoBehaviour
             rb.velocity = rb.transform.rotation * new Vector3(-10, rb.velocity.y, 0);
         if (Input.GetKey(KeyCode.D))
             rb.velocity = rb.transform.rotation * new Vector3(10, rb.velocity.y, 0);
+        
+        if (Input.GetKey(KeyCode.A) || Input.GetKey(KeyCode.S) || Input.GetKey(KeyCode.W) || Input.GetKey(KeyCode.D))
+        {
+            animator.SetBool("IsWalking", true);
+        }
+        else
+        {
+            animator.SetBool("IsWalking", false);
+        }
 
         if (Input.GetKey(KeyCode.Space) && jumpCounter>0)
         {
