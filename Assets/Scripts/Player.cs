@@ -9,8 +9,8 @@ public class Player : MonoBehaviour
     private Animator animator;
 
     private int jumpCounter = 0;
-
     private float turningSpeed = 400;
+    private Vector3 oldPosition;
 
     // Start is called before the first frame update
     void Start()
@@ -33,8 +33,9 @@ public class Player : MonoBehaviour
             rb.velocity = rb.transform.rotation * new Vector3(-10, rb.velocity.y, 0);
         if (Input.GetKey(KeyCode.D))
             rb.velocity = rb.transform.rotation * new Vector3(10, rb.velocity.y, 0);
-        
-        if (Input.GetKey(KeyCode.A) || Input.GetKey(KeyCode.S) || Input.GetKey(KeyCode.W) || Input.GetKey(KeyCode.D))
+
+        Debug.Log(rb.velocity.magnitude);
+        if (rb.velocity.magnitude > 1)
         {
             animator.SetBool("IsWalking", true);
         }
