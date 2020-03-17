@@ -10,10 +10,10 @@ CapsuleCollider:
   m_Material: {fileID: 0}
   m_IsTrigger: 0
   m_Enabled: 1
-  m_Radius: 4
-  m_Height: 6.5
+  m_Radius: 1.3430023
+  m_Height: 7.1995
   m_Direction: 1
-  m_Center: {x: 0.271286, y: 3.3380494, z: 0.0005393028}
+  m_Center: {x: -0.08269191, y: 2.9416914, z: -0.010694504}
 --- !u!1001 &3263067877657092361
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -26,6 +26,16 @@ PrefabInstance:
       propertyPath: m_Name
       value: Tree
       objectReference: {fileID: 0}
+    - target: {fileID: 189309171360804179, guid: b5013d2c042b4314f8b963379b45cdba,
+        type: 3}
+      propertyPath: m_TagString
+      value: Obstacle
+      objectReference: {fileID: 0}
+    - target: {fileID: 888516059116648242, guid: b5013d2c042b4314f8b963379b45cdba,
+        type: 3}
+      propertyPath: m_SelectedEditorRenderState
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 5949574139127709765, guid: b5013d2c042b4314f8b963379b45cdba,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -34,7 +44,7 @@ PrefabInstance:
     - target: {fileID: 5949574139127709765, guid: b5013d2c042b4314f8b963379b45cdba,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: 2.4
+      value: -0.65
       objectReference: {fileID: 0}
     - target: {fileID: 5949574139127709765, guid: b5013d2c042b4314f8b963379b45cdba,
         type: 3}
