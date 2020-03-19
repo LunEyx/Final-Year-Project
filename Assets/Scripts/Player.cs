@@ -11,6 +11,8 @@ public class Player : MonoBehaviour
 
     private float turningSpeed = 400;
 
+    public ExpSystem playerExpSystem = new ExpSystem();
+
     // Start is called before the first frame update
     void Start()
     {

@@ -8,6 +8,7 @@ public class Enemy : MonoBehaviour
 {
     public GameObject player;
     public GameObject skillPrefab;
+    public GameObject ExpPopUp;
     private SightOfView sightOfView;
     private NavMeshAgent navmesh;
     public float skillLife = 1f;
@@ -16,6 +17,8 @@ public class Enemy : MonoBehaviour
     private float attackCooldownTimer;
     public HpSystem hpSystem = new HpSystem(100);
     public Image hpBar;
+    private int exp = 10;
+
 
     // Start is called before the first frame update
     void Start()
@@ -54,6 +57,13 @@ public class Enemy : MonoBehaviour
             }
         }
         hpBar.fillAmount = hpSystem.currentLifePercentage();
+        if (hpSystem.get_hp() <= 0)
+        {
+            Destroy(gameObject);
+            player.GetComponent<Player>().playerExpSystem.gainExp(exp);
+            if (ExpPopUp)
+                showExpPopUp();
+        }
     }
 
     void Attack()
@@ -63,5 +73,12 @@ public class Enemy : MonoBehaviour
         Destroy(skill, skillLife);
         navmesh.destination = player.transform.position;
         hpBar.fillAmount = hpSystem.currentLifePercentage();
+    }
+
+    private void showExpPopUp()
+    {   
+        GameObject obj = Instantiate(ExpPopUp, transform.position, Camera.main.transform.rotation);
+        obj.GetComponent<TextMesh>().text = "+" + exp + " exp";
+        Debug.Log("show");
     }
 }
