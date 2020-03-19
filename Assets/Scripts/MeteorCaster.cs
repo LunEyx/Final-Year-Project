@@ -5,6 +5,7 @@ using UnityEngine;
 public class MeteorCaster : MonoBehaviour
 {
     public GameObject prefab;
+    public float skillLife = 5f;
     private int meteorCounter = 0;
     public int meteorNum = 20;
     public float radius = 8;
@@ -22,7 +23,10 @@ public class MeteorCaster : MonoBehaviour
     {
         float randPosX = Random.Range(0 - radius, radius);
         float randPosZ = Random.Range(0 - radius, radius);
-        GameObject meteor = Instantiate(prefab, new Vector3(transform.position.x + randPosX, transform.position.y + 10f, transform.position.z + randPosZ), transform.rotation);
+        GameObject meteor = Instantiate(
+            prefab,
+            new Vector3(transform.position.x + randPosX, transform.position.y + 10f, transform.position.z + randPosZ),
+            Quaternion.Euler(90, 0, 0));
         meteor.GetComponent<Rigidbody>().velocity = transform.up * -20;
         meteorCounter++;
 
@@ -31,5 +35,7 @@ public class MeteorCaster : MonoBehaviour
             CancelInvoke();
             meteorCounter = 0;
         }
+
+        Destroy(meteor, skillLife);
     }
 }
