@@ -15,7 +15,7 @@ public class BubbleCaster : MonoBehaviour
         {
             GameObject skill = Instantiate(prefab, transform.position + transform.forward * 2, transform.rotation);
             skill.GetComponent<Rigidbody>().velocity = transform.forward * 15;
-            //Destroy(skill, skillLife);
+            Destroy(skill, skillLife);
         }
 
 

@@ -66,7 +66,7 @@ public class Enemy : MonoBehaviour
         {
             if (!bubbleGenerated)
             {
-                tempBubble = Instantiate(bubblePrefab, this.transform.position, this.transform.rotation);
+                tempBubble = Instantiate(bubblePrefab, transform);
                 bubbleGenerated = true;
             }
                 
