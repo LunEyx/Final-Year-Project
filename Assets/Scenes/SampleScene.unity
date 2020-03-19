@@ -618,10 +618,14 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   player: {fileID: 1115406783}
+  bubblePrefab: {fileID: 1437083994084464143, guid: 81272ad85fd3e004392bd05d27c107f5,
+    type: 3}
   skillPrefab: {fileID: 1068965152822112325, guid: 2f1d5cad6c7784f1084772dab7ef3ebe,
     type: 3}
   skillLife: 1
   hpBar: {fileID: 963053628}
+  bubbled: 0
+  bubbleDuration: 5
 --- !u!114 &749172969
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -731,6 +735,7 @@ GameObject:
   - component: {fileID: 1115406790}
   - component: {fileID: 1115406789}
   - component: {fileID: 1115406791}
+  - component: {fileID: 1115406792}
   m_Layer: 10
   m_Name: Cube
   m_TagString: Player
@@ -869,6 +874,20 @@ MonoBehaviour:
   skillLife: 1
   meteorNum: 10
   range: 8
+--- !u!114 &1115406792
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1115406783}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ed88ce7fde7d69346bae25c503443bea, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  prefab: {fileID: 972450990342239282, guid: 69c655c02f50365459793afa2a473320, type: 3}
+  skillLife: 1
 --- !u!1 &1147595683
 GameObject:
   m_ObjectHideFlags: 0
