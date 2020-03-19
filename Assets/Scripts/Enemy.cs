@@ -17,10 +17,9 @@ public class Enemy : MonoBehaviour
     private float attackCooldownTimer;
     public HpSystem hpSystem = new HpSystem(100);
     public Image hpBar;
-    public bool bubbled = false;
-    public float bubbleDuration = 5f;
-    private bool bubbleGenerated = false;
-    private GameObject tempBubble;
+    private bool bubbled = false;
+    private GameObject bubble;
+
 
 
     // Start is called before the first frame update
@@ -62,31 +61,21 @@ public class Enemy : MonoBehaviour
                 }
             }
         }
-        else
-        {
-            if (!bubbleGenerated)
-            {
-                tempBubble = Instantiate(bubblePrefab, transform);
-                bubbleGenerated = true;
-            }
-                
-            navmesh.destination = this.transform.position;
-            this.GetComponent<Rigidbody>().velocity = Vector3.zero;
-            StartCoroutine(StopMoves());    
-            
-        }
-
         hpBar.fillAmount = hpSystem.currentLifePercentage();
-
-        
     }
 
-    IEnumerator StopMoves()
+    IEnumerator Bubbled(float duration)
     {
-        yield return new WaitForSeconds(bubbleDuration);
+        bubbled = true;
+        navmesh.destination = transform.position;
+        GetComponent<Rigidbody>().velocity = Vector3.zero;
+        Destroy(bubble);
+        bubble = Instantiate(bubblePrefab, transform);
+        Debug.Log(duration);
+        yield return new WaitForSeconds(duration);
+        Debug.Log("Bubbled End");
         bubbled = false;
-        bubbleGenerated = false;
-        Destroy(tempBubble);
+        Destroy(bubble);
     }
 
 
@@ -97,5 +86,11 @@ public class Enemy : MonoBehaviour
         Destroy(skill, skillLife);
         navmesh.destination = player.transform.position;
         hpBar.fillAmount = hpSystem.currentLifePercentage();
+    }
+
+    public void ApplyDebuff(string debuff, float duration)
+    {
+        StopCoroutine(debuff);
+        StartCoroutine(debuff, duration);
     }
 }

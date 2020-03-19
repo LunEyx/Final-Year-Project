@@ -5,7 +5,7 @@ using UnityEngine;
 public class BubbleCollisionHandler : MonoBehaviour
 {
     private int skillDamage = 5;
-    private float bubbleDuration = 5f;
+    private float bubbledDuration = 5f;
 
     private void OnCollisionEnter(Collision collision)
     {
@@ -16,8 +16,7 @@ public class BubbleCollisionHandler : MonoBehaviour
             if (collision.gameObject.tag == "Enemy" && collision.gameObject.GetComponent<Enemy>().hpSystem.get_hp() > 0)
             {
                 collision.gameObject.GetComponent<Enemy>().hpSystem.damage(skillDamage);
-                collision.gameObject.GetComponent<Enemy>().bubbled = true;
-                collision.gameObject.GetComponent<Enemy>().bubbleDuration = bubbleDuration;
+                collision.gameObject.GetComponent<Enemy>().ApplyDebuff("Bubbled", bubbledDuration);
             }
             if (collision.gameObject.tag == "Enemy" && collision.gameObject.GetComponent<Enemy>().hpSystem.get_hp() <= 0)
             {
