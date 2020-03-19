@@ -7,7 +7,6 @@ public class SpellCaster : MonoBehaviour
     public GameObject prefab;
     public float skillLife = 1f;
 
-
     // Update is called once per frame
     void Update()
     {
@@ -16,9 +15,5 @@ public class SpellCaster : MonoBehaviour
             skill.GetComponent<Rigidbody>().velocity = transform.forward * 40;
             Destroy(skill, skillLife);
         }
-
-        
     }
-
-    
 }

@@ -20,8 +20,6 @@ public class Enemy : MonoBehaviour
     private bool bubbled = false;
     private GameObject bubble;
 
-
-
     // Start is called before the first frame update
     void Start()
     {
@@ -71,13 +69,10 @@ public class Enemy : MonoBehaviour
         GetComponent<Rigidbody>().velocity = Vector3.zero;
         Destroy(bubble);
         bubble = Instantiate(bubblePrefab, transform);
-        Debug.Log(duration);
         yield return new WaitForSeconds(duration);
-        Debug.Log("Bubbled End");
         bubbled = false;
         Destroy(bubble);
     }
-
 
     void Attack()
     {

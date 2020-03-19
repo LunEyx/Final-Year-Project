@@ -7,7 +7,6 @@ public class BubbleCaster : MonoBehaviour
     public GameObject prefab;
     public float skillLife = 10f;
 
-
     // Update is called once per frame
     void Update()
     {
@@ -17,7 +16,5 @@ public class BubbleCaster : MonoBehaviour
             skill.GetComponent<Rigidbody>().velocity = transform.forward * 15;
             Destroy(skill, skillLife);
         }
-
-
     }
 }
