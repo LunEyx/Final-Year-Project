@@ -34,7 +34,6 @@ public class Player : MonoBehaviour
         if (Input.GetKey(KeyCode.D))
             rb.velocity = rb.transform.rotation * new Vector3(10, rb.velocity.y, 0);
 
-        Debug.Log(rb.velocity.magnitude);
         if (rb.velocity.magnitude > 1)
         {
             animator.SetBool("IsWalking", true);
