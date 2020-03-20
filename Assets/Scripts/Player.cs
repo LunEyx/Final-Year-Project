@@ -10,7 +10,7 @@ public class Player : MonoBehaviour
 
     private int jumpCounter = 0;
     private float turningSpeed = 400;
-    private Vector3 oldPosition;
+    public float magnitude = 1;
 
     // Start is called before the first frame update
     void Start()
@@ -34,7 +34,7 @@ public class Player : MonoBehaviour
         if (Input.GetKey(KeyCode.D))
             rb.velocity = rb.transform.rotation * new Vector3(10, rb.velocity.y, 0);
 
-        if (rb.velocity.magnitude > 1)
+        if (rb.velocity.magnitude > magnitude)
         {
             animator.SetBool("IsWalking", true);
         }
