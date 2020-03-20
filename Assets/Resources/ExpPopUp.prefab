@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 2103993799434946972}
   - component: {fileID: 1882246067951920864}
   - component: {fileID: 1046820836115520356}
+  - component: {fileID: 114339806043431520}
   - component: {fileID: 8286531229278918118}
   - component: {fileID: 114312191246910894}
   - component: {fileID: 5365795102549658232}
@@ -85,6 +86,22 @@ MeshRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
+--- !u!114 &114339806043431520
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8448747930220164662}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3ea5c6061727ac14d8c03f68af66bcab, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  BillboardX: 1
+  BillboardY: 1
+  BillboardZ: 1
+  OffsetToCamera: 0
 --- !u!102 &8286531229278918118
 TextMesh:
   serializedVersion: 3
