@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 170076734}
-  m_IndirectSpecularColor: {r: 0.44657898, g: 0.4964133, b: 0.5748178, a: 1}
+  m_IndirectSpecularColor: {r: 0.44657898, g: 0.49641287, b: 0.5748173, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -624,8 +624,6 @@ MonoBehaviour:
     type: 3}
   skillLife: 1
   hpBar: {fileID: 963053628}
-  bubbled: 0
-  bubbleDuration: 5
 --- !u!114 &749172969
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -873,7 +871,7 @@ MonoBehaviour:
   prefab: {fileID: 7848916626512630633, guid: 0d2a0e2f0e5c39546aa5680ffb414e25, type: 3}
   skillLife: 1
   meteorNum: 10
-  range: 8
+  radius: 8
 --- !u!114 &1115406792
 MonoBehaviour:
   m_ObjectHideFlags: 0
