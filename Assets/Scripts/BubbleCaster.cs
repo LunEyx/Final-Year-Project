@@ -2,17 +2,18 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class SpellCaster : MonoBehaviour
+public class BubbleCaster : MonoBehaviour
 {
     public GameObject prefab;
-    public float skillLife = 1f;
+    public float skillLife = 10f;
 
     // Update is called once per frame
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Alpha1)){
+        if (Input.GetKeyDown(KeyCode.Alpha4))
+        {
             GameObject skill = Instantiate(prefab, transform.position + transform.forward * 2, transform.rotation);
-            skill.GetComponent<Rigidbody>().velocity = transform.forward * 40;
+            skill.GetComponent<Rigidbody>().velocity = transform.forward * 15;
             Destroy(skill, skillLife);
         }
     }

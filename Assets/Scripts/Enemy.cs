@@ -7,6 +7,7 @@ using UnityEngine.UI;
 public class Enemy : MonoBehaviour
 {
     public GameObject player;
+    public GameObject bubblePrefab;
     public GameObject skillPrefab;
     private SightOfView sightOfView;
     private NavMeshAgent navmesh;
@@ -16,6 +17,8 @@ public class Enemy : MonoBehaviour
     private float attackCooldownTimer;
     public HpSystem hpSystem = new HpSystem(100);
     public Image hpBar;
+    private bool bubbled = false;
+    private GameObject bubble;
 
     // Start is called before the first frame update
     void Start()
@@ -28,32 +31,47 @@ public class Enemy : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (attackCooldownTimer > 0)
+        if (!bubbled)
         {
-            attackCooldownTimer -= Time.deltaTime;
-        }
-        else
-        {
-            attackCooldownTimer = 0;
-        }
-
-        if (sightOfView.visibleTargets.Count == 0)
-        {
-            navmesh.destination = player.transform.position;
-        }
-        else
-        {
-            navmesh.destination = navmesh.transform.position;
-            Vector3 targetPos = sightOfView.visibleTargets[0].position;
-            Quaternion targetRotation = Quaternion.LookRotation(targetPos - transform.position);
-            navmesh.transform.rotation = Quaternion.Slerp(transform.rotation, targetRotation, 10f * Time.deltaTime);
-            if (attackCooldownTimer == 0)
+            if (attackCooldownTimer > 0)
             {
-                Attack();
-                attackCooldownTimer = Random.Range(minAttackCooldown, maxAttackCooldown);
+                attackCooldownTimer -= Time.deltaTime;
+            }
+            else
+            {
+                attackCooldownTimer = 0;
+            }
+
+            if (sightOfView.visibleTargets.Count == 0)
+            {
+                navmesh.destination = player.transform.position;
+            }
+            else
+            {
+                navmesh.destination = navmesh.transform.position;
+                Vector3 targetPos = sightOfView.visibleTargets[0].position;
+                Quaternion targetRotation = Quaternion.LookRotation(targetPos - transform.position);
+                navmesh.transform.rotation = Quaternion.Slerp(transform.rotation, targetRotation, 10f * Time.deltaTime);
+                if (attackCooldownTimer == 0)
+                {
+                    Attack();
+                    attackCooldownTimer = Random.Range(minAttackCooldown, maxAttackCooldown);
+                }
             }
         }
         hpBar.fillAmount = hpSystem.currentLifePercentage();
+    }
+
+    IEnumerator Bubbled(float duration)
+    {
+        bubbled = true;
+        navmesh.destination = transform.position;
+        GetComponent<Rigidbody>().velocity = Vector3.zero;
+        Destroy(bubble);
+        bubble = Instantiate(bubblePrefab, transform);
+        yield return new WaitForSeconds(duration);
+        bubbled = false;
+        Destroy(bubble);
     }
 
     void Attack()
@@ -63,5 +81,11 @@ public class Enemy : MonoBehaviour
         Destroy(skill, skillLife);
         navmesh.destination = player.transform.position;
         hpBar.fillAmount = hpSystem.currentLifePercentage();
+    }
+
+    public void ApplyDebuff(string debuff, float duration)
+    {
+        StopCoroutine(debuff);
+        StartCoroutine(debuff, duration);
     }
 }
