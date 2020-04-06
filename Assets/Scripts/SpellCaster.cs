@@ -5,7 +5,7 @@ using UnityEngine;
 public class SpellCaster : MonoBehaviour
 {
     public GameObject prefab;
-    public float skillLife = 1f;
+    public float skillLife;
     public float cooldown = 3f;
     public bool isCooldown = false;
     public Animator animator;
