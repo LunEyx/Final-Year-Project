@@ -6,6 +6,7 @@ using UnityEngine.UI;
 
 public class Enemy : MonoBehaviour
 {
+    private Rigidbody rb;
     public GameObject player;
     public GameObject bubblePrefab;
     public GameObject skillPrefab;
@@ -23,6 +24,7 @@ public class Enemy : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        rb = GetComponent<Rigidbody>();
         sightOfView = GetComponent<SightOfView>();
         navmesh = GetComponent<NavMeshAgent>();
         attackCooldownTimer = Random.Range(minAttackCooldown, maxAttackCooldown);
@@ -31,6 +33,14 @@ public class Enemy : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        Debug.Log(rb.velocity.magnitude);
+        if (rb.velocity.magnitude > 0.05)
+        {
+            rb.velocity *= 0.95f;
+        } else
+        {
+            rb.velocity = Vector3.zero;
+        }
         if (!bubbled)
         {
             if (attackCooldownTimer > 0)

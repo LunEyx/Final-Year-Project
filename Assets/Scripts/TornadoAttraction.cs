@@ -9,19 +9,13 @@ public class TornadoAttraction : MonoBehaviour
     public float refreshRate;
 
     private void OnTriggerEnter(Collider obj){
-        StartCoroutine(pullObject(obj, true));
+        StartCoroutine(PullObject(obj));
     }
 
-    private void OnTriggerExit(Collider obj){
-        StartCoroutine(pullObject(obj, false));
-    }
-
-    IEnumerator pullObject(Collider obj, bool pullable){
-        if (pullable){
-            Vector3 pullDirection = particleCenter.position - obj.transform.position;
-            obj.GetComponent<Rigidbody>().AddForce(pullDirection.normalized * pullForce * Time.deltaTime);
-            yield return refreshRate;
-            StartCoroutine(pullObject(obj, pullable));
-        }
+    IEnumerator PullObject(Collider obj){
+        Vector3 pullDirection = particleCenter.position - obj.transform.position;
+        obj.GetComponent<Rigidbody>().AddForce(pullDirection.normalized * pullForce * Time.deltaTime);
+        yield return refreshRate;
+        StartCoroutine(PullObject(obj));
     }
 }
