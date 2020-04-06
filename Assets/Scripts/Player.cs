@@ -1,22 +1,33 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class Player : MonoBehaviour
 {
 
     private Rigidbody rb;
     private Animator animator;
+    private Text hpText;
+    private Image hpBar;
 
+    private int maxHp = 100;
     private int jumpCounter = 0;
     private float turningSpeed = 400;
     public float magnitude = 1;
+    public GameObject hud;
+    public HpSystem hpSystem;
 
     // Start is called before the first frame update
     void Start()
     {
         rb = GetComponent<Rigidbody>();
         animator = GetComponentInChildren<Animator>();
+        Transform hpObj = hud.transform.Find("Player Status").Find("HP");
+        hpText = hpObj.GetComponentInChildren<Text>();
+        hpBar = hpObj.Find("HP Bar").Find("hp_background").GetChild(0).GetComponentInChildren<Image>();
+
+        hpSystem = new HpSystem(maxHp);
     }
 
     // Update is called once per frame
@@ -47,8 +58,10 @@ public class Player : MonoBehaviour
         {
             jumpCounter--;
             rb.AddForce(new Vector3(0, 10f, 0), ForceMode.Impulse);
-            
         }
+
+        hpText.text = $"{hpSystem.get_hp()} / {maxHp}";
+        hpBar.fillAmount = hpSystem.currentLifePercentage();
     }
 
     void LateUpdate()
