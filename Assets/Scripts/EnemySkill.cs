@@ -8,12 +8,10 @@ public class EnemySkill : MonoBehaviour
     {
         if (collision.gameObject.tag == "Player" || collision.gameObject.tag == "Obstacle")
         {
-            Debug.Log("HIT sth");
             if (collision.gameObject.tag == "Player")
             {
                 Player player = collision.gameObject.GetComponent<Player>();
                 player.hpSystem.damage(10);
-                Debug.Log("HIT player");
             }
 
             Destroy(gameObject);

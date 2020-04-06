@@ -14,8 +14,11 @@ public class Player : MonoBehaviour
     private int maxHp = 100;
     private int jumpCounter = 0;
     private float turningSpeed = 400;
+    private SpellCaster skill1;
+    private float skill1Cooldown;
     public float magnitude = 1;
-    public GameObject hud;
+    private GameObject hud;
+    public Image skill1Icon;
     public HpSystem hpSystem;
 
     // Start is called before the first frame update
@@ -23,9 +26,13 @@ public class Player : MonoBehaviour
     {
         rb = GetComponent<Rigidbody>();
         animator = GetComponentInChildren<Animator>();
+        hud = GameObject.FindGameObjectWithTag("HUD");
         Transform hpObj = hud.transform.Find("Player Status").Find("HP");
         hpText = hpObj.GetComponentInChildren<Text>();
         hpBar = hpObj.Find("HP Bar").Find("hp_background").GetChild(0).GetComponentInChildren<Image>();
+        skill1 = GetComponent<SpellCaster>();
+        skill1Cooldown = skill1.GetCooldown();
+        skill1Icon = hpObj.Find("Skill").GetComponentsInChildren<Image>()[0];
 
         hpSystem = new HpSystem(maxHp);
     }
@@ -58,6 +65,20 @@ public class Player : MonoBehaviour
         {
             jumpCounter--;
             rb.AddForce(new Vector3(0, 10f, 0), ForceMode.Impulse);
+        }
+
+        if (Input.GetKey(KeyCode.Q) && !skill1.IsCooldown())
+        {
+            skill1.Cast();
+            skill1Icon.fillAmount = 0;
+        }
+        else if (skill1.IsCooldown())
+        {
+            skill1Icon.fillAmount += 1 / skill1Cooldown * Time.deltaTime;
+            if (skill1Icon.fillAmount >= 1)
+            {
+                skill1.Ready();
+            }
         }
 
         hpText.text = $"{hpSystem.get_hp()} / {maxHp}";

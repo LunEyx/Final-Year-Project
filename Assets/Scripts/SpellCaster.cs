@@ -6,6 +6,8 @@ public class SpellCaster : MonoBehaviour
 {
     public GameObject prefab;
     public float skillLife = 1f;
+    public float cooldown = 3f;
+    public bool isCooldown = false;
     public Animator animator;
 
     private void Start()
@@ -13,13 +15,26 @@ public class SpellCaster : MonoBehaviour
         animator = GetComponentInChildren<Animator>();
     }
 
-    // Update is called once per frame
-    void Update()
+    public float GetCooldown()
     {
-        if (Input.GetKeyDown(KeyCode.Alpha1)){
-            animator.SetTrigger("IsAttack");
-            Invoke("SkillInstantiate", 0.5f);
-        }
+        return cooldown;
+    }
+
+    public bool IsCooldown()
+    {
+        return isCooldown;
+    }
+
+    public void Ready()
+    {
+        isCooldown = false;
+    }
+
+    public void Cast()
+    {
+        isCooldown = true;
+        animator.SetTrigger("IsAttack");
+        Invoke("SkillInstantiate", 0.5f);
     }
 
     void SkillInstantiate()

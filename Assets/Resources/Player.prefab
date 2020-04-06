@@ -64,7 +64,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   magnitude: 1
-  hud: {fileID: 1347749256161768939, guid: a854f23ea858e4d13a074a4e860c6a30, type: 3}
+  hud: {fileID: 0}
 --- !u!114 &313450360509659982
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -79,6 +79,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   prefab: {fileID: 7848916626512630633, guid: 0d2a0e2f0e5c39546aa5680ffb414e25, type: 3}
   skillLife: 1
+  cooldown: 3
+  isCooldown: 0
   animator: {fileID: 0}
 --- !u!54 &313450360509659981
 Rigidbody:
