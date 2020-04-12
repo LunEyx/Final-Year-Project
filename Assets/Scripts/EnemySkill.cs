@@ -6,14 +6,14 @@ public class EnemySkill : MonoBehaviour
 {
     private void OnCollisionEnter(Collision collision)
     {
-        if (collision.gameObject.tag == "Player" || collision.gameObject.tag == "Obstacle")
+        if (collision.gameObject.CompareTag("Player"))
         {
-            if (collision.gameObject.tag == "Player")
-            {
-                Player player = collision.gameObject.GetComponent<Player>();
-                player.hpSystem.damage(10);
-            }
-
+            Player player = collision.gameObject.GetComponent<Player>();
+            player.TakeDamage(10);
+            Destroy(gameObject);
+        }
+        if (collision.gameObject.CompareTag("Obstacle"))
+        {
             Destroy(gameObject);
         }
     }

@@ -4,11 +4,10 @@ using UnityEngine;
 using UnityEngine.AI;
 using UnityEngine.UI;
 
-public class Enemy : MonoBehaviour
+public class Enemy : Actor
 {
     private Rigidbody rb;
     public GameObject player;
-    public GameObject bubblePrefab;
     public GameObject skillPrefab;
     private SightOfView sightOfView;
     private NavMeshAgent navmesh;
@@ -16,9 +15,6 @@ public class Enemy : MonoBehaviour
     private readonly float minAttackCooldown = 1f;
     private readonly float maxAttackCooldown = 2f;
     private float attackCooldownTimer;
-    public HpSystem hpSystem = new HpSystem(100);
-    public Image hpBar;
-    private bool bubbled = false;
     private GameObject bubble;
 
     // Start is called before the first frame update
@@ -33,7 +29,6 @@ public class Enemy : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        Debug.Log(rb.velocity.magnitude);
         if (rb.velocity.magnitude > 0.05)
         {
             rb.velocity *= 0.95f;
@@ -69,7 +64,6 @@ public class Enemy : MonoBehaviour
                 }
             }
         }
-        hpBar.fillAmount = hpSystem.currentLifePercentage();
     }
 
     IEnumerator Bubbled(float duration)
@@ -90,12 +84,14 @@ public class Enemy : MonoBehaviour
         skill.GetComponent<Rigidbody>().velocity = transform.forward * 40;
         Destroy(skill, skillLife);
         navmesh.destination = player.transform.position;
-        hpBar.fillAmount = hpSystem.currentLifePercentage();
     }
 
-    public void ApplyDebuff(string debuff, float duration)
+    public override void TakeDamage(int value)
     {
-        StopCoroutine(debuff);
-        StartCoroutine(debuff, duration);
+        base.TakeDamage(value);
+        if (GetHp() <= 0)
+        {
+            Destroy(gameObject);
+        }
     }
 }

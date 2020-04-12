@@ -9,15 +9,13 @@ public class CollisionHandler : MonoBehaviour
 
     private void OnCollisionEnter(Collision collision){
         if (collision.gameObject.tag == "Enemy"){
-            if (collision.gameObject.GetComponent<Enemy>().hpSystem.get_hp() > 0)
-                collision.gameObject.GetComponent<Enemy>().hpSystem.damage(skillDamage);
-            else if (collision.gameObject.GetComponent<Enemy>().hpSystem.get_hp() <= 0)
-                Destroy(collision.gameObject);
+            Enemy enemy = collision.gameObject.GetComponent<Enemy>();
+            enemy.TakeDamage(skillDamage);
         }
 
         if (collision.gameObject.tag == "Skill"){
             explosionPrefab = Instantiate(explosionPrefab, transform.position, transform.rotation);
-            Destroy(explosionPrefab, explosionPrefab.GetComponent<ParticleSystem>().duration);
+            Destroy(explosionPrefab, explosionPrefab.GetComponent<ParticleSystem>().main.duration);
             Destroy(collision.gameObject);
         }
         

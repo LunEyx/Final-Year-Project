@@ -4,25 +4,18 @@ using UnityEngine;
 
 public class BubbleCollisionHandler : MonoBehaviour
 {
-    private int skillDamage = 5;
-    private float bubbledDuration = 5f;
+    private const int SkillDamage = 5;
+    private const float BubbledDuration = 5f;
 
     private void OnCollisionEnter(Collision collision)
     {
-
-        if (collision.gameObject.tag == "Enemy" || collision.gameObject.tag == "Obstacle")
+        if (collision.gameObject.CompareTag("Enemy"))
         {
-
-            if (collision.gameObject.tag == "Enemy" && collision.gameObject.GetComponent<Enemy>().hpSystem.get_hp() > 0)
-            {
-                collision.gameObject.GetComponent<Enemy>().hpSystem.damage(skillDamage);
-                collision.gameObject.GetComponent<Enemy>().ApplyDebuff("Bubbled", bubbledDuration);
-            }
-            if (collision.gameObject.tag == "Enemy" && collision.gameObject.GetComponent<Enemy>().hpSystem.get_hp() <= 0)
-            {
-                Destroy(collision.gameObject);
-            }
-
+            Enemy enemy = collision.gameObject.GetComponent<Enemy>();
+            enemy.TakeDamage(SkillDamage);
+            enemy.ApplyEffect(Actor.Effect.Bubbled, BubbledDuration);
+        } else if (collision.gameObject.CompareTag("Obstacle"))
+        {
             Destroy(gameObject);
         }
     }

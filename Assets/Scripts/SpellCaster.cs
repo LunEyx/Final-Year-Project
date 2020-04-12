@@ -1,38 +1,23 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
-public class SpellCaster : MonoBehaviour
+public class SpellCaster : Spell
 {
     public GameObject prefab;
     public float skillLife;
-    public float cooldown = 3f;
-    public bool isCooldown = false;
     public Animator animator;
 
     private void Start()
     {
+        cooldown = 3f;
         animator = GetComponentInChildren<Animator>();
     }
 
-    public float GetCooldown()
+    public override void Cast()
     {
-        return cooldown;
-    }
-
-    public bool IsCooldown()
-    {
-        return isCooldown;
-    }
-
-    public void Ready()
-    {
-        isCooldown = false;
-    }
-
-    public void Cast()
-    {
-        isCooldown = true;
+        base.Cast();
         animator.SetTrigger("IsAttack");
         Invoke("SkillInstantiate", 0.5f);
     }
