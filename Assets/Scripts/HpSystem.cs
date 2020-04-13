@@ -1,4 +1,4 @@
-﻿using System;
+﻿using UnityEngine;
 
 public class HpSystem
 {
@@ -16,10 +16,15 @@ public class HpSystem
         return currentHp;
     }
 
+    public int GetMaxHp()
+    {
+        return maxHp;
+    }
+
     public void TakeDamage(int value)
     {
         currentHp -= value;
-        currentHp = Math.Max(0, Math.Min(currentHp, maxHp));
+        currentHp = Mathf.Clamp(currentHp, 0, maxHp);
     }
 
     public float CurrentLifePercentage()

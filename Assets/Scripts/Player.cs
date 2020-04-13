@@ -11,44 +11,36 @@ public class Player : Actor
     private Animator animator;
     private Text hpText;
 
-    private Spell[] spells = new Spell[4];
-    private Image[] spellIcons = new Image[4];
+    private Spell[] spells = new Spell[MaxSkill];
+    private Image[] spellIcons = new Image[MaxSkill];
 
-    private int maxHp = 100;
     private int jumpCounter = 0;
+    private float distanceToGround;
     private float turningSpeed = 400;
-    private SpellCaster skill1;
     public float magnitude = 1;
     private GameObject hud;
-
-    private float rotX;
-    private float rotY;
 
     // Start is called before the first frame update
     void Start()
     {
-        Vector3 rot = transform.localRotation.eulerAngles;
-        rotX = rot.x;
-        rotY = rot.y;
         rb = GetComponent<Rigidbody>();
+        distanceToGround = GetComponent<Collider>().bounds.extents.y;
         animator = GetComponentInChildren<Animator>();
         hud = GameObject.FindGameObjectWithTag("HUD");
         Transform hpObj = hud.transform.Find("Player Status").Find("HP");
         hpText = hpObj.GetComponentInChildren<Text>();
         hpBar = hpObj.Find("HP Bar").Find("hp_background").GetChild(0).GetComponentInChildren<Image>();
-        skill1 = GetComponent<SpellCaster>();
         for (int i = 0; i < MaxSkill; i++)
         {
             spellIcons[i] = hpObj.Find("Skill").GetComponentsInChildren<Image>()[i];
         }
 
-        hpSystem = new HpSystem(maxHp);
+        hpSystem = new HpSystem(100);
     }
     
     private void ViewControl()
     {
         float horizontal = Input.GetAxis("Mouse X") * turningSpeed * Time.deltaTime;
-        //float vertical = Input.GetAxis("Mouse Y") * turningSpeed * Time.deltaTime;
         transform.Rotate(0, horizontal, 0);
     }
     
@@ -101,6 +93,11 @@ public class Player : Actor
         }
     }
 
+    private void FixedUpdate()
+    {
+        
+    }
+
     // Update is called once per frame
     void Update()
     {
@@ -122,17 +119,15 @@ public class Player : Actor
     public override void TakeDamage(int value)
     {
         base.TakeDamage(value);
-        hpText.text = $"{hpSystem.GetHp()} / {maxHp}";
-    }
-
-    void LateUpdate()
-    {
-        transform.LookAt(rb.transform);
+        hpText.text = $"{hpSystem.GetHp()} / {hpSystem.GetMaxHp()}";
     }
 
     private void OnCollisionEnter(Collision collision)
     {
-        jumpCounter += 1;
+        if (Physics.Raycast(transform.position, Vector3.down, distanceToGround + 0.1f))
+        {
+            jumpCounter = 1;
+        }
     }
 
     public void LearnSpell(System.Type spellType, int index)
