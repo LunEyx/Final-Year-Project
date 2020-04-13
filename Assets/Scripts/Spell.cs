@@ -10,7 +10,7 @@ public abstract class Spell : MonoBehaviour
     protected float cooldown;
     private float cooldownTimer;
 
-    protected void Update()
+    protected virtual void Update()
     {
         if (IsCooldown())
         {
