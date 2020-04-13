@@ -5,7 +5,7 @@ using UnityEngine.UI;
 
 public abstract class Spell : MonoBehaviour
 {
-    protected Image icon;
+    protected Sprite icon;
     private bool isCooldown = false;
     protected float cooldown;
     private float cooldownTimer;
@@ -22,7 +22,7 @@ public abstract class Spell : MonoBehaviour
         }
     }
 
-    public Image GetIcon()
+    public Sprite GetIcon()
     {
         return icon;
     }
@@ -50,5 +50,6 @@ public abstract class Spell : MonoBehaviour
     public virtual void Cast()
     {
         cooldownTimer = 0;
+        isCooldown = true;
     }
 }

@@ -13,7 +13,7 @@ public class Actor : MonoBehaviour
     // bubbled debuff
     protected GameObject bubblePrefab;
     protected bool bubbled = false;
-    private GameObject bubble;
+    protected GameObject bubble;
 
     protected int GetHp()
     {

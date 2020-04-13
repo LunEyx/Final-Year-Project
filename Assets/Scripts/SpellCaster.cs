@@ -9,16 +9,30 @@ public class SpellCaster : Spell
     public float skillLife;
     public Animator animator;
 
+    private void Awake()
+    {
+        icon = Resources.Load<Sprite>("Icons/SpellBookPreface_18");
+        prefab = prefab ? prefab : Resources.Load<GameObject>("Fireball");
+        skillLife = skillLife != 0 ? skillLife : 5f;
+        cooldown = cooldown != 0 ? cooldown : 3f;
+    }
+
     private void Start()
     {
-        cooldown = 3f;
-        animator = GetComponentInChildren<Animator>();
+        animator = GetComponent<Animator>();
+        if (animator == null)
+        {
+            animator = GetComponentInChildren<Animator>();
+        }
     }
 
     public override void Cast()
     {
         base.Cast();
-        animator.SetTrigger("IsAttack");
+        if (animator != null)
+        {
+            animator.SetTrigger("IsAttack");
+        }
         Invoke("SkillInstantiate", 0.5f);
     }
 

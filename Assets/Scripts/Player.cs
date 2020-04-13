@@ -47,25 +47,9 @@ public class Player : Actor
     
     private void ViewControl()
     {
-        Camera cam = Camera.main;
-        transform.Rotate(0, cam.transform.rotation.y, 0);
-        /*
         float horizontal = Input.GetAxis("Mouse X") * turningSpeed * Time.deltaTime;
-        // transform.Rotate(0, horizontal, 0);
-        Camera camera = GetComponentInChildren<Camera>();
-        float mouseX = Input.GetAxis("Mouse X");
-        float mouseY = -Input.GetAxis("Mouse Y");
-
-        rotY += mouseX * turningSpeed * Time.deltaTime;
-        rotX += mouseY * turningSpeed * Time.deltaTime;
-
-        rotX = Mathf.Clamp(rotX, -80, 80);
-
-        Quaternion localRotation = Quaternion.Euler(rotX, rotY, 0.0f);
-        camera.transform.rotation = localRotation;
         //float vertical = Input.GetAxis("Mouse Y") * turningSpeed * Time.deltaTime;
-        //camera.transform.Rotate(vertical, 0, 0);
-        */
+        transform.Rotate(0, horizontal, 0);
     }
     
     private void MovementControl()
@@ -120,10 +104,19 @@ public class Player : Actor
     // Update is called once per frame
     void Update()
     {
-        //ViewControl();
+        if (Input.GetKey(KeyCode.U))
+        {
+            LearnSpell(typeof(SpellCaster), 0);
+        }
+        ViewControl();
         MovementControl();
         Animation();
         CastSpell();
+
+        if (transform.position.y < -5)
+        {
+            transform.position = new Vector3(30, 5, 0);
+        }
     }
 
     public override void TakeDamage(int value)
@@ -140,5 +133,16 @@ public class Player : Actor
     private void OnCollisionEnter(Collision collision)
     {
         jumpCounter += 1;
+    }
+
+    public void LearnSpell(System.Type spellType, int index)
+    {
+        if (spells[index] != null)
+        {
+            Destroy(spells[index]);
+        }
+        Spell spell = gameObject.AddComponent(spellType) as Spell;
+        spells[index] = spell;
+        spellIcons[index].sprite = spell.GetIcon();
     }
 }

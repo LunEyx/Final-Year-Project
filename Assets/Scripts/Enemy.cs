@@ -9,17 +9,19 @@ public class Enemy : Actor
     private Rigidbody rb;
     public GameObject player;
     public GameObject skillPrefab;
+    public Image enemyHpBar;
     private SightOfView sightOfView;
     private NavMeshAgent navmesh;
     public float skillLife = 1f;
     private readonly float minAttackCooldown = 1f;
     private readonly float maxAttackCooldown = 2f;
     private float attackCooldownTimer;
-    private GameObject bubble;
 
     // Start is called before the first frame update
     void Start()
     {
+        hpSystem = new HpSystem(100);
+        hpBar = enemyHpBar;
         rb = GetComponent<Rigidbody>();
         sightOfView = GetComponent<SightOfView>();
         navmesh = GetComponent<NavMeshAgent>();
