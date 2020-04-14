@@ -12,7 +12,7 @@ public class EnemyTemplate : Enemy
     {
         base.Start();
         spell = GetComponent<Spell>();
-        hpSystem = new HpSystem(100);
+        hpSystem = new HpSystem(MaxHp);
     }
 
     protected override void TargetFoundAction()
