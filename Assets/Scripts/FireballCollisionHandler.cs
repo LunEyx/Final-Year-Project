@@ -13,18 +13,21 @@ public class FireballCollisionHandler : MonoBehaviour
     }
 
     private void OnCollisionEnter(Collision collision){
-        if (collision.gameObject.CompareTag("Enemy"))
+        switch (collision.gameObject.tag)
         {
-            Enemy enemy = collision.gameObject.GetComponent<Enemy>();
-            enemy.TakeDamage(Damage);
-            Destroy(gameObject);
-        }
-        else if (collision.gameObject.CompareTag("Skill"))
-        {
-            GameObject explosion = Instantiate(explosionPrefab, transform.position, transform.rotation);
-            Destroy(explosion, explosion.GetComponent<ParticleSystem>().main.duration);
-            Destroy(collision.gameObject);
-            Destroy(gameObject);
+            case "Enemy":
+                Enemy enemy = collision.gameObject.GetComponent<Enemy>();
+                enemy.TakeDamage(Damage);
+                Destroy(gameObject);
+                break;
+            case "Obstacle":
+            case "Skill":
+                GameObject explosion = Instantiate(explosionPrefab, transform.position, transform.rotation);
+                Destroy(explosion, explosion.GetComponent<ParticleSystem>().main.duration);
+                Destroy(gameObject);
+                break;
+            default:
+                break;
         }
     }
 }

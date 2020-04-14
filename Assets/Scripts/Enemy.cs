@@ -71,13 +71,13 @@ public class Enemy : Actor
     IEnumerator Bubbled(float duration)
     {
         bubbled = true;
-        navmesh.enabled = false;
+        navmesh.isStopped = true;
         GetComponent<Rigidbody>().velocity = Vector3.zero;
         Destroy(bubble);
         bubble = Instantiate(bubblePrefab, transform);
         yield return new WaitForSeconds(duration);
+        navmesh.isStopped = false;
         bubbled = false;
-        navmesh.enabled = true;
         Destroy(bubble);
     }
 

@@ -9425,8 +9425,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 88adbb5767917d14bb589025d9b4f4b9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  explosionPrefab: {fileID: 8701385888082004903, guid: 276d6c5b78d7c884e87757e6ab09fbee,
-    type: 3}
 --- !u!54 &54591617576983734
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -9441,5 +9439,5 @@ Rigidbody:
   m_UseGravity: 0
   m_IsKinematic: 0
   m_Interpolate: 0
-  m_Constraints: 36
+  m_Constraints: 0
   m_CollisionDetection: 0

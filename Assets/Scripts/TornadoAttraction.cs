@@ -9,7 +9,10 @@ public class TornadoAttraction : MonoBehaviour
     public float refreshRate;
 
     private void OnTriggerEnter(Collider obj){
-        StartCoroutine(PullObject(obj));
+        if (obj.GetComponent<Rigidbody>() != null)
+        {
+            StartCoroutine(PullObject(obj));
+        }
     }
 
     IEnumerator PullObject(Collider obj){

@@ -20,5 +20,4 @@ public class BubbleCollisionHandler : MonoBehaviour
             Destroy(gameObject);
         }
     }
-
 }

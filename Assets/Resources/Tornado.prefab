@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 2408071516411525400}
   - component: {fileID: 2408071516411525401}
   - component: {fileID: 54289155685211906}
+  - component: {fileID: 5364965187419513879}
   m_Layer: 0
   m_Name: Tornado
   m_TagString: Skill
@@ -28,7 +29,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2408071516411525406}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 79.32, y: -0.66000384, z: 28.72}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 2408071516789865032}
@@ -4730,8 +4731,21 @@ Rigidbody:
   m_UseGravity: 0
   m_IsKinematic: 0
   m_Interpolate: 0
-  m_Constraints: 0
+  m_Constraints: 112
   m_CollisionDetection: 0
+--- !u!135 &5364965187419513879
+SphereCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2408071516411525406}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Radius: 4.185153
+  m_Center: {x: -0.37030554, y: 3.5179029, z: -0.24687088}
 --- !u!1 &2408071516789865033
 GameObject:
   m_ObjectHideFlags: 0
@@ -9378,7 +9392,7 @@ ParticleSystemRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 753aae6479cb10f44994b5fbc533cd88, type: 2}
+  - {fileID: 0}
   - {fileID: 0}
   m_StaticBatchInfo:
     firstSubMesh: 0
