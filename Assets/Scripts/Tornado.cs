@@ -10,6 +10,6 @@ public class Tornado : ProjectileSpell
         prefab = Resources.Load<GameObject>("Tornado");
         duration = 5f;
         cooldown = 3f;
-        projectileSpeed = 40f;
+        projectileSpeed = 20f;
     }
 }

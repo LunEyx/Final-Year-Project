@@ -22,9 +22,16 @@ public class FireballCollisionHandler : MonoBehaviour
                 break;
             case "Obstacle":
             case "Skill":
-                GameObject explosion = Instantiate(explosionPrefab, transform.position, transform.rotation);
-                Destroy(explosion, explosion.GetComponent<ParticleSystem>().main.duration);
-                Destroy(gameObject);
+                if (collision.gameObject.GetComponent<TornadoCollisionHandler>() != null)
+                {
+                    transform.Rotate(new Vector3(0, Random.Range(0f, 360f), 0));
+                }
+                else
+                {
+                    GameObject explosion = Instantiate(explosionPrefab, transform.position, transform.rotation);
+                    Destroy(explosion, explosion.GetComponent<ParticleSystem>().main.duration);
+                    Destroy(gameObject);
+                }
                 break;
             default:
                 break;

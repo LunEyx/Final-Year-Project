@@ -13,7 +13,6 @@ GameObject:
   - component: {fileID: 2408071516411525400}
   - component: {fileID: 2408071516411525401}
   - component: {fileID: 54289155685211906}
-  - component: {fileID: 5364965187419513879}
   m_Layer: 0
   m_Name: Tornado
   m_TagString: Skill
@@ -4733,19 +4732,6 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 112
   m_CollisionDetection: 0
---- !u!135 &5364965187419513879
-SphereCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2408071516411525406}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Radius: 4.185153
-  m_Center: {x: -0.37030554, y: 3.5179029, z: -0.24687088}
 --- !u!1 &2408071516789865033
 GameObject:
   m_ObjectHideFlags: 0
@@ -9476,7 +9462,7 @@ GameObject:
   - component: {fileID: 2408071517514416866}
   - component: {fileID: 2408071517514416867}
   m_Layer: 0
-  m_Name: particle glow slave birth dust
+  m_Name: particle dust
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -14128,8 +14114,10 @@ GameObject:
   - component: {fileID: 2408071517901060382}
   - component: {fileID: 2408071517901060376}
   - component: {fileID: 2408071517901060377}
+  - component: {fileID: 1356977377}
+  - component: {fileID: 1356977378}
   m_Layer: 0
-  m_Name: particle glow slave birth trail
+  m_Name: particle trail
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -18788,6 +18776,31 @@ ParticleSystemRenderer:
   m_Mesh2: {fileID: 0}
   m_Mesh3: {fileID: 0}
   m_MaskInteraction: 0
+--- !u!135 &1356977377
+SphereCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2408071517901060383}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Radius: 4.188595
+  m_Center: {x: 0.19955444, y: 3.0217159, z: -1.2612095}
+--- !u!114 &1356977378
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2408071517901060383}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7cbec017cf86745958ee6b0f6bbb14be, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &2408071517906934075
 GameObject:
   m_ObjectHideFlags: 0
