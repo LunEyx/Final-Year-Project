@@ -20,8 +20,7 @@ public class Player : Actor
     public float magnitude = 1;
     private GameObject hud;
 
-    // Start is called before the first frame update
-    void Start()
+    private void Start()
     {
         rb = GetComponent<Rigidbody>();
         distanceToGround = GetComponent<Collider>().bounds.extents.y;
@@ -81,7 +80,7 @@ public class Player : Actor
             {
                 continue;
             }
-            if (spells[i].IsCooldown())
+            if (spells[i].IsCooldown() || spellIcons[i].fillAmount != 1)
             {
                 spellIcons[i].fillAmount = spells[i].GetCooldownTimerPercentage();
             }
@@ -93,18 +92,9 @@ public class Player : Actor
         }
     }
 
-    private void FixedUpdate()
-    {
-        
-    }
-
     // Update is called once per frame
     void Update()
     {
-        if (Input.GetKey(KeyCode.U))
-        {
-            LearnSpell(typeof(SpellCaster), 0);
-        }
         ViewControl();
         MovementControl();
         Animation();

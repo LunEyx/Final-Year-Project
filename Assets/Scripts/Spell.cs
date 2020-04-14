@@ -1,15 +1,17 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public abstract class Spell : MonoBehaviour
 {
     protected Sprite icon;
-    private bool isCooldown = false;
     protected float cooldown;
+    private bool isCooldown = false;
     private float cooldownTimer;
+    private Image iconContainer;
 
-    protected virtual void Update()
+    protected void Update()
     {
         if (IsCooldown())
         {
@@ -17,6 +19,10 @@ public abstract class Spell : MonoBehaviour
             if (cooldownTimer >= cooldown)
             {
                 isCooldown = false;
+            }
+            if (iconContainer != null)
+            {
+                iconContainer.fillAmount = GetCooldownTimerPercentage();
             }
         }
     }
@@ -41,6 +47,11 @@ public abstract class Spell : MonoBehaviour
         return cooldown;
     }
 
+    public void SetIconContainer(Image iconContainer)
+    {
+        this.iconContainer = iconContainer;
+    }
+
     public bool IsCooldown()
     {
         return isCooldown;
@@ -50,5 +61,9 @@ public abstract class Spell : MonoBehaviour
     {
         cooldownTimer = 0;
         isCooldown = true;
+        if (iconContainer != null)
+        {
+            iconContainer.fillAmount = 0;
+        }
     }
 }

@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class SpellCaster : ProjectileSpell
+public class Fireball : ProjectileSpell
 {
     private void Awake()
     {
