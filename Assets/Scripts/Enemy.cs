@@ -4,68 +4,64 @@ using UnityEngine;
 using UnityEngine.AI;
 using UnityEngine.UI;
 
-public class Enemy : Actor
+public abstract class Enemy : Actor
 {
-    private Rigidbody rb;
-    public GameObject player;
-    public GameObject skillPrefab;
+    protected Rigidbody rb;
+    private GameObject[] playerObjs;
     public Image enemyHpBar;
-    private SightOfView sightOfView;
-    private NavMeshAgent navmesh;
-    public float skillLife = 1f;
-    private readonly float minAttackCooldown = 1f;
-    private readonly float maxAttackCooldown = 2f;
-    private float attackCooldownTimer;
+    protected SightOfView sightOfView;
+    protected NavMeshAgent navmesh;
 
     protected override void Start()
     {
         base.Start();
-        hpSystem = new HpSystem(100);
+        playerObjs = GameObject.FindGameObjectsWithTag("Player");
         hpBar = enemyHpBar;
         rb = GetComponent<Rigidbody>();
         sightOfView = GetComponent<SightOfView>();
         navmesh = GetComponent<NavMeshAgent>();
-        attackCooldownTimer = Random.Range(minAttackCooldown, maxAttackCooldown);
     }
 
     // Update is called once per frame
-    void Update()
+    protected virtual void Update()
+    {
+        VelocityFix();
+        if (!bubbled)
+        {
+            PreAction();
+
+            if (sightOfView.visibleTargets.Count == 0)
+            {
+                NoTargetAction();
+            }
+            else
+            {
+                TargetFoundAction();
+            }
+
+            PostAction();
+        }
+    }
+
+    protected void VelocityFix()
     {
         if (rb.velocity.magnitude > 0.05)
         {
             rb.velocity *= 0.95f;
-        } else
+        }
+        else
         {
             rb.velocity = Vector3.zero;
         }
-        if (!bubbled)
-        {
-            if (attackCooldownTimer > 0)
-            {
-                attackCooldownTimer -= Time.deltaTime;
-            }
-            else
-            {
-                attackCooldownTimer = 0;
-            }
+    }
 
-            if (sightOfView.visibleTargets.Count == 0)
-            {
-                navmesh.destination = player.transform.position;
-            }
-            else
-            {
-                navmesh.destination = navmesh.transform.position;
-                Vector3 targetPos = sightOfView.visibleTargets[0].position;
-                Quaternion targetRotation = Quaternion.LookRotation(targetPos - transform.position);
-                navmesh.transform.rotation = Quaternion.Slerp(transform.rotation, targetRotation, 10f * Time.deltaTime);
-                if (attackCooldownTimer == 0)
-                {
-                    Attack();
-                    attackCooldownTimer = Random.Range(minAttackCooldown, maxAttackCooldown);
-                }
-            }
-        }
+    protected virtual void PreAction()
+    {
+
+    }
+    protected virtual void PostAction()
+    {
+
     }
 
     IEnumerator Bubbled(float duration)
@@ -81,12 +77,27 @@ public class Enemy : Actor
         Destroy(bubble);
     }
 
-    void Attack()
+    protected virtual void NoTargetAction()
     {
-        GameObject skill = Instantiate(skillPrefab, transform.position + transform.forward, transform.rotation);
-        skill.GetComponent<Rigidbody>().velocity = transform.forward * 40;
-        Destroy(skill, skillLife);
-        navmesh.destination = player.transform.position;
+        GameObject nearestPlayerObj = playerObjs[0];
+        float minDistance = Mathf.Infinity;
+        foreach (GameObject playerObj in playerObjs)
+        {
+            float distance = Vector3.Distance(playerObj.transform.position, transform.position);
+            if (distance < minDistance)
+            {
+                nearestPlayerObj = playerObj;
+                minDistance = distance;
+            }
+        }
+        navmesh.destination = nearestPlayerObj.transform.position;
+    }
+
+    protected virtual void TargetFoundAction()
+    {
+        Vector3 targetPos = sightOfView.visibleTargets[0].position;
+        Quaternion targetRotation = Quaternion.LookRotation(targetPos - transform.position);
+        navmesh.transform.rotation = Quaternion.Slerp(transform.rotation, targetRotation, 10f * Time.deltaTime);
     }
 
     public override void TakeDamage(int value)

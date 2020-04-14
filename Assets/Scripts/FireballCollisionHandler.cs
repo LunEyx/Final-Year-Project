@@ -16,8 +16,9 @@ public class FireballCollisionHandler : MonoBehaviour
         switch (collision.gameObject.tag)
         {
             case "Enemy":
-                Enemy enemy = collision.gameObject.GetComponent<Enemy>();
-                enemy.TakeDamage(Damage);
+            case "Player":
+                Actor actor = collision.gameObject.GetComponent<Actor>();
+                actor.TakeDamage(Damage);
                 Destroy(gameObject);
                 break;
             case "Obstacle":

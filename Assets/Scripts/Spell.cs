@@ -7,6 +7,8 @@ public abstract class Spell : MonoBehaviour
 {
     protected Sprite icon;
     protected float cooldown;
+    protected float minCooldown;
+    protected float maxCooldown;
     private bool isCooldown = false;
     private float cooldownTimer;
     private Image iconContainer;
@@ -61,6 +63,10 @@ public abstract class Spell : MonoBehaviour
     public virtual void Cast()
     {
         cooldownTimer = 0;
+        if (maxCooldown != 0)
+        {
+            cooldown = Random.Range(minCooldown, maxCooldown);
+        }
         isCooldown = true;
         if (iconContainer != null)
         {
