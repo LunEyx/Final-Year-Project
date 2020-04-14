@@ -17,9 +17,9 @@ public class Enemy : Actor
     private readonly float maxAttackCooldown = 2f;
     private float attackCooldownTimer;
 
-    // Start is called before the first frame update
-    void Start()
+    protected override void Start()
     {
+        base.Start();
         hpSystem = new HpSystem(100);
         hpBar = enemyHpBar;
         rb = GetComponent<Rigidbody>();

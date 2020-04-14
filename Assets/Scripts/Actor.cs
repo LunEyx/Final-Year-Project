@@ -15,6 +15,11 @@ public class Actor : MonoBehaviour
     protected bool bubbled = false;
     protected GameObject bubble;
 
+    protected virtual void Start()
+    {
+        bubblePrefab = Resources.Load<GameObject>("EnemyInBubble");
+    }
+
     protected int GetHp()
     {
         return hpSystem.GetHp();

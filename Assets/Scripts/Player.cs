@@ -20,8 +20,9 @@ public class Player : Actor
     public float magnitude = 1;
     private GameObject hud;
 
-    private void Start()
+    protected override void Start()
     {
+        base.Start();
         rb = GetComponent<Rigidbody>();
         distanceToGround = GetComponent<Collider>().bounds.extents.y;
         animator = GetComponentInChildren<Animator>();
@@ -80,11 +81,7 @@ public class Player : Actor
             {
                 continue;
             }
-            if (spells[i].IsCooldown() || spellIcons[i].fillAmount != 1)
-            {
-                spellIcons[i].fillAmount = spells[i].GetCooldownTimerPercentage();
-            }
-            else if (Input.GetKey(spellKeys[i]))
+            if (!spells[i].IsCooldown() && Input.GetKey(spellKeys[i]))
             {
                 spells[i].Cast();
                 spellIcons[i].fillAmount = 0;
@@ -128,6 +125,6 @@ public class Player : Actor
         }
         Spell spell = gameObject.AddComponent(spellType) as Spell;
         spells[index] = spell;
-        spellIcons[index].sprite = spell.GetIcon();
+        spell.SetIconContainer(spellIcons[index]);
     }
 }

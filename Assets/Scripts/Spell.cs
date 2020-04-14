@@ -49,6 +49,7 @@ public abstract class Spell : MonoBehaviour
 
     public void SetIconContainer(Image iconContainer)
     {
+        iconContainer.sprite = icon;
         this.iconContainer = iconContainer;
     }
 

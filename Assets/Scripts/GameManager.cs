@@ -23,6 +23,7 @@ public class GameManager : MonoBehaviour
             foreach (Player player in players)
             {
                 player.LearnSpell(typeof(Fireball), 0);
+                player.LearnSpell(typeof(Bubble), 1);
             }
             isGifted = true;
         }
