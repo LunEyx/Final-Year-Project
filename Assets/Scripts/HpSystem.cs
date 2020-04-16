@@ -1,35 +1,34 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
-public class HpSystem 
+public class HpSystem
 {
-    private int max_hp;
-    private int current_hp;
+    private int maxHp;
+    private int currentHp;
 
     public HpSystem(int hp)
     {
-        this.max_hp = hp;
-        this.current_hp = hp;
-
+        maxHp = hp;
+        currentHp = hp;
     }
 
-    public int get_hp()
+    public int GetHp()
     {
-        return current_hp;
+        return currentHp;
     }
 
-    public void damage(int hp_damage)
+    public int GetMaxHp()
     {
-        current_hp -= hp_damage;
-        if (current_hp < 0)
-            current_hp = 0;
+        return maxHp;
     }
 
-    public float currentLifePercentage()
+    public void TakeDamage(int value)
     {
-        return (float)current_hp / max_hp;
+        currentHp -= value;
+        currentHp = Mathf.Clamp(currentHp, 0, maxHp);
     }
 
-
+    public float CurrentLifePercentage()
+    {
+        return (float)currentHp / maxHp;
+    }
 }

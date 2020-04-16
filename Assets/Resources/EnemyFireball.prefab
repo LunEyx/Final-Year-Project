@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 6966106281437269944}
   - component: {fileID: 9181581131903407201}
   - component: {fileID: 4001048379804884810}
-  - component: {fileID: 2524885379715552948}
+  - component: {fileID: 114229979362284392}
   m_Layer: 0
   m_Name: EnemyFireball
   m_TagString: Skill
@@ -4717,7 +4717,7 @@ Rigidbody:
   m_IsKinematic: 0
   m_Interpolate: 0
   m_Constraints: 0
-  m_CollisionDetection: 0
+  m_CollisionDetection: 2
 --- !u!135 &4001048379804884810
 SphereCollider:
   m_ObjectHideFlags: 0
@@ -4729,9 +4729,9 @@ SphereCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Radius: 0.001
+  m_Radius: 0.4
   m_Center: {x: 0, y: 0, z: 0}
---- !u!114 &2524885379715552948
+--- !u!114 &114229979362284392
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -4740,7 +4740,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 1068965152822112325}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0d24c2eefc4674b2b8f01a555d453e37, type: 3}
+  m_Script: {fileID: 11500000, guid: 88adbb5767917d14bb589025d9b4f4b9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!1 &6656329952442042970
