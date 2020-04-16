@@ -456,6 +456,7 @@ GameObject:
   - component: {fileID: 749172962}
   - component: {fileID: 749172968}
   - component: {fileID: 749172969}
+  - component: {fileID: 749172970}
   m_Layer: 0
   m_Name: Capsule
   m_TagString: Enemy
@@ -587,9 +588,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d82940314e0c54de99bee82fb6ca602e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+
   ExpPopUp: {fileID: 8448747930220164662, guid: 5e6133e04d53c5645856ece6c70d1f5c,
     type: 3}
   enemyHpBar: {fileID: 1714916229}
+
 --- !u!114 &749172969
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -611,6 +614,30 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 512
   visibleTargets: []
+--- !u!114 &749172970
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 749172961}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0d24c2eefc4674b2b8f01a555d453e37, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &963053628 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 9013888659276046307, guid: c412ffaf73e2e3e4693dc62e67d2a908,
+    type: 3}
+  m_PrefabInstance: {fileID: 9013888659399972831}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: -765806418, guid: f70555f144d8491a825f0804e09c671c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1147595683
 GameObject:
   m_ObjectHideFlags: 0
@@ -716,7 +743,7 @@ GameObject:
   - component: {fileID: 1205233653}
   m_Layer: 0
   m_Name: Plane
-  m_TagString: Untagged
+  m_TagString: Obstacle
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 8
