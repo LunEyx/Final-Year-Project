@@ -14,6 +14,4 @@ public class FloatingText : MonoBehaviour
         transform.localPosition += offset;
         
     }
-
-    
 }
