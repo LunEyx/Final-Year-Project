@@ -20,6 +20,8 @@ public class Player : Actor
     public float magnitude = 1;
     private GameObject hud;
 
+    public ExpSystem playerExpSystem = new ExpSystem();
+
     protected override void Start()
     {
         base.Start();
