@@ -6,6 +6,10 @@ public class GameManager : MonoBehaviour
 {
     private Player[] players;
     private bool isGifted = false;
+    private List<Item> itemList = new List<Item>();
+    public List<Item> pItemList {
+        get { return itemList; }
+    }
 
     private void Start()
     {
@@ -14,6 +18,16 @@ public class GameManager : MonoBehaviour
         for (int i = 0; i < playerObjs.Length; i++)
         {
             players[i] = playerObjs[i].GetComponent<Player>();
+        }
+
+        TextAsset itemData = Resources.Load<TextAsset>("item list");
+        string[] data = itemData.text.Split( '\n' );
+        Debug.Log(data[0]);
+        for (int i = 1; i < data.Length; i++)
+        {
+            string[] tempitem = data[i].Split(',');
+            Sprite itemIcon = Resources.Load<Sprite>(tempitem[0]);
+            itemList.Add(new Item(tempitem[0], tempitem[1], itemIcon, tempitem[2], false));
         }
     }
 

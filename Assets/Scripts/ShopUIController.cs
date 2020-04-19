@@ -13,6 +13,8 @@ public class ShopUIController : MonoBehaviour
         shopUI = transform.Find("Shop_UI");
         shopItemTemplate = shopUI.Find("Shop_Item_Container");
         shopItemTemplate.gameObject.SetActive(false);
+
+
     }
 
     private void CreateItemContainer(Item item)
@@ -20,6 +22,9 @@ public class ShopUIController : MonoBehaviour
         Transform shopItemTransform = Instantiate(shopItemTemplate, shopUI);
         RectTransform shopItemRectTransform = shopItemTransform.GetComponent<RectTransform>();
 
+        shopItemRectTransform.Find("Item_Name").GetComponent<TextMesh>().text = item.GetItemName();
+        shopItemRectTransform.Find("Item_Cost").GetComponent<TextMesh>().text = item.GetItemCost();
+        //shopItemRectTransform.Find("Item_").GetComponent<TextMesh>().text = item.GetItemName();
     }
 
     public void Show(Player player)

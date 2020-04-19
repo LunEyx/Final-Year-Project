@@ -5,12 +5,12 @@ using UnityEngine;
 public class Item 
 {
     private string itemName;
-    private int itemCost;
+    private string itemCost;
     private Sprite itemIcon;
     private string itemDescription;
     private bool ownedByPlayer;
 
-    public Item(string itemName, int itemCost, Sprite itemIcon, string itemDescription, bool ownedByPlayer)
+    public Item(string itemName, string itemCost, Sprite itemIcon, string itemDescription, bool ownedByPlayer)
     {
         this.itemName = itemName;
         this.itemCost = itemCost;
@@ -24,7 +24,7 @@ public class Item
         return this.itemName;
     }
 
-    public int GetItemCost()
+    public string GetItemCost()
     {
         return this.itemCost;
     }
