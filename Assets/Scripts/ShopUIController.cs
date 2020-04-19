@@ -29,7 +29,7 @@ public class ShopUIController : MonoBehaviour
 
         container.GetComponentsInChildren<Text>()[0].text = item.GetItemName();
         container.GetComponentsInChildren<Text>()[1].text = item.GetItemCost();
-        
+        container.GetComponentsInChildren<Text>()[2].text = item.GetItemDescription();
 
         container.GetComponentsInChildren<Image>()[1].sprite = item.GetItemIcon();
     }
@@ -44,4 +44,6 @@ public class ShopUIController : MonoBehaviour
     {
         gameObject.SetActive(false);
     }
+
+
 }
