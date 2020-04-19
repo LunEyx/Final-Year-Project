@@ -4,88 +4,121 @@ using UnityEngine;
 using UnityEngine.AI;
 using UnityEngine.UI;
 
-public class Enemy : MonoBehaviour
+public abstract class Enemy : Actor
 {
-    public GameObject player;
-    public GameObject bubblePrefab;
-    public GameObject skillPrefab;
-    private SightOfView sightOfView;
-    private NavMeshAgent navmesh;
-    public float skillLife = 1f;
-    private readonly float minAttackCooldown = 1f;
-    private readonly float maxAttackCooldown = 2f;
-    private float attackCooldownTimer;
-    public HpSystem hpSystem = new HpSystem(100);
-    public Image hpBar;
-    private bool bubbled = false;
-    private GameObject bubble;
+    public GameObject ExpPopUp;
+    protected Rigidbody rb;
+    private GameObject[] playerObjs;
+    public Image enemyHpBar;
+    protected SightOfView sightOfView;
+    protected NavMeshAgent navmesh;
+    private const int exp = 10;
 
-    // Start is called before the first frame update
-    void Start()
+    protected override void Start()
     {
+        base.Start();
+        playerObjs = GameObject.FindGameObjectsWithTag("Player");
+        hpBar = enemyHpBar;
+        rb = GetComponent<Rigidbody>();
         sightOfView = GetComponent<SightOfView>();
         navmesh = GetComponent<NavMeshAgent>();
-        attackCooldownTimer = Random.Range(minAttackCooldown, maxAttackCooldown);
     }
 
     // Update is called once per frame
-    void Update()
+    protected virtual void Update()
     {
+        VelocityFix();
         if (!bubbled)
         {
-            if (attackCooldownTimer > 0)
-            {
-                attackCooldownTimer -= Time.deltaTime;
-            }
-            else
-            {
-                attackCooldownTimer = 0;
-            }
+            PreAction();
 
             if (sightOfView.visibleTargets.Count == 0)
             {
-                navmesh.destination = player.transform.position;
+                NoTargetAction();
             }
             else
             {
-                navmesh.destination = navmesh.transform.position;
-                Vector3 targetPos = sightOfView.visibleTargets[0].position;
-                Quaternion targetRotation = Quaternion.LookRotation(targetPos - transform.position);
-                navmesh.transform.rotation = Quaternion.Slerp(transform.rotation, targetRotation, 10f * Time.deltaTime);
-                if (attackCooldownTimer == 0)
-                {
-                    Attack();
-                    attackCooldownTimer = Random.Range(minAttackCooldown, maxAttackCooldown);
-                }
+                TargetFoundAction();
             }
+
+            PostAction();
         }
-        hpBar.fillAmount = hpSystem.currentLifePercentage();
+    }
+
+    protected void VelocityFix()
+    {
+        if (rb.velocity.magnitude > 0.05)
+        {
+            rb.velocity *= 0.95f;
+        }
+        else
+        {
+            rb.velocity = Vector3.zero;
+        }
+    }
+
+    protected virtual void PreAction()
+    {
+
+    }
+    protected virtual void PostAction()
+    {
+
     }
 
     IEnumerator Bubbled(float duration)
     {
         bubbled = true;
-        navmesh.destination = transform.position;
+        navmesh.isStopped = true;
         GetComponent<Rigidbody>().velocity = Vector3.zero;
         Destroy(bubble);
         bubble = Instantiate(bubblePrefab, transform);
         yield return new WaitForSeconds(duration);
+        navmesh.isStopped = false;
         bubbled = false;
         Destroy(bubble);
     }
 
-    void Attack()
+    protected virtual void NoTargetAction()
     {
-        GameObject skill = Instantiate(skillPrefab, transform.position + transform.forward, transform.rotation);
-        skill.GetComponent<Rigidbody>().velocity = transform.forward * 40;
-        Destroy(skill, skillLife);
-        navmesh.destination = player.transform.position;
-        hpBar.fillAmount = hpSystem.currentLifePercentage();
+        GameObject nearestPlayerObj = playerObjs[0];
+        float minDistance = Mathf.Infinity;
+        foreach (GameObject playerObj in playerObjs)
+        {
+            float distance = Vector3.Distance(playerObj.transform.position, transform.position);
+            if (distance < minDistance)
+            {
+                nearestPlayerObj = playerObj;
+                minDistance = distance;
+            }
+        }
+        navmesh.destination = nearestPlayerObj.transform.position;
     }
 
-    public void ApplyDebuff(string debuff, float duration)
+    protected virtual void TargetFoundAction()
     {
-        StopCoroutine(debuff);
-        StartCoroutine(debuff, duration);
+        Vector3 targetPos = sightOfView.visibleTargets[0].position;
+        Quaternion targetRotation = Quaternion.LookRotation(targetPos - transform.position);
+        navmesh.transform.rotation = Quaternion.Slerp(transform.rotation, targetRotation, 10f * Time.deltaTime);
+    }
+
+    public override void TakeDamage(int value)
+    {
+        base.TakeDamage(value);
+        if (GetHp() <= 0)
+        {
+            playerObjs[0].GetComponent<Player>().playerExpSystem.GainExp(exp);
+            if (ExpPopUp)
+            {
+                ShowExpPopUp();
+            }
+            Destroy(gameObject);
+        }
+    }
+
+    private void ShowExpPopUp()
+    {   
+        GameObject obj = Instantiate(ExpPopUp, transform.position, Camera.main.transform.rotation);
+        obj.GetComponent<TextMesh>().text = "+" + exp + " exp";
     }
 }
