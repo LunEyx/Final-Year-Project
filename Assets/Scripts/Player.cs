@@ -16,7 +16,7 @@ public class Player : Actor
 
     private int jumpCounter = 0;
     private float distanceToGround;
-    private float turningSpeed = 400;
+    
     public float magnitude = 1;
     private GameObject hud;
 
@@ -38,11 +38,6 @@ public class Player : Actor
         hpSystem = new HpSystem(100);
     }
     
-    private void ViewControl()
-    {
-        float horizontal = Input.GetAxis("Mouse X") * turningSpeed * Time.deltaTime;
-        transform.Rotate(0, horizontal, 0);
-    }
     
     private void MovementControl()
     {
@@ -93,7 +88,7 @@ public class Player : Actor
     // Update is called once per frame
     void Update()
     {
-        ViewControl();
+     
         MovementControl();
         Animation();
         CastSpell();

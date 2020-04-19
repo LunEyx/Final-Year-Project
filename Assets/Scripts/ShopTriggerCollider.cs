@@ -11,6 +11,7 @@ public class ShopTriggerCollider : MonoBehaviour
         if (player != null)
         {
             shop_UI.Show(player);
+            GameManager.CameraMove = false;
         }
     }
 
@@ -20,6 +21,7 @@ public class ShopTriggerCollider : MonoBehaviour
         if (player != null)
         {
             shop_UI.Hide();
+            GameManager.CameraMove = true;
         }
     }
 }

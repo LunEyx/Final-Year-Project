@@ -1,30 +1,37 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class ShopUIController : MonoBehaviour
 {
-    private Transform shopUI;
-    private Transform shopItemTemplate;
+    
+    private GameObject shopItemTemplate;
     private Player player;
 
-    private void Awake()
+    
+
+    private void Start()
     {
-        shopUI = transform.Find("Shop_UI");
-        shopItemTemplate = shopUI.Find("Shop_Item_Container");
-        shopItemTemplate.gameObject.SetActive(false);
+        shopItemTemplate = Resources.Load<GameObject>("Shop_Item_Container");
 
+        List<Item> itemList = GameManager.ItemList;
+        
 
+        CreateItemContainer(itemList[0],0);
+        CreateItemContainer(itemList[1], 1);
     }
 
-    private void CreateItemContainer(Item item)
+    private void CreateItemContainer(Item item, int offset)
     {
-        Transform shopItemTransform = Instantiate(shopItemTemplate, shopUI);
-        RectTransform shopItemRectTransform = shopItemTransform.GetComponent<RectTransform>();
+        GameObject container = Instantiate(shopItemTemplate,transform);
+        container.GetComponent<Transform>().localPosition = new Vector3(-241 + offset * 175, 0, 0);
 
-        shopItemRectTransform.Find("Item_Name").GetComponent<TextMesh>().text = item.GetItemName();
-        shopItemRectTransform.Find("Item_Cost").GetComponent<TextMesh>().text = item.GetItemCost();
-        //shopItemRectTransform.Find("Item_").GetComponent<TextMesh>().text = item.GetItemName();
+        container.GetComponentsInChildren<Text>()[0].text = item.GetItemName();
+        container.GetComponentsInChildren<Text>()[1].text = item.GetItemCost();
+        
+
+        container.GetComponentsInChildren<Image>()[1].sprite = item.GetItemIcon();
     }
 
     public void Show(Player player)

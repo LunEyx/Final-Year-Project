@@ -4,10 +4,12 @@ using UnityEngine;
 
 public class GameManager : MonoBehaviour
 {
+    private float turningSpeed = 400;
     private Player[] players;
     private bool isGifted = false;
-    private List<Item> itemList = new List<Item>();
-    public List<Item> pItemList {
+    private static List<Item> itemList = new List<Item>();
+    public static bool CameraMove = true;
+    public static List<Item> ItemList {
         get { return itemList; }
     }
 
@@ -33,6 +35,8 @@ public class GameManager : MonoBehaviour
 
     private void Update()
     {
+        if (CameraMove)
+            ViewControl();
         if (!isGifted) {
             foreach (Player player in players)
             {
@@ -43,5 +47,11 @@ public class GameManager : MonoBehaviour
             }
             isGifted = true;
         }
+    }
+
+    private void ViewControl()
+    {
+        float horizontal = Input.GetAxis("Mouse X") * turningSpeed * Time.deltaTime;
+        players[0].transform.Rotate(0, horizontal, 0);
     }
 }

@@ -19,6 +19,9 @@ public class Item
         this.ownedByPlayer = ownedByPlayer;
     }
 
+    public Item() { }
+
+
     public string GetItemName()
     {
         return this.itemName;
