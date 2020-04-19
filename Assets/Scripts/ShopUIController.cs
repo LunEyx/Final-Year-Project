@@ -15,6 +15,13 @@ public class ShopUIController : MonoBehaviour
         shopItemTemplate.gameObject.SetActive(false);
     }
 
+    private void CreateItemContainer(Item item)
+    {
+        Transform shopItemTransform = Instantiate(shopItemTemplate, shopUI);
+        RectTransform shopItemRectTransform = shopItemTransform.GetComponent<RectTransform>();
+
+    }
+
     public void Show(Player player)
     {
         this.player = player;
