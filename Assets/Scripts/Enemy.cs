@@ -32,6 +32,8 @@ public abstract class Enemy : Actor
         {
             PreAction();
 
+            Debug.Log(sightOfView.visibleTargets.Count);
+
             if (sightOfView.visibleTargets.Count == 0)
             {
                 NoTargetAction();
