@@ -7,8 +7,8 @@ public class ShopUIController : MonoBehaviour
 {
     
     private GameObject shopItemTemplate;
-    private Player player;
-
+    public Player player;
+    
     
 
     private void Start()
@@ -20,6 +20,11 @@ public class ShopUIController : MonoBehaviour
 
         CreateItemContainer(itemList[0],0);
         CreateItemContainer(itemList[1], 1);
+    }
+
+    private void Update()
+    {
+        gameObject.GetComponentsInChildren<Text>()[1].text = player.gold.ToString();
     }
 
     private void CreateItemContainer(Item item, int offset)
@@ -45,5 +50,5 @@ public class ShopUIController : MonoBehaviour
         gameObject.SetActive(false);
     }
 
-
+    
 }

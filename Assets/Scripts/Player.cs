@@ -19,6 +19,7 @@ public class Player : Actor
     
     public float magnitude = 1;
     private GameObject hud;
+    public int gold = 50;
 
     protected override void Start()
     {
