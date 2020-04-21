@@ -21,6 +21,7 @@ public class ShopUIController : MonoBehaviour
 
         CreateItemContainer(itemList[0],0);
         CreateItemContainer(itemList[1], 1);
+        CreateItemContainer(itemList[2], 2);
 
         tooltip.SetActive(false);
     }
