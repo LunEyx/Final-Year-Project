@@ -8,8 +8,9 @@ public class ShopUIController : MonoBehaviour
     
     private GameObject shopItemTemplate;
     public Player player;
-    
-    
+    public GameObject tooltip;
+    public int widthOffset = 100;
+    public int heightOffset = -25;
 
     private void Start()
     {
@@ -20,10 +21,13 @@ public class ShopUIController : MonoBehaviour
 
         CreateItemContainer(itemList[0],0);
         CreateItemContainer(itemList[1], 1);
+
+        tooltip.SetActive(false);
     }
 
     private void Update()
     {
+        tooltip.transform.position = Input.mousePosition + new Vector3(widthOffset,heightOffset,0);
         gameObject.GetComponentsInChildren<Text>()[1].text = player.gold.ToString();
     }
 
@@ -31,12 +35,10 @@ public class ShopUIController : MonoBehaviour
     {
         GameObject container = Instantiate(shopItemTemplate,transform);
         container.GetComponent<Transform>().localPosition = new Vector3(-241 + offset * 175, 0, 0);
-
-        container.GetComponentsInChildren<Text>()[0].text = item.GetItemName();
-        container.GetComponentsInChildren<Text>()[1].text = item.GetItemCost();
-        container.GetComponentsInChildren<Text>()[2].text = item.GetItemDescription();
-
-        container.GetComponentsInChildren<Image>()[1].sprite = item.GetItemIcon();
+        container.GetComponent<ShopItemsController>().item = item;
+        container.GetComponent<ShopItemsController>().player = player;
+        container.GetComponentInChildren<ToolTip>().tooltip = tooltip;
+        
     }
 
     public void Show(Player player)
