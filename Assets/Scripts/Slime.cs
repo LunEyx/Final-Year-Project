@@ -9,6 +9,7 @@ public class Slime : Enemy
     private Spell spell;
     private Animator animator;
     private const int MaxHp = 100;
+    private bool isSpellReady = true;
 
     protected override void Start()
     {
@@ -21,10 +22,20 @@ public class Slime : Enemy
     protected override void TargetFoundAction()
     {
         base.TargetFoundAction();
-        if (!spell.IsCooldown())
+        if (isSpellReady && !spell.IsCooldown())
         {
+            isSpellReady = false;
             animator.SetTrigger("IsAttack");
-            spell.Cast();
+            StartCoroutine("AfterAnimation");
         }
+    }
+
+    IEnumerator AfterAnimation() {
+        while (!animator.GetCurrentAnimatorStateInfo(0).IsName("SlimeAttacking"))
+        {
+            yield return null;
+        }
+        spell.Cast();
+        isSpellReady = true;
     }
 }
