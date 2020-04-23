@@ -61,6 +61,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   magnitude: 1
+  gold: 100
 --- !u!54 &313450360509659981
 Rigidbody:
   m_ObjectHideFlags: 0
