@@ -6,11 +6,13 @@ using UnityEngine.UI;
 
 public abstract class Enemy : Actor
 {
+    public GameObject ExpPopUp;
     protected Rigidbody rb;
     private GameObject[] playerObjs;
     public Image enemyHpBar;
     protected SightOfView sightOfView;
     protected NavMeshAgent navmesh;
+    private const int exp = 10;
 
     protected override void Start()
     {
@@ -105,7 +107,18 @@ public abstract class Enemy : Actor
         base.TakeDamage(value);
         if (GetHp() <= 0)
         {
+            playerObjs[0].GetComponent<Player>().playerExpSystem.GainExp(exp);
+            if (ExpPopUp)
+            {
+                ShowExpPopUp();
+            }
             Destroy(gameObject);
         }
+    }
+
+    private void ShowExpPopUp()
+    {   
+        GameObject obj = Instantiate(ExpPopUp, transform.position, Camera.main.transform.rotation);
+        obj.GetComponent<TextMesh>().text = "+" + exp + " exp";
     }
 }

@@ -21,6 +21,8 @@ public class Player : Actor
     private GameObject hud;
     public int gold = 50;
 
+    public ExpSystem playerExpSystem = new ExpSystem();
+
     protected override void Start()
     {
         base.Start();
