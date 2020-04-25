@@ -18,10 +18,9 @@ public class Player : Actor
     private float distanceToGround;
     
     public float magnitude = 1;
-    private GameObject hud;
     public int gold = 50;
 
-    public ExpSystem playerExpSystem = new ExpSystem();
+    public ExpSystem expSystem;
 
     protected override void Start()
     {
@@ -29,16 +28,20 @@ public class Player : Actor
         rb = GetComponent<Rigidbody>();
         distanceToGround = GetComponent<Collider>().bounds.extents.y;
         animator = GetComponentInChildren<Animator>();
-        hud = GameObject.FindGameObjectWithTag("HUD");
-        Transform hpObj = hud.transform.Find("Player Status").Find("HP");
+        Transform hud = GameObject.FindGameObjectWithTag("HUD").transform.Find("Player Status");
+        Transform hpObj = hud.Find("HP");
         hpText = hpObj.GetComponentInChildren<Text>();
         hpBar = hpObj.Find("HP Bar").Find("hp_background").GetChild(0).GetComponentInChildren<Image>();
+        Transform skillObj = hud.Find("Skill");
         for (int i = 0; i < MaxSkill; i++)
         {
-            spellIcons[i] = hpObj.Find("Skill").GetComponentsInChildren<Image>()[i];
+            spellIcons[i] = skillObj.GetComponentsInChildren<Image>()[i];
         }
-
+        Transform expObj = hud.Find("Exp");
+        Image expBar = expObj.Find("Background").GetComponentInChildren<Image>();
+        Text expText = expObj.GetComponentInChildren<Text>();
         hpSystem = new HpSystem(100);
+        expSystem = new ExpSystem(expBar, expText);
     }
     
     

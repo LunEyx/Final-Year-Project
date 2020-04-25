@@ -24,7 +24,6 @@ public class GameManager : MonoBehaviour
 
         TextAsset itemData = Resources.Load<TextAsset>("item list");
         string[] data = itemData.text.Split( '\n' );
-        Debug.Log(data[0]);
         for (int i = 1; i < data.Length; i++)
         {
             string[] tempitem = data[i].Split(',');

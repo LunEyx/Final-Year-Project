@@ -6,7 +6,7 @@ using UnityEngine.UI;
 
 public abstract class Enemy : Actor
 {
-    public GameObject ExpPopUp;
+    private GameObject expPopUp;
     protected Rigidbody rb;
     private GameObject[] playerObjs;
     public Image enemyHpBar;
@@ -18,6 +18,7 @@ public abstract class Enemy : Actor
     {
         base.Start();
         playerObjs = GameObject.FindGameObjectsWithTag("Player");
+        expPopUp = Resources.Load<GameObject>("ExpPopUp");
         hpBar = enemyHpBar;
         rb = GetComponent<Rigidbody>();
         sightOfView = GetComponent<SightOfView>();
@@ -107,8 +108,8 @@ public abstract class Enemy : Actor
         base.TakeDamage(value);
         if (GetHp() <= 0)
         {
-            playerObjs[0].GetComponent<Player>().playerExpSystem.GainExp(exp);
-            if (ExpPopUp)
+            playerObjs[0].GetComponent<Player>().expSystem.GainExp(exp);
+            if (expPopUp)
             {
                 ShowExpPopUp();
             }
@@ -118,7 +119,7 @@ public abstract class Enemy : Actor
 
     private void ShowExpPopUp()
     {   
-        GameObject obj = Instantiate(ExpPopUp, transform.position, Camera.main.transform.rotation);
+        GameObject obj = Instantiate(expPopUp, transform.position, Camera.main.transform.rotation);
         obj.GetComponent<TextMesh>().text = "+" + exp + " exp";
     }
 }
