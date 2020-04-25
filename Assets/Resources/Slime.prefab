@@ -43,7 +43,6 @@ GameObject:
   - component: {fileID: 4276842131974741275}
   - component: {fileID: 4276842131974741274}
   - component: {fileID: 4276842131974741265}
-  - component: {fileID: 4276842131974741266}
   - component: {fileID: 8182416921218271954}
   - component: {fileID: 749172965}
   m_Layer: 0
@@ -118,8 +117,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 18e319689e35140b4978d4aefee17a3d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  viewRadius: 15
-  viewAngle: 90
+  viewRadius: 5
+  viewAngle: 45
   targetMask:
     serializedVersion: 2
     m_Bits: 1024
@@ -127,18 +126,6 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 512
   visibleTargets: []
---- !u!114 &4276842131974741266
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4276842131974741273}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0d24c2eefc4674b2b8f01a555d453e37, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!65 &8182416921218271954
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -174,6 +161,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 2022446059306826763}
     m_Modifications:
+    - target: {fileID: 100000, guid: e76933191c66edb4cb1cfb38cd581882, type: 3}
+      propertyPath: m_Name
+      value: slime
+      objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: e76933191c66edb4cb1cfb38cd581882, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
@@ -218,10 +209,6 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 100000, guid: e76933191c66edb4cb1cfb38cd581882, type: 3}
-      propertyPath: m_Name
-      value: slime
-      objectReference: {fileID: 0}
     - target: {fileID: 9500000, guid: e76933191c66edb4cb1cfb38cd581882, type: 3}
       propertyPath: m_Controller
       value: 
@@ -241,6 +228,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 4650321791853657010}
     m_Modifications:
+    - target: {fileID: 9013888659773644155, guid: c412ffaf73e2e3e4693dc62e67d2a908,
+        type: 3}
+      propertyPath: m_Name
+      value: HpBar
+      objectReference: {fileID: 0}
     - target: {fileID: 9013888659773644154, guid: c412ffaf73e2e3e4693dc62e67d2a908,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -345,11 +337,6 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Pivot.y
       value: 0.5
-      objectReference: {fileID: 0}
-    - target: {fileID: 9013888659773644155, guid: c412ffaf73e2e3e4693dc62e67d2a908,
-        type: 3}
-      propertyPath: m_Name
-      value: HpBar
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: c412ffaf73e2e3e4693dc62e67d2a908, type: 3}

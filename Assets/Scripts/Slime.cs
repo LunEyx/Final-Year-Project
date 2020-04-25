@@ -6,15 +6,15 @@ using UnityEngine.UI;
 
 public class Slime : Enemy
 {
-    private Spell spell;
     private Animator animator;
     private const int MaxHp = 100;
-    private bool isSpellReady = true;
+    private const int AttackDamage = 5;
+    private const int AttackCooldown = 5;
+    private bool isAttackReady = true;
 
     protected override void Start()
     {
         base.Start();
-        spell = GetComponent<Spell>();
         animator = GetComponentInChildren<Animator>();
         hpSystem = new HpSystem(MaxHp);
     }
@@ -22,9 +22,9 @@ public class Slime : Enemy
     protected override void TargetFoundAction()
     {
         base.TargetFoundAction();
-        if (isSpellReady && !spell.IsCooldown())
+        if (isAttackReady)
         {
-            isSpellReady = false;
+            isAttackReady = false;
             animator.SetTrigger("IsAttack");
             StartCoroutine("AfterAnimation");
         }
@@ -35,7 +35,15 @@ public class Slime : Enemy
         {
             yield return null;
         }
-        spell.Cast();
-        isSpellReady = true;
+        foreach (Transform target in sightOfView.visibleTargets)
+        {
+            Player player;
+            if ((player = target.gameObject.GetComponent<Player>()) != null)
+            {
+                player.TakeDamage(AttackDamage);
+            }
+        }
+        yield return new WaitForSeconds(AttackCooldown);
+        isAttackReady = true;
     }
 }
