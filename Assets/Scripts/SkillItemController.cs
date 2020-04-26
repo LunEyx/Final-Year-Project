@@ -31,7 +31,6 @@ public class SkillItemController : MonoBehaviour
             if (method != null)
                 gameObject.GetComponentInChildren<ToolTip>().tooltipText = method.Invoke(null,null).ToString();
         }
-            
     }
 
     public void Chosen()
@@ -45,12 +44,6 @@ public class SkillItemController : MonoBehaviour
             (player.GetComponent(spellName) as Spell).Upgrade();
         }
 
-        levelUpUI.SetActive(false);
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
+        Destroy(levelUpUI);
     }
 }

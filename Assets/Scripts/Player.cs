@@ -53,9 +53,6 @@ public class Player : Actor
         Text expText = expObj.GetComponentInChildren<Text>();
         coinText = hud.Find("Coin").GetComponentInChildren<Text>();
         hpSystem = new HpSystem(100);
-
-        
-
         expSystem = new ExpSystem(expBar, expText);
         RefreshCoinHUD();
 
@@ -164,6 +161,11 @@ public class Player : Actor
         coin += value;
         ShowCoinPopUp(value);
         RefreshCoinHUD();
+    }
+
+    public void GainExp(int value)
+    {
+        expSystem.GainExp(value);
     }
 
     private void RefreshCoinHUD()

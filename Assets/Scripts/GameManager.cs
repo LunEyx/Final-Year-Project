@@ -5,7 +5,7 @@ using UnityEngine;
 public class GameManager : MonoBehaviour
 {
     private float turningSpeed = 400;
-    private Player[] players;
+    private static Player[] players;
     private bool isGifted = false;
     private static List<Item> itemList = new List<Item>();
     private static List<string> unlearntSpellList = new List<string>();
@@ -63,9 +63,16 @@ public class GameManager : MonoBehaviour
         }
     }
 
+    public static Player GetCurrentPlayer()
+    {
+        // TODO: modify this for multiplayer get player
+        return players[0];
+    }
+
     private void ViewControl()
     {
         float horizontal = Input.GetAxis("Mouse X") * turningSpeed * Time.deltaTime;
+        Debug.Log(players[0]);
         players[0].transform.Rotate(0, horizontal, 0);
     }
 

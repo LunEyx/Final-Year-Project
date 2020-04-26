@@ -16,6 +16,7 @@ public class LevelUpUIController : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        player = GameManager.GetCurrentPlayer();
         skillItemTemplate = Resources.Load<GameObject>("Skill_Container");
         levelUpUI = gameObject;
         for (int i = 0;i < (5-player.skillLearntCounter); i++)
