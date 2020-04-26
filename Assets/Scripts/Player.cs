@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
@@ -14,15 +15,21 @@ public class Player : Actor
 
     private Spell[] spells = new Spell[MaxSkill];
     private Image[] spellIcons = new Image[MaxSkill];
-
+    
     private int jumpCounter = 0;
     private float distanceToGround;
     
     public float magnitude = 1;
+
+    private GameObject hud;
+    public int gold = 50;
+    public int skillLearntCounter = 0;
+
     private int coin = 50;
     private GameObject popUpText;
 
     public ExpSystem expSystem;
+
 
     protected override void Start()
     {
@@ -48,6 +55,7 @@ public class Player : Actor
         hpSystem = new HpSystem(100);
         expSystem = new ExpSystem(expBar, expText);
         RefreshCoinHUD();
+
     }
     
     private void MovementControl()
@@ -132,6 +140,9 @@ public class Player : Actor
         Spell spell = gameObject.AddComponent(spellType) as Spell;
         spells[index] = spell;
         spell.SetIconContainer(spellIcons[index]);
+        GameManager.UnlearntSpellList.Remove(spell.GetType().Name);
+        GameManager.LearntSpellList.Add(spell.GetType().Name);
+        skillLearntCounter++;
     }
 
     public bool CanAfford(int value)
@@ -150,6 +161,11 @@ public class Player : Actor
         coin += value;
         ShowCoinPopUp(value);
         RefreshCoinHUD();
+    }
+
+    public void GainExp(int value)
+    {
+        expSystem.GainExp(value);
     }
 
     private void RefreshCoinHUD()

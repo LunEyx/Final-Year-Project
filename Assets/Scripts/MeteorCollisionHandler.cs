@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class FireballCollisionHandler : MonoBehaviour
+public class MeteorCollisionHandler : MonoBehaviour
 {
     private GameObject explosionPrefab;
 
@@ -11,13 +11,14 @@ public class FireballCollisionHandler : MonoBehaviour
         explosionPrefab = Resources.Load<GameObject>("Explosion");
     }
 
-    private void OnCollisionEnter(Collision collision){
+    private void OnCollisionEnter(Collision collision)
+    {
         switch (collision.gameObject.tag)
         {
             case "Enemy":
             case "Player":
                 Actor actor = collision.gameObject.GetComponent<Actor>();
-                actor.TakeDamage(Fireball.Damage);
+                actor.TakeDamage(Meteor.Damage);
                 Destroy(gameObject);
                 break;
             case "Obstacle":

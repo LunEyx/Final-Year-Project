@@ -13,7 +13,7 @@ public abstract class Enemy : Actor
     public Image enemyHpBar;
     protected SightOfView sightOfView;
     protected NavMeshAgent navmesh;
-    private const int Exp = 10;
+    private const int exp = 10;
     private const int Coin = 10;
     public GameObject model;
     protected Vector3 bubbleOffset = Vector3.zero;
@@ -132,10 +132,10 @@ public abstract class Enemy : Actor
         base.TakeDamage(value);
         if (GetHp() <= 0)
         {
-            Player player = playerObjs[0].GetComponent<Player>();
-            player.expSystem.GainExp(Exp);
-            player.GainCoin(Coin);
+            playerObjs[0].GetComponent<Player>().GainExp(exp);
+            playerObjs[0].GetComponent<Player>().gold += 10;
             if (expPopUp)
+
             {
                 ShowExpPopUp();
             }
@@ -146,6 +146,6 @@ public abstract class Enemy : Actor
     private void ShowExpPopUp()
     {   
         GameObject obj = Instantiate(expPopUp, transform.position, Camera.main.transform.rotation);
-        obj.GetComponent<TextMesh>().text = $"+{Exp} exp";
+        obj.GetComponent<TextMesh>().text = $"+{exp} exp";
     }
 }

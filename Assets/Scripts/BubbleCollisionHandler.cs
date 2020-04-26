@@ -5,7 +5,6 @@ using UnityEngine;
 public class BubbleCollisionHandler : MonoBehaviour
 {
     private const int Damage = 5;
-    private const float BubbledDuration = 5f;
 
     private void OnCollisionEnter(Collision collision)
     {
@@ -13,7 +12,7 @@ public class BubbleCollisionHandler : MonoBehaviour
         {
             Enemy enemy = collision.gameObject.GetComponent<Enemy>();
             enemy.TakeDamage(Damage);
-            enemy.ApplyEffect(Actor.Effect.Bubbled, BubbledDuration);
+            enemy.ApplyEffect(Actor.Effect.Bubbled, Bubble.BubbledDuration);
             Destroy(gameObject);
         } else if (collision.gameObject.CompareTag("Obstacle"))
         {

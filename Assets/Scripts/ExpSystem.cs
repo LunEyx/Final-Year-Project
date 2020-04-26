@@ -3,12 +3,15 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class ExpSystem 
+public class ExpSystem
 {
-    private int levelExpLimit = 100;
+    private int levelExpLimit = 10;
     private int exp = 0;
     private int level = 1;
     private const float levelExpScale = 1.1f;
+
+    private GameObject levelUpUI;
+
     private Image expBar;
     private Text expText;
 
@@ -18,23 +21,33 @@ public class ExpSystem
         this.expText = expText;
         expBar.fillAmount = (float)exp / levelExpLimit;
         expText.text = $"{exp} / {levelExpLimit}";
+        levelUpUI = Resources.Load<GameObject>("LevelUpUI");
     }
+
 
     public void LevelUp()
     {
         level++;
+        GameObject.Instantiate(levelUpUI);
+        exp -= levelExpLimit;
+        levelExpLimit = (int)(levelExpLimit * levelExpScale);
     }
 
     public void GainExp(int expAmt)
     {
         exp += expAmt;
-        if (exp > levelExpLimit)
-        {
-            exp -= levelExpLimit;
+        if (exp >= levelExpLimit)
+        {  
             LevelUp();
-            levelExpLimit = (int)(levelExpLimit * levelExpScale);
         }
         expBar.fillAmount = (float)exp / levelExpLimit;
         expText.text = $"{exp} / {levelExpLimit}";
     }
+
+    public int GetLevel()
+    {
+        return level;
+    }
+   
+
 }
