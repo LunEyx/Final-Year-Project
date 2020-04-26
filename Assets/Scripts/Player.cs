@@ -142,7 +142,7 @@ public class Player : Actor
     private void ShowCoinPopUp(int value)
     {
         GameObject obj = Instantiate(popUpText, coinText.transform);
-        obj.GetComponent<Text>().text = $"+{value}";
+        obj.GetComponent<Text>().text = value.ToString("+0;-#");
     }
 
     public void GainCoin(int value)
