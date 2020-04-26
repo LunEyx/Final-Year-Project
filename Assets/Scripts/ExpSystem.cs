@@ -37,7 +37,7 @@ public class ExpSystem : MonoBehaviour
         exp += expAmt;
         if (exp >= levelExpLimit)
         {  
-            //LevelUp();
+            LevelUp();
         }
         expBar.fillAmount = (float)exp / levelExpLimit;
         expText.text = $"{exp} / {levelExpLimit}";
