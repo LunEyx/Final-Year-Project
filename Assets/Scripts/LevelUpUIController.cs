@@ -8,7 +8,7 @@ public class LevelUpUIController : MonoBehaviour
     private GameObject skillItemTemplate;
     private GameObject levelUpUI;
     private int offsetCounter = 0;
-    public Player player;
+    private Player player;
     public GameObject tooltip;
     public int widthOffset = 100;
     public int heightOffset = -25;

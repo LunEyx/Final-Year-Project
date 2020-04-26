@@ -6,7 +6,7 @@ using UnityEngine.UI;
 public class ShopUIController : MonoBehaviour
 {
     private GameObject shopItemTemplate;
-    public Player player;
+    private Player player;
     public GameObject tooltip;
     public int widthOffset = 100;
     public int heightOffset = -25;
@@ -14,7 +14,7 @@ public class ShopUIController : MonoBehaviour
     private void Start()
     {
         shopItemTemplate = Resources.Load<GameObject>("Shop_Item_Container");
-
+        player = GameManager.GetCurrentPlayer();
         List<Item> itemList = GameManager.ItemList;
 
         CreateItemContainer(itemList[0], 0);
