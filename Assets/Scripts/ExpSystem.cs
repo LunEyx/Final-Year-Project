@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class ExpSystem : MonoBehaviour
 {
@@ -8,7 +9,20 @@ public class ExpSystem : MonoBehaviour
     private int exp = 0;
     private int level = 1;
     private const float levelExpScale = 1.1f;
+
     public GameObject levelUpUI;
+
+    private Image expBar;
+    private Text expText;
+
+    public ExpSystem(Image expBar, Text expText)
+    {
+        this.expBar = expBar;
+        this.expText = expText;
+        expBar.fillAmount = (float)exp / levelExpLimit;
+        expText.text = $"{exp} / {levelExpLimit}";
+    }
+
 
     public void LevelUp()
     {
@@ -25,6 +39,8 @@ public class ExpSystem : MonoBehaviour
             LevelUp();
             levelExpLimit = (int)(levelExpLimit * levelExpScale);
         }
+        expBar.fillAmount = (float)exp / levelExpLimit;
+        expText.text = $"{exp} / {levelExpLimit}";
     }
 
     public int GetLevel()
@@ -32,4 +48,5 @@ public class ExpSystem : MonoBehaviour
         return level;
     }
    
+
 }

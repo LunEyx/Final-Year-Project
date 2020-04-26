@@ -6,18 +6,20 @@ using UnityEngine.UI;
 
 public abstract class Enemy : Actor
 {
-    public GameObject ExpPopUp;
+    private GameObject expPopUp;
     protected Rigidbody rb;
     private GameObject[] playerObjs;
     public Image enemyHpBar;
     protected SightOfView sightOfView;
     protected NavMeshAgent navmesh;
-    private const int exp = 10;
+    private const int Exp = 10;
+    private const int Coin = 10;
 
     protected override void Start()
     {
         base.Start();
         playerObjs = GameObject.FindGameObjectsWithTag("Player");
+        expPopUp = Resources.Load<GameObject>("ExpPopUp");
         hpBar = enemyHpBar;
         rb = GetComponent<Rigidbody>();
         sightOfView = GetComponent<SightOfView>();
@@ -110,6 +112,7 @@ public abstract class Enemy : Actor
             playerObjs[0].GetComponent<ExpSystem>().GainExp(exp);
             playerObjs[0].GetComponent<Player>().gold += 10;
             if (ExpPopUp)
+
             {
                 ShowExpPopUp();
             }
@@ -119,7 +122,7 @@ public abstract class Enemy : Actor
 
     private void ShowExpPopUp()
     {   
-        GameObject obj = Instantiate(ExpPopUp, transform.position, Camera.main.transform.rotation);
-        obj.GetComponent<TextMesh>().text = "+" + exp + " exp";
+        GameObject obj = Instantiate(expPopUp, transform.position, Camera.main.transform.rotation);
+        obj.GetComponent<TextMesh>().text = $"+{Exp} exp";
     }
 }

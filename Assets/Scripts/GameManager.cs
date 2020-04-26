@@ -32,8 +32,19 @@ public class GameManager : MonoBehaviour
             players[i] = playerObjs[i].GetComponent<Player>();
         }
 
+
         readItemData();
         readSkillData();
+
+        TextAsset itemData = Resources.Load<TextAsset>("item list");
+        string[] data = itemData.text.Split( '\n' );
+        for (int i = 1; i < data.Length; i++)
+        {
+            string[] tempitem = data[i].Split(',');
+            Sprite itemIcon = Resources.Load<Sprite>(tempitem[0]);
+            itemList.Add(new Item(tempitem[0], tempitem[1], itemIcon, tempitem[2], false));
+        }
+
     }
 
     private void Update()

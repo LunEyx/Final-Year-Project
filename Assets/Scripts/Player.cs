@@ -11,6 +11,7 @@ public class Player : Actor
     private Rigidbody rb;
     private Animator animator;
     private Text hpText;
+    private Text coinText;
 
     private Spell[] spells = new Spell[MaxSkill];
     private Image[] spellIcons = new Image[MaxSkill];
@@ -19,29 +20,46 @@ public class Player : Actor
     private float distanceToGround;
     
     public float magnitude = 1;
+
     private GameObject hud;
     public int gold = 50;
     public int skillLearntCounter = 0;
+
+    private int coin = 50;
+    private GameObject popUpText;
+
+    public ExpSystem expSystem;
+
 
     protected override void Start()
     {
         base.Start();
         rb = GetComponent<Rigidbody>();
+        popUpText = Resources.Load<GameObject>("CoinPopUp");
         distanceToGround = GetComponent<Collider>().bounds.extents.y;
         animator = GetComponentInChildren<Animator>();
-        hud = GameObject.FindGameObjectWithTag("HUD");
-        Transform hpObj = hud.transform.Find("Player Status").Find("HP");
+        Transform hud = GameObject.FindGameObjectWithTag("HUD").transform;
+        Transform playerStatus = hud.Find("Player Status");
+        Transform hpObj = playerStatus.Find("HP");
         hpText = hpObj.GetComponentInChildren<Text>();
-        hpBar = hpObj.Find("HP Bar").Find("hp_background").GetChild(0).GetComponentInChildren<Image>();
+        hpBar = hpObj.Find("hp_background").GetChild(0).GetComponentInChildren<Image>();
+        Transform skillObj = playerStatus.Find("Skill");
         for (int i = 0; i < MaxSkill; i++)
         {
-            spellIcons[i] = hpObj.Find("Skill").GetComponentsInChildren<Image>()[i];
+            spellIcons[i] = skillObj.GetComponentsInChildren<Image>()[i];
         }
-
+        Transform expObj = playerStatus.Find("Exp");
+        Image expBar = expObj.Find("Background").GetComponentInChildren<Image>();
+        Text expText = expObj.GetComponentInChildren<Text>();
+        coinText = hud.Find("Coin").GetComponentInChildren<Text>();
         hpSystem = new HpSystem(100);
+
         
+
+        expSystem = new ExpSystem(expBar, expText);
+        RefreshCoinHUD();
+
     }
-    
     
     private void MovementControl()
     {
@@ -92,7 +110,6 @@ public class Player : Actor
     // Update is called once per frame
     void Update()
     {
-     
         MovementControl();
         Animation();
         CastSpell();
@@ -129,5 +146,28 @@ public class Player : Actor
         GameManager.UnlearntSpellList.Remove(spell.GetType().Name);
         GameManager.LearntSpellList.Add(spell.GetType().Name);
         skillLearntCounter++;
+    }
+
+    public bool CanAfford(int value)
+    {
+        return coin >= value;
+    }
+
+    private void ShowCoinPopUp(int value)
+    {
+        GameObject obj = Instantiate(popUpText, coinText.transform);
+        obj.GetComponent<Text>().text = value.ToString("+0;-#");
+    }
+
+    public void GainCoin(int value)
+    {
+        coin += value;
+        ShowCoinPopUp(value);
+        RefreshCoinHUD();
+    }
+
+    private void RefreshCoinHUD()
+    {
+        coinText.text = $"{coin}";
     }
 }
