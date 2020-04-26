@@ -6,6 +6,7 @@ using UnityEngine.UI;
 
 public abstract class Enemy : Actor
 {
+    protected Animator animator;
     private GameObject expPopUp;
     protected Rigidbody rb;
     private GameObject[] playerObjs;
@@ -14,6 +15,9 @@ public abstract class Enemy : Actor
     protected NavMeshAgent navmesh;
     private const int Exp = 10;
     private const int Coin = 10;
+    public GameObject model;
+    protected Vector3 bubbleOffset = Vector3.zero;
+    protected float bubbleScale = 1;
 
     protected override void Start()
     {
@@ -33,7 +37,7 @@ public abstract class Enemy : Actor
         if (!bubbled)
         {
             PreAction();
-
+            
             if (sightOfView.visibleTargets.Count == 0)
             {
                 NoTargetAction();
@@ -72,10 +76,29 @@ public abstract class Enemy : Actor
     {
         bubbled = true;
         navmesh.isStopped = true;
+        float animationSpeed = 0;
+        if (animator)
+        {
+            animationSpeed = animator.speed;
+            animator.speed = 0;
+        }
         GetComponent<Rigidbody>().velocity = Vector3.zero;
         Destroy(bubble);
-        bubble = Instantiate(bubblePrefab, transform);
+        if (model)
+        {
+            bubble = Instantiate(bubblePrefab, model.transform);
+        }
+        else
+        {
+            bubble = Instantiate(bubblePrefab, transform);
+        }
+        bubble.transform.localPosition += bubbleOffset;
+        bubble.transform.localScale = new Vector3(bubbleScale, bubbleScale, bubbleScale);
         yield return new WaitForSeconds(duration);
+        if (animator)
+        {
+            animator.speed = animationSpeed;
+        }
         navmesh.isStopped = false;
         bubbled = false;
         Destroy(bubble);
