@@ -12,6 +12,7 @@ public abstract class Spell : MonoBehaviour
     private bool isCooldown = false;
     private float cooldownTimer;
     private Image iconContainer;
+    
 
     protected void Update()
     {
@@ -60,6 +61,7 @@ public abstract class Spell : MonoBehaviour
         return isCooldown;
     }
 
+
     public virtual void Cast()
     {
         cooldownTimer = 0;
@@ -73,4 +75,16 @@ public abstract class Spell : MonoBehaviour
             iconContainer.fillAmount = 0;
         }
     }
+
+    public static Sprite getUnlearntSpellIcon(string spellName)
+    {
+        return Resources.Load<Sprite>("Icons/" + spellName);
+    }
+
+    public virtual void Upgrade()
+    {
+
+    }
+
+
 }

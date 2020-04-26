@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
@@ -13,15 +14,14 @@ public class Player : Actor
 
     private Spell[] spells = new Spell[MaxSkill];
     private Image[] spellIcons = new Image[MaxSkill];
-
+    
     private int jumpCounter = 0;
     private float distanceToGround;
     
     public float magnitude = 1;
     private GameObject hud;
     public int gold = 50;
-
-    public ExpSystem playerExpSystem = new ExpSystem();
+    public int skillLearntCounter = 0;
 
     protected override void Start()
     {
@@ -39,6 +39,7 @@ public class Player : Actor
         }
 
         hpSystem = new HpSystem(100);
+        
     }
     
     
@@ -125,5 +126,8 @@ public class Player : Actor
         Spell spell = gameObject.AddComponent(spellType) as Spell;
         spells[index] = spell;
         spell.SetIconContainer(spellIcons[index]);
+        GameManager.UnlearntSpellList.Remove(spell.GetType().Name);
+        GameManager.LearntSpellList.Add(spell.GetType().Name);
+        skillLearntCounter++;
     }
 }

@@ -9,6 +9,7 @@ public class TornadoCollisionHandler : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
+        damage = Tornado.Damage;
         if (other.gameObject.CompareTag("Enemy"))
         {
             Enemy enemy = other.gameObject.GetComponent<Enemy>();
@@ -16,11 +17,11 @@ public class TornadoCollisionHandler : MonoBehaviour
         }
         if (other.gameObject.CompareTag("Skill"))
         {
-            if (other.gameObject.GetComponent<FireballCollisionHandler>() != null)
+            if (other.gameObject.GetComponent<FireballCollisionHandler>() != null || other.gameObject.GetComponent<MeteorCollisionHandler>() != null)
             {
                 Material mat = Resources.Load<Material>("Materials/glow_volumetric_alpha_red");
                 gameObject.GetComponent<ParticleSystemRenderer>().material = mat;
-                damage = FireDamage;
+                damage += FireDamage;
             }
         }
     }

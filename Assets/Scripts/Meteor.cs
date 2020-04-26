@@ -8,13 +8,16 @@ public class Meteor : Spell
     protected float duration;
     protected float projectileSpeed;
     private int meteorCounter = 0;
-    public const int MeteorNum = 20;
+    public int MeteorNum = 20;
     public const float Radius = 8;
+    public static int Damage = 10;
+    public static string UpgradeDes = "Increase the number of meteors by 10!";
+    public static string NewDes = "Summon meteors to attack enemies!";
 
     private void Awake()
     {
-        icon = Resources.Load<Sprite>("Icons/SpellBookPreface_22");
-        prefab = Resources.Load<GameObject>("Fireball");
+        icon = Resources.Load<Sprite>("Icons/Meteor");
+        prefab = Resources.Load<GameObject>("Meteor");
         duration = 5f;
         cooldown = 3f;
     }
@@ -43,5 +46,20 @@ public class Meteor : Spell
         }
 
         Destroy(meteor, duration);
+    }
+
+    public override void Upgrade()
+    {
+        MeteorNum += 10;
+    }
+
+    public static string GetNewDescription()
+    {
+        return NewDes;
+    }
+
+    public static string GetUpgradeDescription()
+    {
+        return UpgradeDes;
     }
 }

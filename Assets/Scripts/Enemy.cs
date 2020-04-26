@@ -107,7 +107,8 @@ public abstract class Enemy : Actor
         base.TakeDamage(value);
         if (GetHp() <= 0)
         {
-            playerObjs[0].GetComponent<Player>().playerExpSystem.GainExp(exp);
+            playerObjs[0].GetComponent<ExpSystem>().GainExp(exp);
+            playerObjs[0].GetComponent<Player>().gold += 10;
             if (ExpPopUp)
             {
                 ShowExpPopUp();
