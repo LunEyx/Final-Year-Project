@@ -1,11 +1,7 @@
 fileFormatVersion: 2
-guid: fa6d111e897986d4cb31c3898d97cf9f
+guid: 41cb8e77586478d4b88d296ec0a6977b
 TextureImporter:
-  fileIDToRecycleName:
-    21300000: hpbar_empty
-    21300002: hpbar_0
-    21300004: hpbar_filled
-    21300006: expbar_filled
+  fileIDToRecycleName: {}
   externalObjects: {}
   serializedVersion: 9
   mipmaps:
@@ -44,7 +40,7 @@ TextureImporter:
   nPOTScale: 0
   lightmap: 0
   compressionQuality: 50
-  spriteMode: 2
+  spriteMode: 1
   spriteExtrude: 1
   spriteMeshType: 1
   alignment: 0
@@ -97,91 +93,11 @@ TextureImporter:
     androidETC2FallbackOverride: 0
   spriteSheet:
     serializedVersion: 2
-    sprites:
-    - serializedVersion: 2
-      name: hpbar_empty
-      rect:
-        serializedVersion: 2
-        x: 0
-        y: 400
-        width: 511
-        height: 55
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 615299753af5dfb438d8e99a9703e069
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: hpbar_0
-      rect:
-        serializedVersion: 2
-        x: 0
-        y: 454
-        width: 511
-        height: 55
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: b219c22d7de16ca4cbe029ee47750344
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: hpbar_filled
-      rect:
-        serializedVersion: 2
-        x: 0
-        y: 344
-        width: 512
-        height: 55
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 435bee5ab3f37f3458cd6a57bd5df345
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: expbar_filled
-      rect:
-        serializedVersion: 2
-        x: 0
-        y: 259
-        width: 512
-        height: 29
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 21d30cff154eb401cad13198f80dbab3
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
+    sprites: []
     outline: []
     physicsShape: []
     bones: []
-    spriteID: 51fb03fc109140845b2a143a2903fd63
+    spriteID: 4bd40a98080e65146ac6f68e3184d7b4
     vertices: []
     indices: 
     edges: []

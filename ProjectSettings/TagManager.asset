@@ -8,6 +8,8 @@ TagManager:
   - Enemy
   - Skill
   - HUD
+  - ItemTooltip
+  - Shop
   layers:
   - Default
   - TransparentFX
