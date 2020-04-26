@@ -12,7 +12,7 @@ public abstract class Enemy : Actor
     public Image enemyHpBar;
     protected SightOfView sightOfView;
     protected NavMeshAgent navmesh;
-    private const int Exp = 10;
+    private const int exp = 10;
     private const int Coin = 10;
 
     protected override void Start()
@@ -111,7 +111,7 @@ public abstract class Enemy : Actor
         {
             playerObjs[0].GetComponent<ExpSystem>().GainExp(exp);
             playerObjs[0].GetComponent<Player>().gold += 10;
-            if (ExpPopUp)
+            if (expPopUp)
 
             {
                 ShowExpPopUp();
@@ -123,6 +123,6 @@ public abstract class Enemy : Actor
     private void ShowExpPopUp()
     {   
         GameObject obj = Instantiate(expPopUp, transform.position, Camera.main.transform.rotation);
-        obj.GetComponent<TextMesh>().text = $"+{Exp} exp";
+        obj.GetComponent<TextMesh>().text = $"+{exp} exp";
     }
 }

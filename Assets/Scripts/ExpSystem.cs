@@ -28,16 +28,16 @@ public class ExpSystem : MonoBehaviour
     {
         level++;
         levelUpUI.SetActive(true);
+        exp -= levelExpLimit;
+        levelExpLimit = (int)(levelExpLimit * levelExpScale);
     }
 
     public void GainExp(int expAmt)
     {
         exp += expAmt;
         if (exp >= levelExpLimit)
-        {
-            exp -= levelExpLimit;
-            LevelUp();
-            levelExpLimit = (int)(levelExpLimit * levelExpScale);
+        {  
+            //LevelUp();
         }
         expBar.fillAmount = (float)exp / levelExpLimit;
         expText.text = $"{exp} / {levelExpLimit}";
