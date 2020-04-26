@@ -679,6 +679,11 @@ PrefabInstance:
       propertyPath: m_Pivot.y
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 7344946165100357352, guid: a854f23ea858e4d13a074a4e860c6a30,
+        type: 3}
+      propertyPath: m_FontData.m_Alignment
+      value: 5
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: a854f23ea858e4d13a074a4e860c6a30, type: 3}
 --- !u!1 &743553633
@@ -1846,11 +1851,11 @@ GameObject:
   - component: {fileID: 1668536955}
   m_Layer: 5
   m_Name: Shop_UI
-  m_TagString: Untagged
+  m_TagString: Shop
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &1668536955
 MonoBehaviour:
   m_ObjectHideFlags: 0

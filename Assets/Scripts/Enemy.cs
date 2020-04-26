@@ -12,7 +12,8 @@ public abstract class Enemy : Actor
     public Image enemyHpBar;
     protected SightOfView sightOfView;
     protected NavMeshAgent navmesh;
-    private const int exp = 10;
+    private const int Exp = 10;
+    private const int Coin = 10;
 
     protected override void Start()
     {
@@ -108,7 +109,9 @@ public abstract class Enemy : Actor
         base.TakeDamage(value);
         if (GetHp() <= 0)
         {
-            playerObjs[0].GetComponent<Player>().expSystem.GainExp(exp);
+            Player player = playerObjs[0].GetComponent<Player>();
+            player.expSystem.GainExp(Exp);
+            player.GainCoin(Coin);
             if (expPopUp)
             {
                 ShowExpPopUp();
@@ -120,6 +123,6 @@ public abstract class Enemy : Actor
     private void ShowExpPopUp()
     {   
         GameObject obj = Instantiate(expPopUp, transform.position, Camera.main.transform.rotation);
-        obj.GetComponent<TextMesh>().text = "+" + exp + " exp";
+        obj.GetComponent<TextMesh>().text = $"+{Exp} exp";
     }
 }

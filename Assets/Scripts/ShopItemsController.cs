@@ -26,9 +26,9 @@ public class ShopItemsController: MonoBehaviour
     
     public void Purchase()
     {
-        if (player.gold >= itemCost)
+        if (player.CanAfford(itemCost))
         {
-            player.gold -= itemCost;
+            player.GainCoin(-itemCost);
             soldIcon.SetActive(true);
             itemIcon.enabled = false;
         }

@@ -9,6 +9,7 @@ TagManager:
   - Skill
   - HUD
   - ItemTooltip
+  - Shop
   layers:
   - Default
   - TransparentFX
