@@ -31,7 +31,7 @@ public class Player : Actor
         Transform hud = GameObject.FindGameObjectWithTag("HUD").transform.Find("Player Status");
         Transform hpObj = hud.Find("HP");
         hpText = hpObj.GetComponentInChildren<Text>();
-        hpBar = hpObj.Find("HP Bar").Find("hp_background").GetChild(0).GetComponentInChildren<Image>();
+        hpBar = hpObj.Find("hp_background").GetChild(0).GetComponentInChildren<Image>();
         Transform skillObj = hud.Find("Skill");
         for (int i = 0; i < MaxSkill; i++)
         {
