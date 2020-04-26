@@ -6,7 +6,6 @@ using UnityEngine.UI;
 
 public class Slime : Enemy
 {
-    private Animator animator;
     private const int MaxHp = 100;
     private const int AttackDamage = 5;
     private const int AttackCooldown = 5;
@@ -17,6 +16,8 @@ public class Slime : Enemy
         base.Start();
         animator = GetComponentInChildren<Animator>();
         hpSystem = new HpSystem(MaxHp);
+        bubbleOffset = new Vector3(0, 1, 0);
+        bubbleScale = 4;
     }
 
     protected override void TargetFoundAction()
