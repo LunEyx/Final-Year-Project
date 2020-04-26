@@ -72,7 +72,6 @@ public class GameManager : MonoBehaviour
     private void ViewControl()
     {
         float horizontal = Input.GetAxis("Mouse X") * turningSpeed * Time.deltaTime;
-        Debug.Log(players[0]);
         players[0].transform.Rotate(0, horizontal, 0);
     }
 
