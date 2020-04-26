@@ -7,7 +7,7 @@ using UnityEngine.UI;
 public class EnemyTemplate : Enemy
 {
     private Spell spell;
-    private const int MaxHp = 100;
+    private const int MaxHp = 10;
     protected override void Start()
     {
         base.Start();

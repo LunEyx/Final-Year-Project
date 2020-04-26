@@ -15,7 +15,6 @@ public class ShopItemsController: MonoBehaviour
 
     private void Start()
     {
-        
         gameObject.GetComponentsInChildren<Text>()[0].text = item.GetItemName();
         gameObject.GetComponentsInChildren<Text>()[1].text = item.GetItemCost();
         gameObject.GetComponentsInChildren<Image>()[1].sprite = item.GetItemIcon();
@@ -24,14 +23,12 @@ public class ShopItemsController: MonoBehaviour
         soldIcon.SetActive(false);
         noGoldPrompt.SetActive(false);
     }
-
-    
     
     public void Purchase()
     {
-        if (player.gold >= itemCost)
+        if (player.CanAfford(itemCost))
         {
-            player.gold -= itemCost;
+            player.GainCoin(-itemCost);
             soldIcon.SetActive(true);
             itemIcon.enabled = false;
         }
@@ -40,7 +37,5 @@ public class ShopItemsController: MonoBehaviour
             noGoldPrompt.SetActive(true);
         }
     }
-
-    
 }
     

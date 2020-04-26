@@ -5,7 +5,6 @@ using UnityEngine.UI;
 
 public class ShopUIController : MonoBehaviour
 {
-    
     private GameObject shopItemTemplate;
     public Player player;
     public GameObject tooltip;
@@ -17,9 +16,8 @@ public class ShopUIController : MonoBehaviour
         shopItemTemplate = Resources.Load<GameObject>("Shop_Item_Container");
 
         List<Item> itemList = GameManager.ItemList;
-        
 
-        CreateItemContainer(itemList[0],0);
+        CreateItemContainer(itemList[0], 0);
         CreateItemContainer(itemList[1], 1);
         CreateItemContainer(itemList[2], 2);
 
@@ -29,7 +27,6 @@ public class ShopUIController : MonoBehaviour
     private void Update()
     {
         tooltip.transform.position = Input.mousePosition + new Vector3(widthOffset,heightOffset,0);
-        gameObject.GetComponentsInChildren<Text>()[1].text = player.gold.ToString();
     }
 
     private void CreateItemContainer(Item item, int offset)
@@ -52,6 +49,4 @@ public class ShopUIController : MonoBehaviour
     {
         gameObject.SetActive(false);
     }
-
-    
 }
