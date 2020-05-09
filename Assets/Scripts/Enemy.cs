@@ -9,7 +9,7 @@ public abstract class Enemy : Actor
     protected Animator animator;
     private GameObject expPopUp;
     protected Rigidbody rb;
-    private GameObject[] playerObjs;
+    private List<Player> players;
     public Image enemyHpBar;
     protected SightOfView sightOfView;
     protected NavMeshAgent navmesh;
@@ -22,7 +22,7 @@ public abstract class Enemy : Actor
     protected override void Start()
     {
         base.Start();
-        playerObjs = GameObject.FindGameObjectsWithTag("Player");
+        players = GameManager.GetPlayers();
         expPopUp = Resources.Load<GameObject>("ExpPopUp");
         hpBar = enemyHpBar;
         rb = GetComponent<Rigidbody>();
@@ -106,18 +106,18 @@ public abstract class Enemy : Actor
 
     protected virtual void NoTargetAction()
     {
-        GameObject nearestPlayerObj = playerObjs[0];
+        Player nearestPlayer = GameManager.GetPlayers()[0];
         float minDistance = Mathf.Infinity;
-        foreach (GameObject playerObj in playerObjs)
+        foreach (Player player in players)
         {
-            float distance = Vector3.Distance(playerObj.transform.position, transform.position);
+            float distance = Vector3.Distance(player.transform.position, transform.position);
             if (distance < minDistance)
             {
-                nearestPlayerObj = playerObj;
+                nearestPlayer = player;
                 minDistance = distance;
             }
         }
-        navmesh.destination = nearestPlayerObj.transform.position;
+        navmesh.destination = nearestPlayer.transform.position;
     }
 
     protected virtual void TargetFoundAction()
@@ -132,8 +132,8 @@ public abstract class Enemy : Actor
         base.TakeDamage(value);
         if (GetHp() <= 0)
         {
-            playerObjs[0].GetComponent<Player>().GainExp(exp);
-            playerObjs[0].GetComponent<Player>().gold += 10;
+            GameManager.GetCurrentPlayer().GainExp(exp);
+            GameManager.GetCurrentPlayer().gold += 10;
             if (expPopUp)
 
             {

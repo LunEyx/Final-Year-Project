@@ -55,7 +55,7 @@ public class Player : Actor
         hpSystem = new HpSystem(100);
         expSystem = new ExpSystem(expBar, expText);
         RefreshCoinHUD();
-
+        GameObject.Find("GameManager").GetComponent<GameManager>().AddPlayer(this);
     }
     
     private void MovementControl()

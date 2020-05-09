@@ -1,11 +1,13 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Networking;
 
 public class GameManager : MonoBehaviour
 {
+    public int level = 0;
     private float turningSpeed = 400;
-    private static Player[] players;
+    private static List<Player> players = new List<Player>();
     private bool isGifted = false;
     private static List<Item> itemList = new List<Item>();
     private static List<string> unlearntSpellList = new List<string>();
@@ -25,14 +27,6 @@ public class GameManager : MonoBehaviour
 
     private void Start()
     {
-        GameObject[] playerObjs = GameObject.FindGameObjectsWithTag("Player");
-        players = new Player[playerObjs.Length];
-        for (int i = 0; i < playerObjs.Length; i++)
-        {
-            players[i] = playerObjs[i].GetComponent<Player>();
-        }
-
-
         readItemData();
         readSkillData();
 
@@ -45,6 +39,7 @@ public class GameManager : MonoBehaviour
             itemList.Add(new Item(tempitem[0], tempitem[1], itemIcon, tempitem[2], false));
         }
 
+        InitializeLevel();
     }
 
     private void Update()
@@ -61,6 +56,11 @@ public class GameManager : MonoBehaviour
             }
             isGifted = true;
         }
+    }
+
+    public static List<Player> GetPlayers()
+    {
+        return players;
     }
 
     public static Player GetCurrentPlayer()
@@ -96,5 +96,37 @@ public class GameManager : MonoBehaviour
         {
             unlearntSpellList.Add(data[i]);
         }
+    }
+
+    public void AddPlayer(Player player)
+    {
+        players.Add(player);
+        Camera.main.GetComponent<CameraFollow>().SetTarget(player.transform);
+    }
+
+    private Player SpawnPlayer(Vector3 position, Quaternion rotation)
+    {
+        GameObject prefab = Resources.Load<GameObject>("Player");
+        GameObject obj = Instantiate(prefab, position, rotation);
+        return obj.GetComponent<Player>();
+    }
+
+    private void InitializeLevel()
+    {
+        switch (level)
+        {
+            case 1:
+                InitializeLevel1();
+                break;
+            default:
+                Debug.Log("Level Not Set");
+                break;
+        }
+    }
+
+    private void InitializeLevel1()
+    {
+        Player player = SpawnPlayer(new Vector3(35, 10, 0), Quaternion.identity);
+        AddPlayer(player);
     }
 }

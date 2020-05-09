@@ -14,12 +14,6 @@ public class SpawnPoint : MonoBehaviour
         StartCoroutine("spawn",enemy);
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
-
     private IEnumerator spawn(GameObject enemey)
     {
         while (EnableSpawn)
@@ -28,6 +22,4 @@ public class SpawnPoint : MonoBehaviour
             Instantiate(enemy,transform.position, transform.rotation);
         }
     }
-
-    
 }
