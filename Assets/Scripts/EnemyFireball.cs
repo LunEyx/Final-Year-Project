@@ -7,9 +7,9 @@ public class EnemyFireball : ProjectileSpell
     private void Awake()
     {
         prefab = Resources.Load<GameObject>("EnemyFireball");
-        duration = 5f;
+        duration = 3f;
         minCooldown = 1f;
-        maxCooldown = 2f;
+        maxCooldown = 5f;
         projectileSpeed = 40f;
     }
 
