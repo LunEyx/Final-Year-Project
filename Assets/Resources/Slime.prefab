@@ -45,6 +45,8 @@ GameObject:
   - component: {fileID: 4276842131974741265}
   - component: {fileID: 8182416921218271954}
   - component: {fileID: 749172965}
+  - component: {fileID: 1768034093689915858}
+  - component: {fileID: 2394289566341128614}
   m_Layer: 0
   m_Name: Slime
   m_TagString: Enemy
@@ -151,8 +153,63 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c204da3309d1940ecbbd418320616df4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  enemyHpBar: {fileID: 1286177521255851565}
+  enemyHpBar: {fileID: 7840389125086526374}
   model: {fileID: 4650321791853946770}
+--- !u!114 &1768034093689915858
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4276842131974741273}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 372142912, guid: dc443db3e92b4983b9738c1131f555cb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_SceneId:
+    m_Value: 0
+  m_AssetId:
+    i0: 0
+    i1: 0
+    i2: 0
+    i3: 0
+    i4: 0
+    i5: 0
+    i6: 0
+    i7: 0
+    i8: 0
+    i9: 0
+    i10: 0
+    i11: 0
+    i12: 0
+    i13: 0
+    i14: 0
+    i15: 0
+  m_ServerOnly: 0
+  m_LocalPlayerAuthority: 1
+--- !u!114 &2394289566341128614
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4276842131974741273}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: -1768714887, guid: dc443db3e92b4983b9738c1131f555cb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_TransformSyncMode: 3
+  m_SendInterval: 0.033333335
+  m_SyncRotationAxis: 7
+  m_RotationSyncCompression: 0
+  m_SyncSpin: 0
+  m_MovementTheshold: 0.001
+  m_VelocityThreshold: 0.0001
+  m_SnapThreshold: 5
+  m_InterpolateRotation: 1
+  m_InterpolateMovement: 1
 --- !u!1001 &4650321791854043442
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -160,6 +217,14 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 2022446059306826763}
     m_Modifications:
+    - target: {fileID: 100000, guid: e76933191c66edb4cb1cfb38cd581882, type: 3}
+      propertyPath: m_Name
+      value: slime
+      objectReference: {fileID: 0}
+    - target: {fileID: 9500000, guid: e76933191c66edb4cb1cfb38cd581882, type: 3}
+      propertyPath: m_Controller
+      value: 
+      objectReference: {fileID: 9100000, guid: d357773d6dcaa2f46b480ca77e174be8, type: 2}
     - target: {fileID: 400000, guid: e76933191c66edb4cb1cfb38cd581882, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
@@ -204,14 +269,6 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 100000, guid: e76933191c66edb4cb1cfb38cd581882, type: 3}
-      propertyPath: m_Name
-      value: slime
-      objectReference: {fileID: 0}
-    - target: {fileID: 9500000, guid: e76933191c66edb4cb1cfb38cd581882, type: 3}
-      propertyPath: m_Controller
-      value: 
-      objectReference: {fileID: 9100000, guid: d357773d6dcaa2f46b480ca77e174be8, type: 2}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: e76933191c66edb4cb1cfb38cd581882, type: 3}
 --- !u!1 &4650321791853946770 stripped
@@ -345,7 +402,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: c412ffaf73e2e3e4693dc62e67d2a908, type: 3}
---- !u!114 &1286177521255851565 stripped
+--- !u!114 &7840389125086526374 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 9013888659276046307, guid: c412ffaf73e2e3e4693dc62e67d2a908,
     type: 3}

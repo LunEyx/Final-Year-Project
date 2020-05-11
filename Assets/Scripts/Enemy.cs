@@ -9,7 +9,6 @@ public abstract class Enemy : Actor
     protected Animator animator;
     private GameObject expPopUp;
     protected Rigidbody rb;
-    private List<Player> players;
     public Image enemyHpBar;
     protected SightOfView sightOfView;
     protected NavMeshAgent navmesh;
@@ -22,7 +21,6 @@ public abstract class Enemy : Actor
     protected override void Start()
     {
         base.Start();
-        players = GameManager.GetPlayers();
         expPopUp = Resources.Load<GameObject>("ExpPopUp");
         hpBar = enemyHpBar;
         rb = GetComponent<Rigidbody>();
@@ -106,7 +104,9 @@ public abstract class Enemy : Actor
 
     protected virtual void NoTargetAction()
     {
-        Player nearestPlayer = GameManager.GetPlayers()[0];
+        List<Player> players = GameManager.GetPlayers();
+        if (players.Count == 0) return;
+        Player nearestPlayer = players[0];
         float minDistance = Mathf.Infinity;
         foreach (Player player in players)
         {
@@ -132,8 +132,8 @@ public abstract class Enemy : Actor
         base.TakeDamage(value);
         if (GetHp() <= 0)
         {
-            GameManager.GetCurrentPlayer().GainExp(exp);
-            GameManager.GetCurrentPlayer().gold += 10;
+            GameManager.GetLocalPlayer().GainExp(exp);
+            GameManager.GetLocalPlayer().gold += 10;
             if (expPopUp)
 
             {

@@ -20,6 +20,7 @@ public class Player : Actor
     private float distanceToGround;
     
     public float magnitude = 1;
+    public GameObject clientHpBar;
 
     private GameObject hud;
     public int gold = 50;
@@ -30,14 +31,14 @@ public class Player : Actor
 
     public ExpSystem expSystem;
 
-
-    protected override void Start()
+    public override void OnStartLocalPlayer()
     {
-        base.Start();
-        rb = GetComponent<Rigidbody>();
-        popUpText = Resources.Load<GameObject>("CoinPopUp");
-        distanceToGround = GetComponent<Collider>().bounds.extents.y;
-        animator = GetComponentInChildren<Animator>();
+        base.OnStartLocalPlayer();
+        Debug.Log("StartLocalPlayer");
+        GameManager.SetLocalPlayer(this);
+        GameManager.AddPlayer(this);
+        Camera.main.GetComponent<CameraFollow>().SetTarget(transform);
+
         Transform hud = GameObject.FindGameObjectWithTag("HUD").transform;
         Transform playerStatus = hud.Find("Player Status");
         Transform hpObj = playerStatus.Find("HP");
@@ -52,10 +53,27 @@ public class Player : Actor
         Image expBar = expObj.Find("Background").GetComponentInChildren<Image>();
         Text expText = expObj.GetComponentInChildren<Text>();
         coinText = hud.Find("Coin").GetComponentInChildren<Text>();
-        hpSystem = new HpSystem(100);
         expSystem = new ExpSystem(expBar, expText);
+
         RefreshCoinHUD();
-        GameObject.Find("GameManager").GetComponent<GameManager>().AddPlayer(this);
+    }
+
+    protected override void Start()
+    {
+        base.Start();
+        rb = GetComponent<Rigidbody>();
+        popUpText = Resources.Load<GameObject>("CoinPopUp");
+        distanceToGround = GetComponent<Collider>().bounds.extents.y;
+        animator = GetComponentInChildren<Animator>();
+        
+        hpSystem = new HpSystem(100);
+
+        if (!isLocalPlayer)
+        {
+            clientHpBar.SetActive(true);
+            hpBar = clientHpBar.GetComponentInChildren<Image>().GetComponentInChildren<Image>();
+        }
+        GameManager.AddPlayer(this);
     }
     
     private void MovementControl()
@@ -107,6 +125,7 @@ public class Player : Actor
     // Update is called once per frame
     void Update()
     {
+        if (!isLocalPlayer) return;
         MovementControl();
         Animation();
         CastSpell();
@@ -120,7 +139,7 @@ public class Player : Actor
     public override void TakeDamage(int value)
     {
         base.TakeDamage(value);
-        hpText.text = $"{hpSystem.GetHp()} / {hpSystem.GetMaxHp()}";
+            hpText.text = $"{hpSystem.GetHp()} / {hpSystem.GetMaxHp()}";
     }
 
     private void OnCollisionEnter(Collision collision)

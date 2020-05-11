@@ -2,13 +2,18 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Networking;
+using UnityEngine.SceneManagement;
 
-public class GameManager : MonoBehaviour
+public class GameManager : NetworkBehaviour
 {
     public int level = 0;
-    private float turningSpeed = 400;
-    private static List<Player> players = new List<Player>();
+    private bool levelStarted = false;
+    private bool allEnemySpawned = false;
     private bool isGifted = false;
+    private float turningSpeed = 400;
+    private static bool dataLoaded = false;
+    private static List<Player> players = new List<Player>();
+    private static Player localPlayer;
     private static List<Item> itemList = new List<Item>();
     private static List<string> unlearntSpellList = new List<string>();
     private static List<string> learntSpellList = new List<string>();
@@ -27,35 +32,57 @@ public class GameManager : MonoBehaviour
 
     private void Start()
     {
-        readItemData();
-        readSkillData();
+        ClientScene.AddPlayer((short) players.Count);
 
-        TextAsset itemData = Resources.Load<TextAsset>("item list");
-        string[] data = itemData.text.Split( '\n' );
-        for (int i = 1; i < data.Length; i++)
+        if (!dataLoaded)
         {
-            string[] tempitem = data[i].Split(',');
-            Sprite itemIcon = Resources.Load<Sprite>(tempitem[0]);
-            itemList.Add(new Item(tempitem[0], tempitem[1], itemIcon, tempitem[2], false));
-        }
+            readItemData();
+            readSkillData();
 
-        InitializeLevel();
+            TextAsset itemData = Resources.Load<TextAsset>("item list");
+            string[] data = itemData.text.Split('\n');
+            for (int i = 1; i < data.Length; i++)
+            {
+                string[] tempitem = data[i].Split(',');
+                Sprite itemIcon = Resources.Load<Sprite>(tempitem[0]);
+                itemList.Add(new Item(tempitem[0], tempitem[1], itemIcon, tempitem[2], false));
+            }
+
+            dataLoaded = true;
+        }
     }
 
     private void Update()
     {
-        if (CameraMove)
-            ViewControl();
-        if (!isGifted) {
-            foreach (Player player in players)
-            {
-                player.LearnSpell(typeof(Fireball), 0);
-                player.LearnSpell(typeof(Bubble), 1);
-                player.LearnSpell(typeof(Tornado), 2);
-                //player.LearnSpell(typeof(Meteor), 3);
-            }
+        if (!localPlayer) return;
+
+        if (!isGifted)
+        {
+            localPlayer.LearnSpell(typeof(Fireball), 0);
+            localPlayer.LearnSpell(typeof(Bubble), 1);
+            localPlayer.LearnSpell(typeof(Tornado), 2);
             isGifted = true;
         }
+
+        if (level < 0) return;
+
+        if (isServer)
+        {
+            if (!levelStarted)
+            {
+                levelStarted = true;
+                LevelStart();
+            }
+
+            if (allEnemySpawned && GameObject.FindGameObjectsWithTag("Enemy").Length == 0)
+            {
+                Debug.Log("Level Complete");
+                NextStage();
+            }
+        }
+
+        if (CameraMove)
+            ViewControl();
     }
 
     public static List<Player> GetPlayers()
@@ -63,16 +90,20 @@ public class GameManager : MonoBehaviour
         return players;
     }
 
-    public static Player GetCurrentPlayer()
+    public static void SetLocalPlayer(Player player)
     {
-        // TODO: modify this for multiplayer get player
-        return players[0];
+        localPlayer = player;
+    }
+
+    public static Player GetLocalPlayer()
+    {
+        return localPlayer;
     }
 
     private void ViewControl()
     {
         float horizontal = Input.GetAxis("Mouse X") * turningSpeed * Time.deltaTime;
-        players[0].transform.Rotate(0, horizontal, 0);
+        GetLocalPlayer().transform.Rotate(0, horizontal, 0);
     }
 
     private void readItemData()
@@ -98,25 +129,30 @@ public class GameManager : MonoBehaviour
         }
     }
 
-    public void AddPlayer(Player player)
+    public static void AddPlayer(Player player)
     {
         players.Add(player);
-        Camera.main.GetComponent<CameraFollow>().SetTarget(player.transform);
     }
 
-    private Player SpawnPlayer(Vector3 position, Quaternion rotation)
-    {
-        GameObject prefab = Resources.Load<GameObject>("Player");
-        GameObject obj = Instantiate(prefab, position, rotation);
-        return obj.GetComponent<Player>();
-    }
-
-    private void InitializeLevel()
+    private void NextStage()
     {
         switch (level)
         {
             case 1:
-                InitializeLevel1();
+                SceneManager.LoadScene("NewScene");
+                break;
+            default:
+                Debug.Log("Next Stage Not Set");
+                break;
+        }
+    }
+
+    private void LevelStart()
+    {
+        switch (level)
+        {
+            case 1:
+                StartCoroutine("Level1");
                 break;
             default:
                 Debug.Log("Level Not Set");
@@ -124,9 +160,14 @@ public class GameManager : MonoBehaviour
         }
     }
 
-    private void InitializeLevel1()
+    private IEnumerator Level1()
     {
-        Player player = SpawnPlayer(new Vector3(35, 10, 0), Quaternion.identity);
-        AddPlayer(player);
+        Debug.Log("Enable Spawn");
+        SpawnPoint.EnableSpawn = true;
+        yield return new WaitForSeconds(10);
+        Debug.Log("Disable Spawn");
+        SpawnPoint.EnableSpawn = false;
+        Debug.Log("All Enemy Spawned");
+        allEnemySpawned = true;
     }
 }
