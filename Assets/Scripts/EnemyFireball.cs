@@ -15,7 +15,7 @@ public class EnemyFireball : ProjectileSpell
     }
 
     [Command]
-    protected override void CmdInstantiate()
+    protected virtual void CmdInstantiate()
     {
         Collider collider = GetComponent<Collider>();
         GameObject projectile = Instantiate(prefab, transform.position + transform.forward * (1 + collider.bounds.extents.z), transform.rotation);

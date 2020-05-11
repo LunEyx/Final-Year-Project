@@ -19,7 +19,6 @@ public class SpawnPoint : NetworkBehaviour
     {   
         if (EnableSpawn && !coroutineRunning)
         {
-            Debug.Log("Should Start");
             StartCoroutine("Spawn");
         }
     }
@@ -27,14 +26,12 @@ public class SpawnPoint : NetworkBehaviour
     [Command]
     private void CmdSpawn()
     {
-        Debug.Log("CmdSpawn");
         GameObject enemy = Instantiate(prefab, transform.position, transform.rotation);
         NetworkServer.Spawn(enemy);
     }
 
     private IEnumerator Spawn()
     {
-        Debug.Log("Spawn");
         coroutineRunning = true;
         yield return new WaitForSeconds(spawnTime);
         CmdSpawn();

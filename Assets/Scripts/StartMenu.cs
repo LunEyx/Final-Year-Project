@@ -19,16 +19,19 @@ public class StartMenu : MonoBehaviour
 
     public void HostNormal()
     {
+        GameManager.Clear();
         NetworkManager.singleton.StartHost();
     }
 
     public void HostAdvanced()
     {
+        GameManager.Clear();
         NetworkManager.singleton.StartHost();
     }
 
     public void Join()
     {
+        GameManager.Clear();
         NetworkManager.singleton.StartClient();
     }
 }

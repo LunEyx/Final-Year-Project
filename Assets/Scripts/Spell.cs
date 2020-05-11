@@ -65,6 +65,7 @@ public abstract class Spell : NetworkBehaviour
 
     public virtual void Cast()
     {
+        Debug.Log("cast");
         cooldownTimer = 0;
         if (maxCooldown != 0)
         {
@@ -75,6 +76,7 @@ public abstract class Spell : NetworkBehaviour
         {
             iconContainer.fillAmount = 0;
         }
+        Debug.Log("cast Done");
     }
 
     public static Sprite getUnlearntSpellIcon(string spellName)

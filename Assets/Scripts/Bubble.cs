@@ -17,6 +17,12 @@ public class Bubble : ProjectileSpell
         projectileSpeed = 40f;
     }
 
+    public override void Cast()
+    {
+        base.Cast();
+        Debug.Log("Bubble");
+    }
+
     public override void Upgrade()
     {
         BubbledDuration += 1f;

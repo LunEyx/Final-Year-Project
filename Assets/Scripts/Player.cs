@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.Networking;
 
 public class Player : Actor
 {
@@ -139,7 +140,10 @@ public class Player : Actor
     public override void TakeDamage(int value)
     {
         base.TakeDamage(value);
+        if (isLocalPlayer)
+        {
             hpText.text = $"{hpSystem.GetHp()} / {hpSystem.GetMaxHp()}";
+        }
     }
 
     private void OnCollisionEnter(Collision collision)
@@ -156,7 +160,7 @@ public class Player : Actor
         {
             Destroy(spells[index]);
         }
-        Spell spell = gameObject.AddComponent(spellType) as Spell;
+        Spell spell = GetComponent(spellType) as Spell;
         spells[index] = spell;
         spell.SetIconContainer(spellIcons[index]);
         GameManager.UnlearntSpellList.Remove(spell.GetType().Name);

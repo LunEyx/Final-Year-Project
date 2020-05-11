@@ -32,7 +32,7 @@ public class GameManager : NetworkBehaviour
 
     private void Start()
     {
-        ClientScene.AddPlayer((short) players.Count);
+        ClientScene.AddPlayer(0);
 
         if (!dataLoaded)
         {
@@ -58,9 +58,9 @@ public class GameManager : NetworkBehaviour
 
         if (!isGifted)
         {
-            localPlayer.LearnSpell(typeof(Fireball), 0);
+            //localPlayer.LearnSpell(typeof(Fireball), 0);
             localPlayer.LearnSpell(typeof(Bubble), 1);
-            localPlayer.LearnSpell(typeof(Tornado), 2);
+            //.LearnSpell(typeof(Tornado), 2);
             isGifted = true;
         }
 
@@ -83,6 +83,11 @@ public class GameManager : NetworkBehaviour
 
         if (CameraMove)
             ViewControl();
+    }
+
+    public static void Clear()
+    {
+        players = new List<Player>();
     }
 
     public static List<Player> GetPlayers()
@@ -162,12 +167,9 @@ public class GameManager : NetworkBehaviour
 
     private IEnumerator Level1()
     {
-        Debug.Log("Enable Spawn");
         SpawnPoint.EnableSpawn = true;
         yield return new WaitForSeconds(10);
-        Debug.Log("Disable Spawn");
         SpawnPoint.EnableSpawn = false;
-        Debug.Log("All Enemy Spawned");
         allEnemySpawned = true;
     }
 }
