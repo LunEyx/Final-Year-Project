@@ -42,7 +42,7 @@ public class GameManager : MonoBehaviour
         {
             string[] tempitem = data[i].Split(',');
             Sprite itemIcon = Resources.Load<Sprite>(tempitem[0]);
-            itemList.Add(new Item(tempitem[0], tempitem[1], itemIcon, tempitem[2], false));
+            itemList.Add(new Item(tempitem[0], tempitem[1], itemIcon, tempitem[2], int.Parse(tempitem[3]), false));
         }
 
     }
@@ -83,7 +83,7 @@ public class GameManager : MonoBehaviour
         {
             string[] tempitem = data[i].Split(',');
             Sprite itemIcon = Resources.Load<Sprite>(tempitem[0]);
-            itemList.Add(new Item(tempitem[0], tempitem[1], itemIcon, tempitem[2], false));
+            itemList.Add(new Item(tempitem[0], tempitem[1], itemIcon, tempitem[2], int.Parse(tempitem[3]), false));
         }
     }
 
