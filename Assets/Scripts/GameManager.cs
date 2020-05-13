@@ -33,6 +33,7 @@ public class GameManager : NetworkBehaviour
     private void Start()
     {
         ClientScene.AddPlayer(0);
+        InitializePosition();
 
         if (!dataLoaded)
         {
@@ -165,12 +166,27 @@ public class GameManager : NetworkBehaviour
         }
     }
 
+    private void InitializePosition()
+    {
+        switch (level)
+        {
+            case 2:
+                localPlayer.transform.position = new Vector3(85, 3, 85);
+                break;
+            default:
+                break;
+        }
+    }
+
     private void LevelStart()
     {
         switch (level)
         {
             case 1:
                 StartCoroutine("Level1");
+                break;
+            case 2:
+                StartCoroutine("Level2");
                 break;
             default:
                 Debug.Log("Level Not Set");
@@ -182,6 +198,14 @@ public class GameManager : NetworkBehaviour
     {
         SpawnPoint.EnableSpawn = true;
         yield return new WaitForSeconds(10);
+        SpawnPoint.EnableSpawn = false;
+        allEnemySpawned = true;
+    }
+
+    private IEnumerator Level2()
+    {
+        SpawnPoint.EnableSpawn = true;
+        yield return new WaitForSeconds(30);
         SpawnPoint.EnableSpawn = false;
         allEnemySpawned = true;
     }
