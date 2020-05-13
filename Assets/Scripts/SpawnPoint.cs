@@ -27,6 +27,8 @@ public class SpawnPoint : NetworkBehaviour
     private void CmdSpawn()
     {
         GameObject enemy = Instantiate(prefab, transform.position, transform.rotation);
+        Renderer renderer = enemy.GetComponentInChildren<Renderer>();
+        renderer.material.SetColor("_Color", new Color(Random.Range(0f, 1f), Random.Range(0f, 1f), Random.Range(0f, 1f)));
         NetworkServer.Spawn(enemy);
     }
 
