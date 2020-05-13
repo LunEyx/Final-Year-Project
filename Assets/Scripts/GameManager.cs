@@ -57,7 +57,7 @@ public class GameManager : MonoBehaviour
                 player.LearnSpell(typeof(Fireball), 0);
                 player.LearnSpell(typeof(Bubble), 1);
                 player.LearnSpell(typeof(Tornado), 2);
-                //player.LearnSpell(typeof(Meteor), 3);
+                player.LearnSpell(typeof(FireNova), 3);
             }
             isGifted = true;
         }
