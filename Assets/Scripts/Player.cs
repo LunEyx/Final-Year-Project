@@ -16,9 +16,10 @@ public class Player : Actor
     private GameObject exitMenu;
     private Spell[] spells = new Spell[MaxSkill];
     private Image[] spellIcons = new Image[MaxSkill];
-    
+    private bool gotArmor = false;
     private int jumpCounter = 0;
     private float distanceToGround;
+    private float movementSpeed = 0f;
     
     public float magnitude = 1;
     public GameObject clientHpBar;
@@ -79,13 +80,13 @@ public class Player : Actor
     private void MovementControl()
     {
         if (Input.GetKey(KeyCode.W))
-            rb.velocity = rb.transform.rotation * new Vector3(0, rb.velocity.y, 10);
+            rb.velocity = rb.transform.rotation * new Vector3(0, rb.velocity.y + movementSpeed, 10);
         if (Input.GetKey(KeyCode.S))
-            rb.velocity = rb.transform.rotation * new Vector3(0, rb.velocity.y, -10);
+            rb.velocity = rb.transform.rotation * new Vector3(0, rb.velocity.y + movementSpeed, -10);
         if (Input.GetKey(KeyCode.A))
-            rb.velocity = rb.transform.rotation * new Vector3(-10, rb.velocity.y, 0);
+            rb.velocity = rb.transform.rotation * new Vector3(-10, rb.velocity.y + movementSpeed, 0);
         if (Input.GetKey(KeyCode.D))
-            rb.velocity = rb.transform.rotation * new Vector3(10, rb.velocity.y, 0);
+            rb.velocity = rb.transform.rotation * new Vector3(10, rb.velocity.y + movementSpeed, 0);
         if (Input.GetKey(KeyCode.Space) && jumpCounter > 0)
         {
             jumpCounter--;
@@ -150,9 +151,21 @@ public class Player : Actor
 
     public override void TakeDamage(int value)
     {
-        base.TakeDamage(value);
-        if (isLocalPlayer)
+        if (gotArmor) {
+            if (value - 5 >= 0) {
+                base.TakeDamage(value - 5);
+            }
+            else
+            {
+                base.TakeDamage(0);
+            }
+        }
+        else
         {
+            base.TakeDamage(value);
+        }
+        
+        if (isLocalPlayer) {
             hpText.text = $"{hpSystem.GetHp()} / {hpSystem.GetMaxHp()}";
         }
     }
@@ -205,5 +218,33 @@ public class Player : Actor
     private void RefreshCoinHUD()
     {
         coinText.text = $"{coin}";
+    }
+
+    public void GetItem(int itemID)
+    {
+        switch (itemID)
+        {
+            case 1:
+                gotArmor = true;
+                break;
+            case 2:
+                hpSystem.IncreaseMaxHp(50);
+                hpSystem.HealHp(50);
+                hpText.text = $"{hpSystem.GetHp()} / {hpSystem.GetMaxHp()}";
+                TakeDamage(0);
+                break;
+            case 3:
+                Fireball.Damage+=10;
+                FireNova.Damage += 10;
+                Tornado.Damage += 10;
+                Bubble.Damage += 10;
+                Meteor.Damage += 10;
+                break;
+            case 4:
+                movementSpeed += 10f;
+                break;
+            default:
+                break;
+        }
     }
 }

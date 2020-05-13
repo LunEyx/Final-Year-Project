@@ -9,14 +9,16 @@ public class Item
     private Sprite itemIcon;
     private string itemDescription;
     private bool ownedByPlayer;
+    private int itemID;
 
-    public Item(string itemName, string itemCost, Sprite itemIcon, string itemDescription, bool ownedByPlayer)
+    public Item(string itemName, string itemCost, Sprite itemIcon, string itemDescription, int itemID, bool ownedByPlayer)
     {
         this.itemName = itemName;
         this.itemCost = itemCost;
         this.itemIcon = itemIcon;
         this.itemDescription = itemDescription;
         this.ownedByPlayer = ownedByPlayer;
+        this.itemID = itemID;
     }
 
     public Item() { }
@@ -45,5 +47,10 @@ public class Item
     public bool GetOwnership()
     {
         return this.ownedByPlayer;
+    }
+
+    public int GetItemID()
+    {
+        return this.itemID;
     }
 }

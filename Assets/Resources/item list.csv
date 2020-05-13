@@ -1,4 +1,5 @@
 ﻿item name,item cost,description
-dnlm,10,good
-heart,19,dsfsf
-sword,100,hey
+shield,10,decrease damage taken by 5!, 1
+heart,19,Increase maximum health by 50!, 2
+wand,50,Increase all spell damage by 10!, 3
+boots, 30, Increase movement speed by 10!, 4

@@ -49,7 +49,7 @@ public class FireNova : Spell
     {
         GameObject fireNova = Instantiate(prefab, new Vector3(transform.position.x,transform.position.y-0.7f,transform.position.z), Quaternion.identity);
         fireNova.transform.parent = GameManager.GetLocalPlayer().transform;
-        Destroy(fireNova, 0.5f);
+        Destroy(fireNova, 0.7f);
        
         
     }

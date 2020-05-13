@@ -31,6 +31,7 @@ public class ShopItemsController: MonoBehaviour
             player.GainCoin(-itemCost);
             soldIcon.SetActive(true);
             itemIcon.enabled = false;
+            player.GetItem(item.GetItemID());
         }
         else
         {
