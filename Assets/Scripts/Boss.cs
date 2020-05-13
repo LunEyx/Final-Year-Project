@@ -20,8 +20,8 @@ public class Boss : Enemy
         base.Start();
         animator = GetComponentInChildren<Animator>();
         hpSystem = new HpSystem(MaxHp);
-        bubbleOffset = new Vector3(0, 1, 0);
-        bubbleScale = 3;
+        bubbleOffset = new Vector3(0, 0.6f, 0);
+        bubbleScale = 2;
         spells[0] = gameObject.AddComponent<BossFireball>() as Spell;
         spells[1] = gameObject.AddComponent<EnemyTornado>() as Spell;
     }

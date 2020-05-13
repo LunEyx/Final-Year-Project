@@ -33,6 +33,7 @@ public class GameManager : NetworkBehaviour
     private void Start()
     {
         ClientScene.AddPlayer(0);
+        InitializePosition();
 
         if (!dataLoaded)
         {
@@ -168,6 +169,18 @@ public class GameManager : NetworkBehaviour
         }
     }
 
+    private void InitializePosition()
+    {
+        switch (level)
+        {
+            case 2:
+                localPlayer.transform.position = new Vector3(85, 3, 85);
+                break;
+            default:
+                break;
+        }
+    }
+
     private void LevelStart()
     {
         switch (level)
@@ -196,6 +209,7 @@ public class GameManager : NetworkBehaviour
         }
         allEnemySpawned = true;
     }
+
 
     private IEnumerator Level2()
     {   

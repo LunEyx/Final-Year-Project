@@ -142,6 +142,7 @@ public class Player : Actor
         Animation();
         CastSpell();
 
+
     }
 
     public override void TakeDamage(int value)
