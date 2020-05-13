@@ -58,9 +58,9 @@ public class GameManager : NetworkBehaviour
 
         if (!isGifted)
         {
-            //localPlayer.LearnSpell(typeof(Fireball), 0);
+            localPlayer.LearnSpell(typeof(Fireball), 0);
             localPlayer.LearnSpell(typeof(Bubble), 1);
-            //.LearnSpell(typeof(Tornado), 2);
+            //localPlayer.LearnSpell(typeof(Tornado), 2);
             isGifted = true;
         }
 

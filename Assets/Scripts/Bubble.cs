@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Networking;
 
 public class Bubble : ProjectileSpell
 {
@@ -11,16 +12,9 @@ public class Bubble : ProjectileSpell
     private void Awake()
     {
         icon = Resources.Load<Sprite>("Icons/SpellBookPreface_05");
-        prefab = Resources.Load<GameObject>("Bubble");
         duration = 10f;
         cooldown = 3f;
         projectileSpeed = 40f;
-    }
-
-    public override void Cast()
-    {
-        base.Cast();
-        Debug.Log("Bubble");
     }
 
     public override void Upgrade()
@@ -36,5 +30,18 @@ public class Bubble : ProjectileSpell
     public static string GetUpgradeDescription()
     {
         return UpgradeDes;
+    }
+
+    [Command]
+    protected override void CmdInstantiate()
+    {
+        Debug.Log("Bubble");
+        Debug.Log(prefab.name);
+        GameObject projectile = Instantiate(prefab, transform.position + transform.forward * 2, transform.rotation);
+        projectile.GetComponent<Rigidbody>().velocity = transform.forward * projectileSpeed;
+        Debug.Log("Spawn");
+        NetworkServer.Spawn(projectile);
+        Debug.Log("Spawn Done");
+        Destroy(projectile, duration);
     }
 }

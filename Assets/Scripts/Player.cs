@@ -73,8 +73,8 @@ public class Player : Actor
         {
             clientHpBar.SetActive(true);
             hpBar = clientHpBar.GetComponentInChildren<Image>().GetComponentInChildren<Image>();
+            GameManager.AddPlayer(this);
         }
-        GameManager.AddPlayer(this);
     }
     
     private void MovementControl()
@@ -156,17 +156,20 @@ public class Player : Actor
 
     public void LearnSpell(System.Type spellType, int index)
     {
+        Debug.Log(spellType.Name);
+        Debug.Log(index);
         if (spells[index] != null)
         {
             Destroy(spells[index]);
         }
         Spell spell = GetComponent(spellType) as Spell;
+        Debug.Log(spell);
         spells[index] = spell;
         spell.SetIconContainer(spellIcons[index]);
         GameManager.UnlearntSpellList.Remove(spell.GetType().Name);
         GameManager.LearntSpellList.Add(spell.GetType().Name);
         skillLearntCounter++;
-    }
+    } 
 
     public bool CanAfford(int value)
     {

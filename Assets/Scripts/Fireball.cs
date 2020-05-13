@@ -11,7 +11,6 @@ public class Fireball : ProjectileSpell
     private void Awake()
     {
         icon = Resources.Load<Sprite>("Icons/Fireball");
-        prefab = Resources.Load<GameObject>("Fireball");
         duration = 5f;
         cooldown = 3f;
         projectileSpeed = 40f;
@@ -30,5 +29,18 @@ public class Fireball : ProjectileSpell
     public static string GetUpgradeDescription()
     {
         return UpgradeDes;
+    }
+
+    [Command]
+    protected override void CmdInstantiate()
+    {
+        Debug.Log("Fireball");
+        Debug.Log(prefab.name);
+        GameObject projectile = Instantiate(prefab, transform.position + transform.forward * 2, transform.rotation);
+        projectile.GetComponent<Rigidbody>().velocity = transform.forward * projectileSpeed;
+        Debug.Log("Spawn");
+        NetworkServer.Spawn(projectile);
+        Debug.Log("Spawn Done");
+        Destroy(projectile, duration);
     }
 }

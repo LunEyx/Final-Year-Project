@@ -5,7 +5,7 @@ using UnityEngine.Networking;
 
 public abstract class ProjectileSpell : Spell
 {
-    protected GameObject prefab;
+    public GameObject prefab;
     protected float duration;
     protected float projectileSpeed;
 
@@ -18,6 +18,7 @@ public abstract class ProjectileSpell : Spell
     [Command]
     protected virtual void CmdInstantiate()
     {
+        Debug.Log(prefab.name);
         GameObject projectile = Instantiate(prefab, transform.position + transform.forward * 2, transform.rotation);
         projectile.GetComponent<Rigidbody>().velocity = transform.forward * projectileSpeed;
         Debug.Log("Spawn");
