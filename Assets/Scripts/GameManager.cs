@@ -82,8 +82,20 @@ public class GameManager : NetworkBehaviour
             }
         }
 
-        if (CameraMove)
+        if (CameraMove) {
             ViewControl();
+        }
+
+        if (!isGifted) {
+            foreach (Player player in players)
+            {
+                player.LearnSpell(typeof(Fireball), 0);
+                player.LearnSpell(typeof(Bubble), 1);
+                player.LearnSpell(typeof(Tornado), 2);
+                player.LearnSpell(typeof(FireNova), 3);
+            }
+            isGifted = true;
+        }
     }
 
     public static void Clear()

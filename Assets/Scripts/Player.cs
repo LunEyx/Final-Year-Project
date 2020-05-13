@@ -13,7 +13,7 @@ public class Player : Actor
     private Animator animator;
     private Text hpText;
     private Text coinText;
-
+    private GameObject exitMenu;
     private Spell[] spells = new Spell[MaxSkill];
     private Image[] spellIcons = new Image[MaxSkill];
     
@@ -91,6 +91,18 @@ public class Player : Actor
             jumpCounter--;
             rb.AddForce(new Vector3(0, 10f, 0), ForceMode.Impulse);
         }
+        if (Input.GetKeyDown(KeyCode.Escape))
+        {
+            if (exitMenu == null)
+            {
+                exitMenu = Instantiate(Resources.Load<GameObject>("Exit_Menu"));
+            }
+            else
+            {
+                Destroy(exitMenu);
+            }
+        }
+            
     }
 
     private void Animation()
