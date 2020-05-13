@@ -43,7 +43,7 @@ public class LevelUpUIController : MonoBehaviour
     private void createSkillItemTemplate(string spellName, int offset)
     {
         GameObject container = Instantiate(skillItemTemplate, transform);
-        container.GetComponent<Transform>().localPosition = new Vector3(-289 + offset * 150, -41, 0);
+        container.GetComponent<Transform>().localPosition = new Vector3(-580 + offset * 300, -41, 0);
         container.GetComponent<SkillItemController>().player = player;
         container.GetComponent<SkillItemController>().spellName = spellName;
         container.GetComponent<SkillItemController>().levelUpUI = levelUpUI;
