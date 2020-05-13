@@ -204,8 +204,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   tooltip: {fileID: 7783706081852213041}
-  widthOffset: 105
-  heightOffset: -30
+  widthOffset: 200
+  heightOffset: -25
 --- !u!223 &7783706083563176495
 Canvas:
   m_ObjectHideFlags: 0
@@ -291,7 +291,7 @@ PrefabInstance:
     - target: {fileID: 8580553353464287238, guid: 06012fc9356cd204aa986a2e353819f9,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: 3
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8580553353464287238, guid: 06012fc9356cd204aa986a2e353819f9,
         type: 3}
@@ -336,12 +336,12 @@ PrefabInstance:
     - target: {fileID: 8580553353464287238, guid: 06012fc9356cd204aa986a2e353819f9,
         type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: -229
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8580553353464287238, guid: 06012fc9356cd204aa986a2e353819f9,
         type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: -126
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8580553353464287238, guid: 06012fc9356cd204aa986a2e353819f9,
         type: 3}
@@ -356,22 +356,22 @@ PrefabInstance:
     - target: {fileID: 8580553353464287238, guid: 06012fc9356cd204aa986a2e353819f9,
         type: 3}
       propertyPath: m_AnchorMin.x
-      value: 0.5
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8580553353464287238, guid: 06012fc9356cd204aa986a2e353819f9,
         type: 3}
       propertyPath: m_AnchorMin.y
-      value: 0.5
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8580553353464287238, guid: 06012fc9356cd204aa986a2e353819f9,
         type: 3}
       propertyPath: m_AnchorMax.x
-      value: 0.5
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8580553353464287238, guid: 06012fc9356cd204aa986a2e353819f9,
         type: 3}
       propertyPath: m_AnchorMax.y
-      value: 0.5
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8580553353464287238, guid: 06012fc9356cd204aa986a2e353819f9,
         type: 3}

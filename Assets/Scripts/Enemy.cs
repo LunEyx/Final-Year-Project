@@ -138,7 +138,7 @@ public abstract class Enemy : Actor
 
     protected virtual void HandleDying() {
         GameManager.GetLocalPlayer().GetComponent<Player>().GainExp(exp);
-        GameManager.GetLocalPlayer().GetComponent<Player>().gold += 10;
+        GameManager.GetLocalPlayer().GetComponent<Player>().GainCoin(Coin);
         if (expPopUp) {
             ShowExpPopUp();
         }

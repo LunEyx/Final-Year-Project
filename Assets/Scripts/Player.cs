@@ -25,7 +25,6 @@ public class Player : Actor
     public GameObject clientHpBar;
 
     private GameObject hud;
-    public int gold = 50;
     public int skillLearntCounter = 0;
 
     private int coin = 50;
@@ -142,6 +141,8 @@ public class Player : Actor
         MovementControl();
         Animation();
         CastSpell();
+
+
     }
 
     public override void TakeDamage(int value)

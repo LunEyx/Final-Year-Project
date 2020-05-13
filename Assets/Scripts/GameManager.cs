@@ -160,6 +160,9 @@ public class GameManager : NetworkBehaviour
             case 1:
                 SceneManager.LoadScene("NewScene");
                 break;
+            case 2:
+                SceneManager.LoadScene("RockScene");
+                break;
             default:
                 Debug.Log("Next Stage Not Set");
                 break;
@@ -196,17 +199,29 @@ public class GameManager : NetworkBehaviour
 
     private IEnumerator Level1()
     {
-        SpawnPoint.EnableSpawn = true;
-        yield return new WaitForSeconds(10);
-        SpawnPoint.EnableSpawn = false;
+        for (int i = 0; i < 3; i++)
+        {
+            SpawnPoint.EnableSpawn = true;
+            yield return new WaitForSeconds(20);
+            SpawnPoint.EnableSpawn = false;
+            yield return new WaitUntil(() => { return (GameObject.FindGameObjectsWithTag("Enemy").Length == 0) ? true : false; });
+            yield return new WaitForSeconds(5);
+        }
         allEnemySpawned = true;
     }
 
+
     private IEnumerator Level2()
-    {
-        SpawnPoint.EnableSpawn = true;
-        yield return new WaitForSeconds(30);
-        SpawnPoint.EnableSpawn = false;
+    {   
+        for (int i=0; i< 5; i++)
+        {
+            SpawnPoint.EnableSpawn = true;
+            SpawnPoint.spawnTime = 2f;
+            yield return new WaitForSeconds(20);
+            SpawnPoint.EnableSpawn = false;
+            yield return new WaitForSeconds(20);
+        }
         allEnemySpawned = true;
     }
+
 }
