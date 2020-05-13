@@ -160,6 +160,14 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 2022446059306826763}
     m_Modifications:
+    - target: {fileID: 100000, guid: e76933191c66edb4cb1cfb38cd581882, type: 3}
+      propertyPath: m_Name
+      value: slime
+      objectReference: {fileID: 0}
+    - target: {fileID: 9500000, guid: e76933191c66edb4cb1cfb38cd581882, type: 3}
+      propertyPath: m_Controller
+      value: 
+      objectReference: {fileID: 9100000, guid: d357773d6dcaa2f46b480ca77e174be8, type: 2}
     - target: {fileID: 400000, guid: e76933191c66edb4cb1cfb38cd581882, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
@@ -204,14 +212,6 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 100000, guid: e76933191c66edb4cb1cfb38cd581882, type: 3}
-      propertyPath: m_Name
-      value: slime
-      objectReference: {fileID: 0}
-    - target: {fileID: 9500000, guid: e76933191c66edb4cb1cfb38cd581882, type: 3}
-      propertyPath: m_Controller
-      value: 
-      objectReference: {fileID: 9100000, guid: d357773d6dcaa2f46b480ca77e174be8, type: 2}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: e76933191c66edb4cb1cfb38cd581882, type: 3}
 --- !u!1 &4650321791853946770 stripped

@@ -289,6 +289,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: Slime
       objectReference: {fileID: 0}
+    - target: {fileID: 4276842131974741273, guid: dcba36609bad547ecaa309987c720ef7,
+        type: 3}
+      propertyPath: m_Layer
+      value: 11
+      objectReference: {fileID: 0}
     - target: {fileID: 4276842131974741279, guid: dcba36609bad547ecaa309987c720ef7,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -343,6 +348,31 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4650321791853946770, guid: dcba36609bad547ecaa309987c720ef7,
+        type: 3}
+      propertyPath: m_Layer
+      value: 11
+      objectReference: {fileID: 0}
+    - target: {fileID: 1286177521255851562, guid: dcba36609bad547ecaa309987c720ef7,
+        type: 3}
+      propertyPath: m_Layer
+      value: 11
+      objectReference: {fileID: 0}
+    - target: {fileID: 1898223873647198934, guid: dcba36609bad547ecaa309987c720ef7,
+        type: 3}
+      propertyPath: m_Layer
+      value: 11
+      objectReference: {fileID: 0}
+    - target: {fileID: 1286177520829654197, guid: dcba36609bad547ecaa309987c720ef7,
+        type: 3}
+      propertyPath: m_Layer
+      value: 11
+      objectReference: {fileID: 0}
+    - target: {fileID: 1286177521855791304, guid: dcba36609bad547ecaa309987c720ef7,
+        type: 3}
+      propertyPath: m_Layer
+      value: 11
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: dcba36609bad547ecaa309987c720ef7, type: 3}
