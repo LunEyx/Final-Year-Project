@@ -31,4 +31,14 @@ public class HpSystem
     {
         return (float)currentHp / maxHp;
     }
+
+    public void IncreaseMaxHp(int num)
+    {
+        maxHp += num;
+    }
+
+    public void HealHp(int num)
+    {
+        currentHp += num;
+    }
 }
