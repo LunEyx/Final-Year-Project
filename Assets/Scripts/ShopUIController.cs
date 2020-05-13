@@ -32,7 +32,7 @@ public class ShopUIController : MonoBehaviour
     private void CreateItemContainer(Item item, int offset)
     {
         GameObject container = Instantiate(shopItemTemplate,transform);
-        container.GetComponent<Transform>().localPosition = new Vector3(-241 + offset * 175, 0, 0);
+        container.GetComponent<Transform>().localPosition = new Vector3( -500 + offset * 350, 0, 0);
         container.GetComponent<ShopItemsController>().item = item;
         container.GetComponent<ShopItemsController>().player = player;
         container.GetComponentInChildren<ToolTip>().tooltip = tooltip;
