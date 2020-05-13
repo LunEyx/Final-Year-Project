@@ -13,17 +13,10 @@ public class FireballCollisionHandler : MonoBehaviour
 
     private void OnCollisionEnter(Collision collision){
         Actor actor;
+        GameObject explosion;
         switch (collision.gameObject.tag)
         {
             case "Enemy":
-                if (!gameObject.name.StartsWith("Enemy"))
-                {
-                    break;
-                }
-                actor = collision.gameObject.GetComponent<Actor>();
-                actor.TakeDamage(Fireball.Damage);
-                Destroy(gameObject);
-                break;
             case "Player":
                 actor = collision.gameObject.GetComponent<Actor>();
                 actor.TakeDamage(Fireball.Damage);
@@ -37,12 +30,15 @@ public class FireballCollisionHandler : MonoBehaviour
                 }
                 else
                 {
-                    GameObject explosion = Instantiate(explosionPrefab, transform.position, transform.rotation);
+                    explosion = Instantiate(explosionPrefab, transform.position, transform.rotation);
                     Destroy(explosion, explosion.GetComponent<ParticleSystem>().main.duration);
                     Destroy(gameObject);
                 }
                 break;
             default:
+                explosion = Instantiate(explosionPrefab, transform.position, transform.rotation);
+                Destroy(explosion, explosion.GetComponent<ParticleSystem>().main.duration);
+                Destroy(gameObject);
                 break;
         }
     }
