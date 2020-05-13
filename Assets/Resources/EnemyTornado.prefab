@@ -9398,7 +9398,7 @@ GameObject:
   - component: {fileID: 19807740}
   - component: {fileID: 19990304}
   - component: {fileID: 2471342535967179485}
-  - component: {fileID: 5779111102824161169}
+  - component: {fileID: 4414561426855169496}
   m_Layer: 1
   m_Name: particle master
   m_TagString: Untagged
@@ -14233,7 +14233,7 @@ SphereCollider:
   serializedVersion: 2
   m_Radius: 13.126972
   m_Center: {x: 0.40278268, y: 12.362547, z: -0.42174459}
---- !u!114 &5779111102824161169
+--- !u!114 &4414561426855169496
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -14242,12 +14242,12 @@ MonoBehaviour:
   m_GameObject: {fileID: 166638}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7ae32f8f4f503124097da3b9e12ca507, type: 3}
+  m_Script: {fileID: 11500000, guid: a1e253d7810b8e742abacf6107c5de3c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   particleCenter: {fileID: 7294097892654157785}
-  pullForce: 500
-  refreshRate: 2
+  pullForce: 1000
+  refreshRate: 10
 --- !u!1 &196506
 GameObject:
   m_ObjectHideFlags: 0

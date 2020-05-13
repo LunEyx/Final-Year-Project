@@ -132,15 +132,17 @@ public abstract class Enemy : Actor
         base.TakeDamage(value);
         if (GetHp() <= 0)
         {
-            playerObjs[0].GetComponent<Player>().GainExp(exp);
-            playerObjs[0].GetComponent<Player>().gold += 10;
-            if (expPopUp)
-
-            {
-                ShowExpPopUp();
-            }
-            Destroy(gameObject);
+            HandleDying();
         }
+    }
+
+    protected virtual void HandleDying() {
+        playerObjs[0].GetComponent<Player>().GainExp(exp);
+        playerObjs[0].GetComponent<Player>().gold += 10;
+        if (expPopUp) {
+            ShowExpPopUp();
+        }
+        Destroy(gameObject);
     }
 
     private void ShowExpPopUp()
