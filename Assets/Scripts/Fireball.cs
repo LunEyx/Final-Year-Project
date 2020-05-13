@@ -30,17 +30,4 @@ public class Fireball : ProjectileSpell
     {
         return UpgradeDes;
     }
-
-    [Command]
-    protected override void CmdInstantiate()
-    {
-        Debug.Log("Fireball");
-        Debug.Log(prefab.name);
-        GameObject projectile = Instantiate(prefab, transform.position + transform.forward * 2, transform.rotation);
-        projectile.GetComponent<Rigidbody>().velocity = transform.forward * projectileSpeed;
-        Debug.Log("Spawn");
-        NetworkServer.Spawn(projectile);
-        Debug.Log("Spawn Done");
-        Destroy(projectile, duration);
-    }
 }

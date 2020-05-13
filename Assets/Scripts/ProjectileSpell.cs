@@ -8,22 +8,22 @@ public abstract class ProjectileSpell : Spell
     public GameObject prefab;
     protected float duration;
     protected float projectileSpeed;
+    private GameObject projectile;
 
     public override void Cast()
     {
         base.Cast();
-        CmdInstantiate();
+        CmdInstantiate(prefab.name);
     }
 
     [Command]
-    protected virtual void CmdInstantiate()
+    protected void CmdInstantiate(string prefabName)
     {
-        Debug.Log(prefab.name);
-        GameObject projectile = Instantiate(prefab, transform.position + transform.forward * 2, transform.rotation);
+        GameObject prefab = Resources.Load<GameObject>(prefabName);
+        projectile = Instantiate(prefab, transform.position + transform.forward * 2, transform.rotation);
         projectile.GetComponent<Rigidbody>().velocity = transform.forward * projectileSpeed;
-        Debug.Log("Spawn");
-        NetworkServer.Spawn(projectile);
-        Debug.Log("Spawn Done");
+
         Destroy(projectile, duration);
+        NetworkServer.Spawn(projectile);
     }
 }
