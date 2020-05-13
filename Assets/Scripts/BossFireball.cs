@@ -1,10 +1,12 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Networking;
 
 public class BossFireball : EnemyFireball
 {
-    protected override void Instantiate()
+    [Command]
+    protected override void CmdInstantiate()
     {
         for (int i = 0; i < 36; i++){
             float angle = 10;
@@ -13,6 +15,7 @@ public class BossFireball : EnemyFireball
             fireball.transform.Rotate(new Vector3(0, curretnRotation, 0));
             fireball.transform.Translate(new Vector3(10, 1, 0));
             fireball.GetComponent<Rigidbody>().velocity = fireball.transform.forward * 40f;
+            NetworkServer.Spawn(fireball);
             Destroy(fireball, duration);
         }
     }
