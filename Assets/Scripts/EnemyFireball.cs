@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Networking;
 
 public class EnemyFireball : ProjectileSpell
 {
@@ -13,11 +14,13 @@ public class EnemyFireball : ProjectileSpell
         projectileSpeed = 40f;
     }
 
-    protected override void Instantiate()
+    [Command]
+    protected virtual void CmdInstantiate()
     {
         Collider collider = GetComponent<Collider>();
         GameObject projectile = Instantiate(prefab, transform.position + transform.forward * (1 + collider.bounds.extents.z), transform.rotation);
         projectile.GetComponent<Rigidbody>().velocity = transform.forward * projectileSpeed;
+        NetworkServer.Spawn(projectile);
         Destroy(projectile, duration);
     }
 }

@@ -9,7 +9,6 @@ public abstract class Enemy : Actor
     protected Animator animator;
     private GameObject expPopUp;
     protected Rigidbody rb;
-    private GameObject[] playerObjs;
     public Image enemyHpBar;
     protected SightOfView sightOfView;
     protected NavMeshAgent navmesh;
@@ -22,7 +21,6 @@ public abstract class Enemy : Actor
     protected override void Start()
     {
         base.Start();
-        playerObjs = GameObject.FindGameObjectsWithTag("Player");
         expPopUp = Resources.Load<GameObject>("ExpPopUp");
         hpBar = enemyHpBar;
         rb = GetComponent<Rigidbody>();
@@ -106,18 +104,20 @@ public abstract class Enemy : Actor
 
     protected virtual void NoTargetAction()
     {
-        GameObject nearestPlayerObj = playerObjs[0];
+        List<Player> players = GameManager.GetPlayers();
+        if (players.Count == 0) return;
+        Player nearestPlayer = players[0];
         float minDistance = Mathf.Infinity;
-        foreach (GameObject playerObj in playerObjs)
+        foreach (Player player in players)
         {
-            float distance = Vector3.Distance(playerObj.transform.position, transform.position);
+            float distance = Vector3.Distance(player.transform.position, transform.position);
             if (distance < minDistance)
             {
-                nearestPlayerObj = playerObj;
+                nearestPlayer = player;
                 minDistance = distance;
             }
         }
-        navmesh.destination = nearestPlayerObj.transform.position;
+        navmesh.destination = nearestPlayer.transform.position;
     }
 
     protected virtual void TargetFoundAction()
@@ -137,8 +137,8 @@ public abstract class Enemy : Actor
     }
 
     protected virtual void HandleDying() {
-        playerObjs[0].GetComponent<Player>().GainExp(exp);
-        playerObjs[0].GetComponent<Player>().gold += 10;
+        GameManager.GetLocalPlayer().GetComponent<Player>().GainExp(exp);
+        GameManager.GetLocalPlayer().GetComponent<Player>().gold += 10;
         if (expPopUp) {
             ShowExpPopUp();
         }

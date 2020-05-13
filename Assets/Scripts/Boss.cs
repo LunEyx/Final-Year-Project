@@ -12,7 +12,7 @@ public class Boss : Enemy
     private bool isAttackReady = true;
     private bool isSpellReady = true;
     private Spell[] spells = new Spell[2];
-    private int mode = 1;
+    private int mode = 2;
     private bool currentSpell = false;
 
     protected override void Start()
@@ -23,7 +23,7 @@ public class Boss : Enemy
         bubbleOffset = new Vector3(0, 1, 0);
         bubbleScale = 3;
         spells[0] = gameObject.AddComponent<BossFireball>() as Spell;
-        spells[1] = gameObject.AddComponent<EnemyTornado>() as Spell;
+        spells[1] = gameObject.AddComponent<BossFireball>() as Spell;
     }
 
     protected override void TargetFoundAction()

@@ -1,8 +1,9 @@
 ﻿using System.Collections;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.Networking;
 
-public class Actor : MonoBehaviour
+public class Actor : NetworkBehaviour
 {
     public enum Effect { Bubbled };
 
@@ -12,6 +13,7 @@ public class Actor : MonoBehaviour
 
     // bubbled debuff
     protected GameObject bubblePrefab;
+    [SyncVar]
     protected bool bubbled = false;
     protected GameObject bubble;
 

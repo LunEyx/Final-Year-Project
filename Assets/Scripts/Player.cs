@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.Networking;
 
 public class Player : Actor
 {
@@ -21,6 +22,7 @@ public class Player : Actor
     private float movementSpeed = 0f;
     
     public float magnitude = 1;
+    public GameObject clientHpBar;
 
     private GameObject hud;
     public int gold = 50;
@@ -31,14 +33,13 @@ public class Player : Actor
 
     public ExpSystem expSystem;
 
-
-    protected override void Start()
+    public override void OnStartLocalPlayer()
     {
-        base.Start();
-        rb = GetComponent<Rigidbody>();
-        popUpText = Resources.Load<GameObject>("CoinPopUp");
-        distanceToGround = GetComponent<Collider>().bounds.extents.y;
-        animator = GetComponentInChildren<Animator>();
+        base.OnStartLocalPlayer();
+        GameManager.SetLocalPlayer(this);
+        GameManager.AddPlayer(this);
+        Camera.main.GetComponent<CameraFollow>().SetTarget(transform);
+
         Transform hud = GameObject.FindGameObjectWithTag("HUD").transform;
         Transform playerStatus = hud.Find("Player Status");
         Transform hpObj = playerStatus.Find("HP");
@@ -53,10 +54,27 @@ public class Player : Actor
         Image expBar = expObj.Find("Background").GetComponentInChildren<Image>();
         Text expText = expObj.GetComponentInChildren<Text>();
         coinText = hud.Find("Coin").GetComponentInChildren<Text>();
-        hpSystem = new HpSystem(100);
         expSystem = new ExpSystem(expBar, expText);
-        RefreshCoinHUD();
 
+        RefreshCoinHUD();
+    }
+
+    protected override void Start()
+    {
+        base.Start();
+        rb = GetComponent<Rigidbody>();
+        popUpText = Resources.Load<GameObject>("CoinPopUp");
+        distanceToGround = GetComponent<Collider>().bounds.extents.y;
+        animator = GetComponentInChildren<Animator>();
+        
+        hpSystem = new HpSystem(100);
+
+        if (!isLocalPlayer)
+        {
+            clientHpBar.SetActive(true);
+            hpBar = clientHpBar.GetComponentInChildren<Image>().GetComponentInChildren<Image>();
+            GameManager.AddPlayer(this);
+        }
     }
     
     private void MovementControl()
@@ -120,6 +138,7 @@ public class Player : Actor
     // Update is called once per frame
     void Update()
     {
+        if (!isLocalPlayer) return;
         MovementControl();
         Animation();
         CastSpell();
@@ -132,12 +151,23 @@ public class Player : Actor
 
     public override void TakeDamage(int value)
     {
-        if (gotArmor)
-            if (value - 5 >= 0)
+        if (gotArmor) {
+            if (value - 5 >= 0) {
                 base.TakeDamage(value - 5);
-            else base.TakeDamage(0);
-        else base.TakeDamage(value);
-        hpText.text = $"{hpSystem.GetHp()} / {hpSystem.GetMaxHp()}";
+            }
+            else
+            {
+                base.TakeDamage(0);
+            }
+        }
+        else
+        {
+            base.TakeDamage(value);
+        }
+        
+        if (isLocalPlayer) {
+            hpText.text = $"{hpSystem.GetHp()} / {hpSystem.GetMaxHp()}";
+        }
     }
 
     private void OnCollisionEnter(Collision collision)
@@ -154,13 +184,13 @@ public class Player : Actor
         {
             Destroy(spells[index]);
         }
-        Spell spell = gameObject.AddComponent(spellType) as Spell;
+        Spell spell = GetComponent(spellType) as Spell;
         spells[index] = spell;
         spell.SetIconContainer(spellIcons[index]);
         GameManager.UnlearntSpellList.Remove(spell.GetType().Name);
         GameManager.LearntSpellList.Add(spell.GetType().Name);
         skillLearntCounter++;
-    }
+    } 
 
     public bool CanAfford(int value)
     {

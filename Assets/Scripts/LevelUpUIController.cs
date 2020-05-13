@@ -17,7 +17,7 @@ public class LevelUpUIController : MonoBehaviour
     void Start()
     {
         int temp = 0;
-        player = GameManager.GetCurrentPlayer();
+        player = GameManager.GetLocalPlayer();
         skillItemTemplate = Resources.Load<GameObject>("Skill_Container");
         levelUpUI = gameObject;
         for (int i = 0;i < Mathf.Max(3-player.skillLearntCounter,0); i++)

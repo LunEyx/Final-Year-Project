@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Networking;
 
 public class Meteor : Spell
 {
@@ -28,7 +29,13 @@ public class Meteor : Spell
         InvokeRepeating("Instantiate", 0, 0.1f);
     }
 
-    protected virtual void Instantiate()
+    private void Instantiate()
+    {
+        CmdInstantiate(prefab.name);
+    }
+
+    [Command]
+    protected virtual void CmdInstantiate(string prefabName)
     {
         float randPosX = Random.Range(0 - Radius, Radius);
         float randPosZ = Random.Range(0 - Radius, Radius);
@@ -44,6 +51,8 @@ public class Meteor : Spell
             CancelInvoke();
             meteorCounter = 0;
         }
+
+        NetworkServer.Spawn(meteor);
 
         Destroy(meteor, duration);
     }

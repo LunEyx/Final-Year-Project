@@ -2,8 +2,9 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.Networking;
 
-public abstract class Spell : MonoBehaviour
+public abstract class Spell : NetworkBehaviour
 {
     protected Sprite icon;
     protected float cooldown;
@@ -85,6 +86,4 @@ public abstract class Spell : MonoBehaviour
     {
 
     }
-
-
 }

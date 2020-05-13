@@ -12,11 +12,20 @@ public class FireballCollisionHandler : MonoBehaviour
     }
 
     private void OnCollisionEnter(Collision collision){
+        Actor actor;
         switch (collision.gameObject.tag)
         {
             case "Enemy":
+                if (!gameObject.name.StartsWith("Enemy"))
+                {
+                    break;
+                }
+                actor = collision.gameObject.GetComponent<Actor>();
+                actor.TakeDamage(Fireball.Damage);
+                Destroy(gameObject);
+                break;
             case "Player":
-                Actor actor = collision.gameObject.GetComponent<Actor>();
+                actor = collision.gameObject.GetComponent<Actor>();
                 actor.TakeDamage(Fireball.Damage);
                 Destroy(gameObject);
                 break;

@@ -14,7 +14,7 @@ public class ShopUIController : MonoBehaviour
     private void Start()
     {
         shopItemTemplate = Resources.Load<GameObject>("Shop_Item_Container");
-        player = GameManager.GetCurrentPlayer();
+        player = GameManager.GetLocalPlayer();
         List<Item> itemList = GameManager.ItemList;
 
         CreateItemContainer(itemList[0], 0);
