@@ -8,7 +8,7 @@ public class ShopUIController : MonoBehaviour
     private GameObject shopItemTemplate;
     private Player player;
     public GameObject tooltip;
-    public int widthOffset = 100;
+    public int widthOffset = 200;
     public int heightOffset = -25;
 
     private void Start()
@@ -32,7 +32,7 @@ public class ShopUIController : MonoBehaviour
     private void CreateItemContainer(Item item, int offset)
     {
         GameObject container = Instantiate(shopItemTemplate,transform);
-        container.GetComponent<Transform>().localPosition = new Vector3( -500 + offset * 350, 0, 0);
+        container.GetComponent<Transform>().localPosition = new Vector3( -500 + offset * 500, 0, 0);
         container.GetComponent<ShopItemsController>().item = item;
         container.GetComponent<ShopItemsController>().player = player;
         container.GetComponentInChildren<ToolTip>().tooltip = tooltip;

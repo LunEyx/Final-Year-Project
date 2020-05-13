@@ -10,21 +10,22 @@ public class LevelUpUIController : MonoBehaviour
     private int offsetCounter = 0;
     private Player player;
     public GameObject tooltip;
-    public int widthOffset = 100;
+    public int widthOffset = 200;
     public int heightOffset = -25;
 
     // Start is called before the first frame update
     void Start()
     {
+        int temp = 0;
         player = GameManager.GetCurrentPlayer();
         skillItemTemplate = Resources.Load<GameObject>("Skill_Container");
         levelUpUI = gameObject;
-        for (int i = 0;i < (5-player.skillLearntCounter); i++)
+        for (int i = 0;i < Mathf.Max(3-player.skillLearntCounter,0); i++)
         {
             createSkillItemTemplate(GameManager.UnlearntSpellList[i], offsetCounter++);
-            
+            temp++;
         }
-        for(int i = 0;i < player.skillLearntCounter; i++)
+        for(int i = 0;i < Mathf.Max(3-temp, 0) ; i++)
         {
             createSkillItemTemplate(GameManager.LearntSpellList[i], offsetCounter++);
             
@@ -43,7 +44,7 @@ public class LevelUpUIController : MonoBehaviour
     private void createSkillItemTemplate(string spellName, int offset)
     {
         GameObject container = Instantiate(skillItemTemplate, transform);
-        container.GetComponent<Transform>().localPosition = new Vector3(-580 + offset * 300, -41, 0);
+        container.GetComponent<Transform>().localPosition = new Vector3(-450 + offset * 450, -41, 0);
         container.GetComponent<SkillItemController>().player = player;
         container.GetComponent<SkillItemController>().spellName = spellName;
         container.GetComponent<SkillItemController>().levelUpUI = levelUpUI;
