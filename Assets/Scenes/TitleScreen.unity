@@ -368,7 +368,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2138909489}
-  - component: {fileID: 2138909488}
+  - component: {fileID: 2138909490}
   - component: {fileID: 2138909487}
   m_Layer: 0
   m_Name: NetworkManager
@@ -393,7 +393,21 @@ MonoBehaviour:
   showGUI: 1
   offsetX: 0
   offsetY: 0
---- !u!114 &2138909488
+--- !u!4 &2138909489
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2138909486}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 4
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &2138909490
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -402,7 +416,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 2138909486}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2ffe2a0d88f5044b1a8bc8073cca7c99, type: 3}
+  m_Script: {fileID: -822479833, guid: dc443db3e92b4983b9738c1131f555cb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   m_NetworkPort: 7777
@@ -421,12 +435,13 @@ MonoBehaviour:
   m_OfflineScene: TitleScreen
   m_OnlineScene: SampleScene
   m_SpawnPrefabs:
-  - {fileID: 313450360509659959, guid: fcf8c955512d7478aac058f2c1f29a00, type: 3}
   - {fileID: 4276842131974741273, guid: dcba36609bad547ecaa309987c720ef7, type: 3}
-  - {fileID: 2408071516411525406, guid: 1dbd11d2ca3f29640b6bd21d7b6393d2, type: 3}
-  - {fileID: 972450990342239282, guid: 69c655c02f50365459793afa2a473320, type: 3}
   - {fileID: 7848916626512630633, guid: 0d2a0e2f0e5c39546aa5680ffb414e25, type: 3}
+  - {fileID: 972450990342239282, guid: 69c655c02f50365459793afa2a473320, type: 3}
+  - {fileID: 4976994650353639806, guid: 11a6b9fcdc06753408509f4963dc8de6, type: 3}
+  - {fileID: 2408071516411525406, guid: 1dbd11d2ca3f29640b6bd21d7b6393d2, type: 3}
   - {fileID: 1068965152822112325, guid: 2f1d5cad6c7784f1084772dab7ef3ebe, type: 3}
+  - {fileID: 108504, guid: e6639f311be6eb4408e7753aefaace0f, type: 3}
   m_CustomConfig: 0
   m_MaxConnections: 4
   m_ConnectionConfig:
@@ -482,20 +497,6 @@ MonoBehaviour:
   matchSize: 4
   isNetworkActive: 0
   matchMaker: {fileID: 0}
---- !u!4 &2138909489
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2138909486}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
-  m_Father: {fileID: 0}
-  m_RootOrder: 4
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &1722199033682775911
 PrefabInstance:
   m_ObjectHideFlags: 0
