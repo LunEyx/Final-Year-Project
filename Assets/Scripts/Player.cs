@@ -25,7 +25,6 @@ public class Player : Actor
     public GameObject clientHpBar;
 
     private GameObject hud;
-    public int gold = 50;
     public int skillLearntCounter = 0;
 
     private int coin = 50;
@@ -143,10 +142,6 @@ public class Player : Actor
         Animation();
         CastSpell();
 
-        if (transform.position.y < -5)
-        {
-            transform.position = new Vector3(30, 5, 0);
-        }
     }
 
     public override void TakeDamage(int value)

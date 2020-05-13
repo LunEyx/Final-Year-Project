@@ -17,4 +17,7 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/StoryScene.unity
     guid: 3ed31d50377f2644ba1152f1b1a22258
+  - enabled: 1
+    path: Assets/Scenes/RockScene.unity
+    guid: a89f7bdb4bb9a1e4cab3a0973e93f1e0
   m_configObjects: {}

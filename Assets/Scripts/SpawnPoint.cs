@@ -6,8 +6,8 @@ using UnityEngine.Networking;
 public class SpawnPoint : NetworkBehaviour
 {
     private GameObject prefab;
-    private float spawnTime = 3f;
     private bool coroutineRunning = false;
+    public static float spawnTime = 3f;
     public static bool EnableSpawn = false;
 
     private void Start()
