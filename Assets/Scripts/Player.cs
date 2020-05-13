@@ -142,11 +142,6 @@ public class Player : Actor
         MovementControl();
         Animation();
         CastSpell();
-
-        if (transform.position.y < -5)
-        {
-            transform.position = new Vector3(30, 5, 0);
-        }
     }
 
     public override void TakeDamage(int value)
