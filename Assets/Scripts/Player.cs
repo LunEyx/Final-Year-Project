@@ -35,7 +35,6 @@ public class Player : Actor
     public override void OnStartLocalPlayer()
     {
         base.OnStartLocalPlayer();
-        Debug.Log("StartLocalPlayer");
         GameManager.SetLocalPlayer(this);
         GameManager.AddPlayer(this);
         Camera.main.GetComponent<CameraFollow>().SetTarget(transform);
@@ -156,14 +155,11 @@ public class Player : Actor
 
     public void LearnSpell(System.Type spellType, int index)
     {
-        Debug.Log(spellType.Name);
-        Debug.Log(index);
         if (spells[index] != null)
         {
             Destroy(spells[index]);
         }
         Spell spell = GetComponent(spellType) as Spell;
-        Debug.Log(spell);
         spells[index] = spell;
         spell.SetIconContainer(spellIcons[index]);
         GameManager.UnlearntSpellList.Remove(spell.GetType().Name);

@@ -60,7 +60,8 @@ public class GameManager : NetworkBehaviour
         {
             localPlayer.LearnSpell(typeof(Fireball), 0);
             localPlayer.LearnSpell(typeof(Bubble), 1);
-            //localPlayer.LearnSpell(typeof(Tornado), 2);
+            localPlayer.LearnSpell(typeof(Tornado), 2);
+            localPlayer.LearnSpell(typeof(Meteor), 3);
             isGifted = true;
         }
 

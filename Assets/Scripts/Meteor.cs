@@ -26,11 +26,16 @@ public class Meteor : Spell
     public override void Cast()
     {
         base.Cast();
-        InvokeRepeating("CmdInstantiate", 0, 0.1f);
+        InvokeRepeating("Instantiate", 0, 0.1f);
+    }
+
+    private void Instantiate()
+    {
+        CmdInstantiate(prefab.name);
     }
 
     [Command]
-    protected virtual void CmdInstantiate()
+    protected virtual void CmdInstantiate(string prefabName)
     {
         float randPosX = Random.Range(0 - Radius, Radius);
         float randPosZ = Random.Range(0 - Radius, Radius);
