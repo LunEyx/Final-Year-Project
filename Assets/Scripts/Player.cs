@@ -220,6 +220,11 @@ public class Player : Actor
     {
         switch (itemID)
         {
+            case 0:
+                hpSystem.HealHp(50);
+                hpText.text = $"{hpSystem.GetHp()} / {hpSystem.GetMaxHp()}";
+                TakeDamage(0);
+                break;
             case 1:
                 gotArmor = true;
                 break;
@@ -238,6 +243,21 @@ public class Player : Actor
                 break;
             case 4:
                 movementSpeed += 10f;
+                break;
+            case 5:
+                gameObject.GetComponent<Fireball>().Torched();
+                break;
+            case 6:
+                for (int i = 0; i < GameManager.UnlearntSpellList.Count; i++)
+                    (gameObject.GetComponent(GameManager.UnlearntSpellList[i]) as Spell).DecreaseCooldown(1);
+                for (int i = 0; i < GameManager.LearntSpellList.Count; i++)
+                    (gameObject.GetComponent(GameManager.LearntSpellList[i]) as Spell).DecreaseCooldown(1);
+                break;
+            case 7:
+                for (int i = 0; i < GameManager.UnlearntSpellList.Count; i++)
+                    (gameObject.GetComponent(GameManager.UnlearntSpellList[i]) as Spell).Upgrade();
+                for (int i = 0; i < GameManager.LearntSpellList.Count; i++)
+                    (gameObject.GetComponent(GameManager.LearntSpellList[i]) as Spell).Upgrade();
                 break;
             default:
                 break;

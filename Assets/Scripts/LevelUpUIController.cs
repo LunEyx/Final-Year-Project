@@ -20,15 +20,17 @@ public class LevelUpUIController : MonoBehaviour
         player = GameManager.GetLocalPlayer();
         skillItemTemplate = Resources.Load<GameObject>("Skill_Container");
         levelUpUI = gameObject;
+        Debug.Log(GameManager.LearntSpellList.Count);
+        List<int> randList = RandomList.getRandomIntList(0, GameManager.UnlearntSpellList.Count-1, Mathf.Max(3 - player.skillLearntCounter, 0));
         for (int i = 0;i < Mathf.Max(3-player.skillLearntCounter,0); i++)
         {
-            createSkillItemTemplate(GameManager.UnlearntSpellList[i], offsetCounter++);
+            createSkillItemTemplate(GameManager.UnlearntSpellList[randList[i]], offsetCounter++);
             temp++;
         }
-        for(int i = 0;i < Mathf.Max(3-temp, 0) ; i++)
+        randList = RandomList.getRandomIntList(0, GameManager.LearntSpellList.Count - 1, Mathf.Max(3 - temp, 0));
+        for (int i = 0;i < Mathf.Max(3-temp, 0) ; i++)
         {
-            createSkillItemTemplate(GameManager.LearntSpellList[i], offsetCounter++);
-            
+            createSkillItemTemplate(GameManager.LearntSpellList[randList[i]], offsetCounter++);
         }
         tooltip.SetActive(false);
         screen = new Rect(0, 0, Screen.width, Screen.height);

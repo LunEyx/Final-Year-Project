@@ -6,7 +6,7 @@ using UnityEngine.UI;
 
 public class Slime : Enemy
 {
-    private const int MaxHp = 100;
+    private const int MaxHp = 15;
     private const int AttackDamage = 5;
     private const int AttackCooldown = 5;
     private bool isAttackReady = true;

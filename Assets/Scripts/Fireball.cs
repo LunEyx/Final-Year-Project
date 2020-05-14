@@ -30,4 +30,10 @@ public class Fireball : ProjectileSpell
     {
         return UpgradeDes;
     }
+
+    public void Torched()
+    {
+        cooldown = 0.5f;
+    }
+
 }

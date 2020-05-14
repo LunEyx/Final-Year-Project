@@ -22,6 +22,7 @@ public class ShopItemsController: MonoBehaviour
         itemCost = int.Parse(item.GetItemCost());
         soldIcon.SetActive(false);
         noGoldPrompt.SetActive(false);
+
     }
     
     public void Purchase()
@@ -32,11 +33,20 @@ public class ShopItemsController: MonoBehaviour
             soldIcon.SetActive(true);
             itemIcon.enabled = false;
             player.GetItem(item.GetItemID());
+            if (item.GetItemID()!=0)
+                GameManager.ItemList.Remove(item);
         }
         else
         {
             noGoldPrompt.SetActive(true);
+            StartCoroutine("UnactivePrompt");
         }
+    }
+
+    private IEnumerator UnactivePrompt()
+    {
+        yield return new WaitForSeconds(3);
+        noGoldPrompt.SetActive(false);
     }
 }
     
