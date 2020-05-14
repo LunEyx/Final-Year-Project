@@ -155,10 +155,10 @@ public class GameManager : NetworkBehaviour
         switch (level)
         {
             case 1:
-                SceneManager.LoadScene("NewScene");
+                SceneManager.LoadScene("RockScene");
                 break;
             case 2:
-                SceneManager.LoadScene("RockScene");
+                SceneManager.LoadScene("BossSence");
                 break;
             default:
                 Debug.Log("Next Stage Not Set");
