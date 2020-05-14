@@ -9602,8 +9602,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   particleCenter: {fileID: 2408071517906934074}
-  pullForce: 500
+  pullForce: 5000
   refreshRate: 2
+  rigidbodies: []
 --- !u!1 &2408071517514416865
 GameObject:
   m_ObjectHideFlags: 0

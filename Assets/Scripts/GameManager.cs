@@ -8,6 +8,7 @@ public class GameManager : NetworkBehaviour
 {
     private bool levelStarted = false;
     private bool allEnemySpawned = false;
+    private bool isLocationSet = false;
     private bool isGifted = false;
     private float turningSpeed = 400;
     public GameObject shopUI;
@@ -35,7 +36,6 @@ public class GameManager : NetworkBehaviour
     private void Start()
     {
         ClientScene.AddPlayer(0);
-        InitializePosition();
 
         if (!dataLoaded)
         {
@@ -49,6 +49,12 @@ public class GameManager : NetworkBehaviour
     private void Update()
     {
         if (!localPlayer) return;
+
+        if (!isLocationSet)
+        {
+            InitializePosition();
+            isLocationSet = true;
+        }
 
         if (!isGifted)
         {
@@ -166,6 +172,9 @@ public class GameManager : NetworkBehaviour
     {
         switch (level)
         {
+            case 0:
+                localPlayer.transform.position = new Vector3(30, 10, 0);
+                break;
             case 2:
                 localPlayer.transform.position = new Vector3(85, 3, 85);
                 break;

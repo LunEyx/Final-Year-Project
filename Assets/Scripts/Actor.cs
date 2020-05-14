@@ -5,7 +5,7 @@ using UnityEngine.Networking;
 
 public class Actor : NetworkBehaviour
 {
-    public enum Effect { Bubbled };
+    public enum Effect { Bubbled, Blow };
 
     // status
     protected HpSystem hpSystem;
@@ -15,6 +15,8 @@ public class Actor : NetworkBehaviour
     protected GameObject bubblePrefab;
     [SyncVar]
     protected bool bubbled = false;
+    [SyncVar]
+    protected bool blew = false;
     protected GameObject bubble;
 
     protected virtual void Start()
@@ -41,6 +43,13 @@ public class Actor : NetworkBehaviour
         yield return new WaitForSeconds(duration);
         bubbled = false;
         Destroy(bubble);
+    }
+
+    IEnumerable Blow(float duration)
+    {
+        blew = true;
+        yield return new WaitForSeconds(duration);
+        blew = false;
     }
 
     public void ApplyEffect(Effect effect, float duration)

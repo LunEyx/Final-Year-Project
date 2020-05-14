@@ -104,6 +104,17 @@ public abstract class Enemy : Actor
         Destroy(bubble);
     }
 
+    IEnumerator Blow(float duration)
+    {
+        blew = true;
+        navmesh.isStopped = true;
+        rb.isKinematic = false;
+        yield return new WaitForSeconds(duration);
+        rb.isKinematic = true;
+        navmesh.isStopped = false;
+        blew = false;
+    }
+
     protected virtual void NoTargetAction()
     {
         List<Player> players = GameManager.GetPlayers();

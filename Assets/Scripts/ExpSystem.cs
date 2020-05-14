@@ -40,7 +40,7 @@ public class ExpSystem
         {  
             LevelUp();
         }
-        expBar.fillAmount = (float)exp / levelExpLimit;
+        expBar.fillAmount = ((float)exp) / levelExpLimit;
         expText.text = $"{exp} / {levelExpLimit}";
     }
 
