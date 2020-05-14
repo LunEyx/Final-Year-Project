@@ -131,7 +131,6 @@ public class Player : Actor
             }
             if (!spells[i].IsCooldown() && Input.GetKey(spellKeys[i]))
             {
-                expSystem.GainExp(50);
                 spells[i].Cast();
                 animator.SetTrigger("IsAttack");
                 spellIcons[i].fillAmount = 0;
