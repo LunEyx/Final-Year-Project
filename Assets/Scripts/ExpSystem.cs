@@ -49,5 +49,11 @@ public class ExpSystem
         return level;
     }
    
-
+    public void SetExpHud(Image expBar, Text expText)
+    {
+        this.expBar = expBar;
+        this.expText = expText;
+        expBar.fillAmount = (float)exp / levelExpLimit;
+        expText.text = $"{exp} / {levelExpLimit}";
+    }
 }
