@@ -20,7 +20,8 @@ public class Player : Actor
     private int jumpCounter = 1;
     private float distanceToGround;
     private float movementSpeed = 0f;
-    
+    private bool isDead = false;
+
     public float magnitude = 1;
     public GameObject clientHpBar;
 
@@ -67,7 +68,7 @@ public class Player : Actor
         popUpText = Resources.Load<GameObject>("CoinPopUp");
         distanceToGround = GetComponent<Collider>().bounds.extents.y;
         animator = GetComponentInChildren<Animator>();
-        
+
         hpSystem = new HpSystem(100);
 
         if (!isLocalPlayer)
@@ -78,7 +79,7 @@ public class Player : Actor
         }
         DontDestroyOnLoad(this);
     }
-    
+
     private void MovementControl()
     {
         if (Input.GetKey(KeyCode.W))
@@ -105,7 +106,7 @@ public class Player : Actor
                 Destroy(exitMenu);
             }
         }
-            
+
     }
 
     private void Animation()
@@ -130,6 +131,7 @@ public class Player : Actor
             }
             if (!spells[i].IsCooldown() && Input.GetKey(spellKeys[i]))
             {
+                expSystem.GainExp(50);
                 spells[i].Cast();
                 animator.SetTrigger("IsAttack");
                 spellIcons[i].fillAmount = 0;
@@ -137,7 +139,7 @@ public class Player : Actor
         }
     }
 
-    // Update is called once per frame
+    // Update is called once perframe
     void Update()
     {
         if (!isLocalPlayer) return;
@@ -165,6 +167,17 @@ public class Player : Actor
         if (isLocalPlayer) {
             hpText.text = $"{hpSystem.GetHp()} / {hpSystem.GetMaxHp()}";
         }
+
+        if (!isDead && GetHp() <= 0)
+        {
+            StartCoroutine("Death");
+        }
+    }
+
+    private IEnumerator Death()
+    {
+        isDead = true;
+        yield return null;
     }
 
     private IEnumerator Jump()
@@ -190,12 +203,14 @@ public class Player : Actor
         {
             Destroy(spells[index]);
         }
+        gameObject.AddComponent(spellType);
         Spell spell = GetComponent(spellType) as Spell;
         spells[index] = spell;
         spell.SetIconContainer(spellIcons[index]);
         GameManager.UnlearntSpellList.Remove(spell.GetType().Name);
         GameManager.LearntSpellList.Add(spell.GetType().Name);
         skillLearntCounter++;
+        Debug.Log(skillLearntCounter);
     } 
 
     public bool CanAfford(int value)
