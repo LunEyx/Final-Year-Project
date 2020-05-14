@@ -31,6 +31,7 @@ public class ExpSystem
         GameObject.Instantiate(levelUpUI);
         exp -= levelExpLimit;
         levelExpLimit = (int)(levelExpLimit * levelExpScale);
+        GameManager.GetLocalPlayer().TakeDamage(-10000);
     }
 
     public void GainExp(int expAmt)

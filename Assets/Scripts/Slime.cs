@@ -9,7 +9,7 @@ public class Slime : Enemy
 {
     private const int MaxHp = 20;
 
-    private const int AttackDamage = 5;
+    private int AttackDamage;
     private const int AttackCooldown = 5;
     private bool isAttackReady = true;
 
@@ -21,6 +21,7 @@ public class Slime : Enemy
         bubbleOffset = new Vector3(0, 1, 0);
         bubbleScale = 4;
         CmdUpdateColor();
+        AttackDamage = Random.Range(2, 6);
     }
 
     [Command]
