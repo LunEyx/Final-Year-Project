@@ -37,8 +37,4 @@ public class HpSystem
         maxHp += num;
     }
 
-    public void HealHp(int num)
-    {
-        currentHp += num;
-    }
 }

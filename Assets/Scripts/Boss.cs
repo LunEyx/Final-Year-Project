@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
 public class Boss : Enemy
 {
@@ -15,6 +16,7 @@ public class Boss : Enemy
     private Spell[] spells = new Spell[2];
     private int mode = 1;
     private bool currentSpell = false;
+    public Image ScreenHpBar;
 
     protected override void Start()
     {
@@ -67,17 +69,17 @@ public class Boss : Enemy
         animator.SetBool("WalkForward", true);
     }
 
-    // public override void TakeDamage(int value)
-    // {
-    //     animator.SetBool("WalkForward", false);
-    //     animator.SetTrigger("TakeDamage");
-    //     base.TakeDamage(value);
-    // }
+    public override void TakeDamage(int value)
+    {
+        base.TakeDamage(value);
+        ScreenHpBar.fillAmount = hpSystem.CurrentLifePercentage();
+    }
 
     protected override void HandleDying() {
         if (mode == 1) {
             hpSystem = new HpSystem(MaxHp);
             hpBar.fillAmount = hpSystem.CurrentLifePercentage();
+            ScreenHpBar.fillAmount = hpSystem.CurrentLifePercentage();
             mode = 2;
         } else {
             base.HandleDying();

@@ -131,7 +131,6 @@ public class Player : Actor
             }
             if (!spells[i].IsCooldown() && Input.GetKey(spellKeys[i]))
             {
-                expSystem.GainExp(50);
                 spells[i].Cast();
                 animator.SetTrigger("IsAttack");
                 spellIcons[i].fillAmount = 0;
@@ -209,8 +208,6 @@ public class Player : Actor
         spell.SetIconContainer(spellIcons[index]);
         GameManager.UnlearntSpellList.Remove(spell.GetType().Name);
         GameManager.LearntSpellList.Add(spell.GetType().Name);
-        skillLearntCounter++;
-        Debug.Log(skillLearntCounter);
     } 
 
     public bool CanAfford(int value)
@@ -246,16 +243,15 @@ public class Player : Actor
         switch (itemID)
         {
             case 0:
-                hpSystem.HealHp(50);
                 hpText.text = $"{hpSystem.GetHp()} / {hpSystem.GetMaxHp()}";
-                TakeDamage(0);
+                TakeDamage(-50);
                 break;
             case 1:
                 gotArmor = true;
                 break;
             case 2:
                 hpSystem.IncreaseMaxHp(50);
-                hpSystem.HealHp(50);
+                TakeDamage(-50);
                 hpText.text = $"{hpSystem.GetHp()} / {hpSystem.GetMaxHp()}";
                 TakeDamage(0);
                 break;
@@ -279,8 +275,6 @@ public class Player : Actor
                     (gameObject.GetComponent(GameManager.LearntSpellList[i]) as Spell).DecreaseCooldown(1);
                 break;
             case 7:
-                for (int i = 0; i < GameManager.UnlearntSpellList.Count; i++)
-                    (gameObject.GetComponent(GameManager.UnlearntSpellList[i]) as Spell).Upgrade();
                 for (int i = 0; i < GameManager.LearntSpellList.Count; i++)
                     (gameObject.GetComponent(GameManager.LearntSpellList[i]) as Spell).Upgrade();
                 break;
