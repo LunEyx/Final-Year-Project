@@ -176,7 +176,16 @@ public class Player : Actor
     private IEnumerator Death()
     {
         isDead = true;
-        yield return null;
+
+        Transform transform = gameObject.GetComponentInChildren<Animator>().transform;
+        for (int i = 0; i < 10; i++)
+        {
+            yield return new WaitForSeconds(0.1f);
+            Camera.main.GetComponent<Grayscale>().Increase(0.1f);
+            transform.eulerAngles = new Vector3(transform.eulerAngles.x, transform.eulerAngles.y, transform.eulerAngles.z + 9);
+        }
+        yield return new WaitForSeconds(3);
+        // TODO: GameOver Scene
     }
 
     private IEnumerator Jump()
