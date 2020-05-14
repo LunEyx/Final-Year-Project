@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class TornadoCollisionHandler : MonoBehaviour
 {
-    private const int FireDamage = 10;
+    private const int FireDamage = 20;
     private int damage = 0;
 
     private void OnTriggerEnter(Collider other)
