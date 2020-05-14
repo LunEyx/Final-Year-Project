@@ -1,5 +1,7 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
+using System.Reflection;
 using UnityEngine;
 using UnityEngine.Networking;
 using UnityEngine.SceneManagement;
@@ -9,7 +11,7 @@ public class GameManager : NetworkBehaviour
     private bool levelStarted = false;
     private bool allEnemySpawned = false;
     private bool isLocationSet = false;
-    private bool isGifted = false;
+    private static bool isGifted = false;
     private float turningSpeed = 400;
     public GameObject shopUI;
     private static bool dataLoaded = false;
@@ -35,7 +37,14 @@ public class GameManager : NetworkBehaviour
 
     private void Start()
     {
-        ClientScene.AddPlayer(0);
+        if (localPlayer == null)
+        {
+            ClientScene.AddPlayer(0);
+        }
+        else
+        {
+            localPlayer.Reload();
+        }
 
         if (!dataLoaded)
         {
@@ -43,7 +52,6 @@ public class GameManager : NetworkBehaviour
             readSkillData();
             dataLoaded = true;
         }
-
     }
 
     private void Update()
@@ -64,7 +72,6 @@ public class GameManager : NetworkBehaviour
         }
 
         if (level < 0) return;
-
         if (isServer)
         {
             if (!levelStarted)
@@ -75,24 +82,12 @@ public class GameManager : NetworkBehaviour
 
             if (allEnemySpawned && GameObject.FindGameObjectsWithTag("Enemy").Length == 0)
             {
-                Debug.Log("Level Complete");
                 NextStage();
             }
         }
 
         if (CameraMove) {
             ViewControl();
-        }
-
-        if (!isGifted) {
-            foreach (Player player in players)
-            {
-                player.LearnSpell(typeof(Fireball), 0);
-                player.LearnSpell(typeof(Bubble), 1);
-                player.LearnSpell(typeof(Tornado), 2);
-                player.LearnSpell(typeof(FireNova), 3);
-            }
-            isGifted = true;
         }
     }
 
@@ -155,10 +150,10 @@ public class GameManager : NetworkBehaviour
         switch (level)
         {
             case 1:
-                SceneManager.LoadScene("RockScene");
+                NetworkManager.singleton.ServerChangeScene("RockScene");
                 break;
             case 2:
-                SceneManager.LoadScene("BossSence");
+                NetworkManager.singleton.ServerChangeScene("BossSence");
                 break;
             default:
                 Debug.Log("Next Stage Not Set");
@@ -174,7 +169,7 @@ public class GameManager : NetworkBehaviour
                 localPlayer.transform.position = new Vector3(30, 10, 0);
                 break;
             case 2:
-                localPlayer.transform.position = new Vector3(85, 3, 85);
+                localPlayer.transform.position = new Vector3(70, 3, 70);
                 break;
             default:
                 break;
@@ -199,6 +194,7 @@ public class GameManager : NetworkBehaviour
 
     private IEnumerator Level1()
     {
+        yield return new WaitForSeconds(10);
         for (int i = 0; i < 3; i++)
         {
             SpawnPoint.EnableSpawn = true;
@@ -210,11 +206,11 @@ public class GameManager : NetworkBehaviour
         allEnemySpawned = true;
     }
 
-
     private IEnumerator Level2()
-    {   
+    {
+        yield return new WaitForSeconds(10);
         for (int i=0; i< 5; i++)
-        {
+        {  
             SpawnPoint.EnableSpawn = true;
             SpawnPoint.spawnTime = 2f;
             yield return new WaitForSeconds(20);
@@ -223,5 +219,4 @@ public class GameManager : NetworkBehaviour
         }
         allEnemySpawned = true;
     }
-
 }

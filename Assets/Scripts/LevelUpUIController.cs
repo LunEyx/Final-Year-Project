@@ -20,7 +20,6 @@ public class LevelUpUIController : MonoBehaviour
         player = GameManager.GetLocalPlayer();
         skillItemTemplate = Resources.Load<GameObject>("Skill_Container");
         levelUpUI = gameObject;
-        Debug.Log(GameManager.LearntSpellList.Count);
         List<int> randList = RandomList.getRandomIntList(0, GameManager.UnlearntSpellList.Count-1, Mathf.Max(3 - player.skillLearntCounter, 0));
         for (int i = 0;i < Mathf.Max(3-player.skillLearntCounter,0); i++)
         {

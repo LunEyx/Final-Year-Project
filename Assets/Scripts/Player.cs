@@ -31,6 +31,8 @@ public class Player : Actor
     private GameObject popUpText;
 
     public ExpSystem expSystem;
+    private Image expBar;
+    private Text expText;
 
     public override void OnStartLocalPlayer()
     {
@@ -50,8 +52,8 @@ public class Player : Actor
             spellIcons[i] = skillObj.GetComponentsInChildren<Image>()[i];
         }
         Transform expObj = playerStatus.Find("Exp");
-        Image expBar = expObj.Find("Background").Find("Filled").GetComponent<Image>();
-        Text expText = expObj.GetComponentInChildren<Text>();
+        expBar = expObj.Find("Background").Find("Filled").GetComponent<Image>();
+        expText = expObj.GetComponentInChildren<Text>();
         coinText = hud.Find("Coin").GetComponentInChildren<Text>();
         expSystem = new ExpSystem(expBar, expText);
 
@@ -74,6 +76,7 @@ public class Player : Actor
             hpBar = clientHpBar.GetComponentInChildren<Image>().GetComponentInChildren<Image>();
             GameManager.AddPlayer(this);
         }
+        DontDestroyOnLoad(this);
     }
     
     private void MovementControl()
@@ -268,6 +271,34 @@ public class Player : Actor
                 break;
             default:
                 break;
+        }
+    }
+
+    public void Reload()
+    {
+        Camera.main.GetComponent<CameraFollow>().SetTarget(transform);
+
+        Transform hud = GameObject.FindGameObjectWithTag("HUD").transform;
+        Transform playerStatus = hud.Find("Player Status");
+        Transform hpObj = playerStatus.Find("HP");
+        hpText = hpObj.GetComponentInChildren<Text>();
+        hpBar = hpObj.Find("hp_background").GetChild(0).GetComponentInChildren<Image>();
+        Transform skillObj = playerStatus.Find("Skill");
+        for (int i = 0; i < MaxSkill; i++)
+        {
+            spellIcons[i] = skillObj.GetComponentsInChildren<Image>()[i];
+        }
+        Transform expObj = playerStatus.Find("Exp");
+        expBar = expObj.Find("Background").Find("Filled").GetComponent<Image>();
+        expText = expObj.GetComponentInChildren<Text>();
+        coinText = hud.Find("Coin").GetComponentInChildren<Text>();
+        expSystem.SetExpHud(expBar, expText);
+
+        RefreshCoinHUD();
+
+        for (int i = 0; i < skillLearntCounter; i++)
+        {
+            spells[i].SetIconContainer(spellIcons[i]);
         }
     }
 }
