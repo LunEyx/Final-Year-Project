@@ -2,6 +2,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class Boss : Enemy
 {
@@ -82,6 +83,7 @@ public class Boss : Enemy
             base.HandleDying();
             animator.SetBool("WalkForward", false);
             animator.SetTrigger("Die");
+            StartCoroutine("Victory");
         }
     }
 
@@ -98,5 +100,11 @@ public class Boss : Enemy
         currentSpell = !currentSpell;
         yield return new WaitForSeconds(SpellCooldown);
         isSpellReady = true;
+    }
+
+    IEnumerator Victory()
+    {
+        yield return new WaitForSeconds(1.5f);
+        SceneManager.LoadScene("VictoryScene");
     }
 }
