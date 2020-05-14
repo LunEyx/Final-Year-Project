@@ -83,7 +83,7 @@ public class Boss : Enemy
             base.HandleDying();
             animator.SetBool("WalkForward", false);
             animator.SetTrigger("Die");
-            StartCoroutine("Victory");
+            SceneManager.LoadScene("VictoryScene");
         }
     }
 
@@ -102,9 +102,5 @@ public class Boss : Enemy
         isSpellReady = true;
     }
 
-    IEnumerator Victory()
-    {
-        yield return new WaitForSeconds(1.5f);
-        SceneManager.LoadScene("VictoryScene");
-    }
+
 }
