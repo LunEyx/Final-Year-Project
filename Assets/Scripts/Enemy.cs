@@ -12,8 +12,8 @@ public abstract class Enemy : Actor
     public Image enemyHpBar;
     protected SightOfView sightOfView;
     protected NavMeshAgent navmesh;
-    private const int exp = 10;
-    private const int Coin = 10;
+    private int exp;
+    private int coin;
     public GameObject model;
     protected Vector3 bubbleOffset = Vector3.zero;
     protected float bubbleScale = 1;
@@ -26,6 +26,8 @@ public abstract class Enemy : Actor
         rb = GetComponent<Rigidbody>();
         sightOfView = GetComponent<SightOfView>();
         navmesh = GetComponent<NavMeshAgent>();
+        coin = Random.Range(5, 10);
+        exp = Random.Range(5, 10);
     }
 
     // Update is called once per frame
@@ -149,7 +151,7 @@ public abstract class Enemy : Actor
 
     protected virtual void HandleDying() {
         GameManager.GetLocalPlayer().GetComponent<Player>().GainExp(exp);
-        GameManager.GetLocalPlayer().GetComponent<Player>().GainCoin(Coin);
+        GameManager.GetLocalPlayer().GetComponent<Player>().GainCoin(coin);
         if (expPopUp) {
             ShowExpPopUp();
         }

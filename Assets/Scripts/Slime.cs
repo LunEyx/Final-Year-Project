@@ -7,7 +7,8 @@ using UnityEngine.Networking;
 
 public class Slime : Enemy
 {
-    private const int MaxHp = 5;
+    private const int MaxHp = 15;
+
     private const int AttackDamage = 5;
     private const int AttackCooldown = 5;
     private bool isAttackReady = true;

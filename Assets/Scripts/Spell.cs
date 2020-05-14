@@ -82,6 +82,13 @@ public abstract class Spell : NetworkBehaviour
         return Resources.Load<Sprite>("Icons/" + spellName);
     }
 
+    public void DecreaseCooldown(float time)
+    {
+        if (cooldown > time)
+            cooldown -= time;
+        else cooldown /= 2;
+    }
+
     public virtual void Upgrade()
     {
 

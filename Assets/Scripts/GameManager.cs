@@ -6,12 +6,13 @@ using UnityEngine.SceneManagement;
 
 public class GameManager : NetworkBehaviour
 {
-    public int level = 0;
     private bool levelStarted = false;
     private bool allEnemySpawned = false;
     private bool isLocationSet = false;
     private bool isGifted = false;
     private float turningSpeed = 400;
+    public GameObject shopUI;
+    public static int level = 1;
     private static bool dataLoaded = false;
     private static List<Player> players = new List<Player>();
     private static Player localPlayer;
@@ -19,6 +20,7 @@ public class GameManager : NetworkBehaviour
     private static List<string> unlearntSpellList = new List<string>();
     private static List<string> learntSpellList = new List<string>();
     public static bool CameraMove = true;
+    
     public static List<Item> ItemList {
         get { return itemList; }
     }
@@ -39,18 +41,9 @@ public class GameManager : NetworkBehaviour
         {
             readItemData();
             readSkillData();
-
-            TextAsset itemData = Resources.Load<TextAsset>("item list");
-            string[] data = itemData.text.Split('\n');
-            for (int i = 1; i < data.Length; i++)
-            {
-                string[] tempitem = data[i].Split(',');
-                Sprite itemIcon = Resources.Load<Sprite>(tempitem[0]);
-                itemList.Add(new Item(tempitem[0], tempitem[1], itemIcon, tempitem[2], int.Parse(tempitem[3]), false));
-            }
-
             dataLoaded = true;
         }
+
     }
 
     private void Update()
@@ -138,7 +131,7 @@ public class GameManager : NetworkBehaviour
         for (int i = 1; i < data.Length; i++)
         {
             string[] tempitem = data[i].Split(',');
-            Sprite itemIcon = Resources.Load<Sprite>(tempitem[0]);
+            Sprite itemIcon = Resources.Load<Sprite>("Item Icons/"+tempitem[0]);
             itemList.Add(new Item(tempitem[0], tempitem[1], itemIcon, tempitem[2], int.Parse(tempitem[3]), false));
         }
     }
