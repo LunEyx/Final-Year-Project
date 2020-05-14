@@ -13,7 +13,7 @@ public class Bubble : ProjectileSpell
     private void Awake()
     {
         prefab = Resources.Load<GameObject>("Bubble");
-        icon = Resources.Load<Sprite>("Icons/SpellBookPreface_05");
+        icon = Resources.Load<Sprite>("Icons/Bubble");
         duration = 10f;
         cooldown = 10f;
         projectileSpeed = 40f;
