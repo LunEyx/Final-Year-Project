@@ -12,7 +12,7 @@ public class GameManager : NetworkBehaviour
     private bool isGifted = false;
     private float turningSpeed = 400;
     public GameObject shopUI;
-    public static int level = 1;
+    public int level = 1;
     private static bool dataLoaded = false;
     private static List<Player> players = new List<Player>();
     private static Player localPlayer;
