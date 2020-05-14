@@ -17,7 +17,7 @@ public class Player : Actor
     private Spell[] spells = new Spell[MaxSkill];
     private Image[] spellIcons = new Image[MaxSkill];
     private bool gotArmor = false;
-    private int jumpCounter = 0;
+    private int jumpCounter = 1;
     private float distanceToGround;
     private float movementSpeed = 0f;
     
@@ -79,17 +79,17 @@ public class Player : Actor
     private void MovementControl()
     {
         if (Input.GetKey(KeyCode.W))
-            rb.velocity = rb.transform.rotation * new Vector3(0, rb.velocity.y + movementSpeed, 10);
+            rb.velocity = rb.transform.rotation * new Vector3(0, rb.velocity.y, 10 + movementSpeed);
         if (Input.GetKey(KeyCode.S))
-            rb.velocity = rb.transform.rotation * new Vector3(0, rb.velocity.y + movementSpeed, -10);
+            rb.velocity = rb.transform.rotation * new Vector3(0, rb.velocity.y, -10 - movementSpeed);
         if (Input.GetKey(KeyCode.A))
-            rb.velocity = rb.transform.rotation * new Vector3(-10, rb.velocity.y + movementSpeed, 0);
+            rb.velocity = rb.transform.rotation * new Vector3(-10 - movementSpeed, rb.velocity.y, 0);
         if (Input.GetKey(KeyCode.D))
-            rb.velocity = rb.transform.rotation * new Vector3(10, rb.velocity.y + movementSpeed, 0);
+            rb.velocity = rb.transform.rotation * new Vector3(10 + movementSpeed, rb.velocity.y, 0);
         if (Input.GetKey(KeyCode.Space) && jumpCounter > 0)
         {
             jumpCounter--;
-            rb.AddForce(new Vector3(0, 10f, 0), ForceMode.Impulse);
+            StartCoroutine("Jump");
         }
         if (Input.GetKeyDown(KeyCode.Escape))
         {
@@ -141,8 +141,6 @@ public class Player : Actor
         MovementControl();
         Animation();
         CastSpell();
-
-
     }
 
     public override void TakeDamage(int value)
@@ -166,14 +164,23 @@ public class Player : Actor
         }
     }
 
-    private void OnCollisionEnter(Collision collision)
+    private IEnumerator Jump()
     {
-        if (Physics.Raycast(transform.position, Vector3.down, distanceToGround + 0.1f))
-        {
-            jumpCounter = 1;
-        }
+        rb.AddForce(new Vector3(0, 10f, 0), ForceMode.Impulse);
+        yield return new WaitForSeconds(0.5f);
+        yield return new WaitUntil(() => { return Physics.Raycast(transform.position, Vector3.down, distanceToGround + 0.1f); });
+        jumpCounter = 1;
     }
 
+    private void OnCollisionEnter(Collision collision)
+    {
+        if (Physics.Raycast(transform.position, Vector3.down, distanceToGround + 0.5f))
+        {
+            jumpCounter = 1;
+            StopCoroutine("Jump");
+        }
+    }
+    
     public void LearnSpell(System.Type spellType, int index)
     {
         if (spells[index] != null)
