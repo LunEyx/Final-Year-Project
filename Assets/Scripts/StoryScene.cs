@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.Networking;
 
 public class StoryScene : MonoBehaviour
 {
@@ -34,7 +35,8 @@ public class StoryScene : MonoBehaviour
                 story_5.SetActive(true);
                 break;
             case 6:
-                SceneManager.LoadScene("SampleScene");
+                NetworkManager.singleton.StartHost();
+                nextCount++;
                 break;
         }
     }

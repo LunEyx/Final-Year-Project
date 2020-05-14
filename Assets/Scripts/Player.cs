@@ -50,7 +50,7 @@ public class Player : Actor
             spellIcons[i] = skillObj.GetComponentsInChildren<Image>()[i];
         }
         Transform expObj = playerStatus.Find("Exp");
-        Image expBar = expObj.Find("Background").GetComponentInChildren<Image>();
+        Image expBar = expObj.Find("Background").Find("Filled").GetComponent<Image>();
         Text expText = expObj.GetComponentInChildren<Text>();
         coinText = hud.Find("Coin").GetComponentInChildren<Text>();
         expSystem = new ExpSystem(expBar, expText);

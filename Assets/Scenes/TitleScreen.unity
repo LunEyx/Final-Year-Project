@@ -535,7 +535,7 @@ MonoBehaviour:
   m_AutoCreatePlayer: 0
   m_PlayerSpawnMethod: 0
   m_OfflineScene: TitleScreen
-  m_OnlineScene: SampleScene
+  m_OnlineScene: NewScene
   m_SpawnPrefabs:
   - {fileID: 4276842131974741273, guid: dcba36609bad547ecaa309987c720ef7, type: 3}
   - {fileID: 7848916626512630633, guid: 0d2a0e2f0e5c39546aa5680ffb414e25, type: 3}

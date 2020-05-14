@@ -9,7 +9,6 @@ public class StartMenu : MonoBehaviour
     public void GameStart()
     {
         SceneManager.LoadScene("StoryScene");
-        Destroy(GameObject.Find("NetworkManager"));
     }
 
     public void GameQuit()
