@@ -12,13 +12,13 @@ public class GameManager : NetworkBehaviour
     private bool isGifted = false;
     private float turningSpeed = 400;
     public GameObject shopUI;
-    public static int level = 1;
     private static bool dataLoaded = false;
     private static List<Player> players = new List<Player>();
     private static Player localPlayer;
     private static List<Item> itemList = new List<Item>();
     private static List<string> unlearntSpellList = new List<string>();
     private static List<string> learntSpellList = new List<string>();
+    public int level = 0;
     public static bool CameraMove = true;
     
     public static List<Item> ItemList {
@@ -59,9 +59,7 @@ public class GameManager : NetworkBehaviour
         if (!isGifted)
         {
             localPlayer.LearnSpell(typeof(Fireball), 0);
-            localPlayer.LearnSpell(typeof(Bubble), 1);
-            localPlayer.LearnSpell(typeof(Tornado), 2);
-            localPlayer.LearnSpell(typeof(Meteor), 3);
+            localPlayer.LearnSpell(typeof(Tornado), 1);
             isGifted = true;
         }
 

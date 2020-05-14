@@ -5,20 +5,20 @@ using UnityEngine.Networking;
 
 public class Fireball : ProjectileSpell
 {
-    public static int Damage = 10;
-    public static string UpgradeDes = "Increase the damage by 10!";
+    public static int Damage = 5;
+    public static string UpgradeDes = "Increase the damage by 5!";
     public static string NewDes = "Shoot a fireball that will explode when hit an enemy!";
     private void Awake()
     {
         icon = Resources.Load<Sprite>("Icons/Fireball");
         duration = 5f;
-        cooldown = 3f;
+        cooldown = 2f;
         projectileSpeed = 40f;
     }
 
     public override void Upgrade()
     {
-        Damage += 10;
+        Damage += 5;
     }
 
     public static string GetNewDescription()
