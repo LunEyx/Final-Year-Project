@@ -10,6 +10,7 @@ public class Tornado : ProjectileSpell
 
     private void Awake()
     {
+        prefab = Resources.Load<GameObject>("Tornado");
         icon = Resources.Load<Sprite>("Icons/Tornado");
         duration = 5f;
         cooldown = 3f;

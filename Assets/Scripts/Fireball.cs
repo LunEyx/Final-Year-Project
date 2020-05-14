@@ -10,6 +10,7 @@ public class Fireball : ProjectileSpell
     public static string NewDes = "Shoot a fireball that will explode when hit an enemy!";
     private void Awake()
     {
+        prefab = Resources.Load<GameObject>("Fireball");
         icon = Resources.Load<Sprite>("Icons/Fireball");
         duration = 5f;
         cooldown = 2f;

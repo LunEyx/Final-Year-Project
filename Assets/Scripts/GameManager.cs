@@ -168,8 +168,14 @@ public class GameManager : NetworkBehaviour
             case 0:
                 localPlayer.transform.position = new Vector3(30, 10, 0);
                 break;
+            case 1:
+                localPlayer.transform.position = new Vector3(0, 0, 0);
+                break;
             case 2:
                 localPlayer.transform.position = new Vector3(70, 3, 70);
+                break;
+            case 3:
+                localPlayer.transform.position = new Vector3(0, 5, 0);
                 break;
             default:
                 break;
