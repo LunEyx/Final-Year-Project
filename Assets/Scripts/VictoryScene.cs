@@ -2,11 +2,13 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.Networking;
 
 public class VictoryScene : MonoBehaviour
 {
     public void BackToTitle()
     {
-        SceneManager.LoadScene("TitleScreen");
+        NetworkManager.singleton.StopHost();
+        NetworkManager.singleton.StopClient();
     }
 }
