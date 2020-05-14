@@ -7,7 +7,7 @@ using UnityEngine.Networking;
 
 public class Slime : Enemy
 {
-    private const int MaxHp = 15;
+    private const int MaxHp = 20;
 
     private const int AttackDamage = 5;
     private const int AttackCooldown = 5;
@@ -17,7 +17,7 @@ public class Slime : Enemy
     {
         base.Start();
         animator = GetComponentInChildren<Animator>();
-        hpSystem = new HpSystem(MaxHp);
+        hpSystem = new HpSystem(MaxHp * GameObject.Find("GameManager").GetComponent<GameManager>().level);
         bubbleOffset = new Vector3(0, 1, 0);
         bubbleScale = 4;
         CmdUpdateColor();

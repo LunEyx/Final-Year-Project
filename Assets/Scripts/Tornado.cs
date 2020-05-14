@@ -5,7 +5,7 @@ using UnityEngine;
 public class Tornado : ProjectileSpell  
 {
     public static int Damage = 0;
-    public static string UpgradeDes = "Increase the damage by 10!";
+    public static string UpgradeDes = "Increase the damage by 3!";
     public static string NewDes = "Cast a tornado that will attract enemies!";
 
     private void Awake()
@@ -18,7 +18,7 @@ public class Tornado : ProjectileSpell
 
     public override void Upgrade()
     {
-        Damage += 10;
+        Damage += 3;
     }
 
     public static string GetNewDescription()

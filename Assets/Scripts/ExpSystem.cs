@@ -5,7 +5,7 @@ using UnityEngine.UI;
 
 public class ExpSystem
 {
-    private int levelExpLimit = 10;
+    private int levelExpLimit = 60;
     private int exp = 0;
     private int level = 1;
     private const float levelExpScale = 1.1f;

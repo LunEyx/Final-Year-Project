@@ -9,9 +9,10 @@ public class Meteor : Spell
     protected float duration;
     protected float projectileSpeed;
     private int meteorCounter = 0;
+    public static float SpawnDuration = 0.1f;
     public int MeteorNum = 20;
     public const float Radius = 8;
-    public static int Damage = 10;
+    public static int Damage = 20;
     public static string UpgradeDes = "Increase the number of meteors by 10!";
     public static string NewDes = "Summon meteors to attack enemies!";
 
@@ -20,13 +21,13 @@ public class Meteor : Spell
         icon = Resources.Load<Sprite>("Icons/Meteor");
         prefab = Resources.Load<GameObject>("Meteor");
         duration = 5f;
-        cooldown = 3f;
+        cooldown = 4f;
     }
 
     public override void Cast()
     {
         base.Cast();
-        InvokeRepeating("Instantiate", 0, 0.1f);
+        InvokeRepeating("Instantiate", 0, SpawnDuration);
     }
 
     private void Instantiate()
@@ -54,12 +55,14 @@ public class Meteor : Spell
 
         NetworkServer.Spawn(meteor);
 
+
         Destroy(meteor, duration);
     }
 
     public override void Upgrade()
     {
         MeteorNum += 10;
+        SpawnDuration = 1 / (MeteorNum/2);
     }
 
     public static string GetNewDescription()
