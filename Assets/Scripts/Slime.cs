@@ -18,7 +18,7 @@ public class Slime : Enemy
     {
         base.Start();
         animator = GetComponentInChildren<Animator>();
-        hpSystem = new HpSystem(MaxHp * GameObject.Find("GameManager").GetComponent<GameManager>().level * (1 + Difficulty / 10));
+        hpSystem = new HpSystem((int) (MaxHp * GameObject.Find("GameManager").GetComponent<GameManager>().level * (1 + Difficulty / 10f) * (GameManager.isMultiplayer ? 1.5f : 1f)));
         bubbleOffset = new Vector3(0, 1, 0);
         bubbleScale = 4;
         CmdUpdateColor();
