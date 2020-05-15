@@ -9,7 +9,6 @@ public class Meteor : Spell
     protected float duration;
     protected float projectileSpeed;
     private int meteorCounter = 0;
-    public static float SpawnDuration = 0.1f;
     public int MeteorNum = 20;
     public const float Radius = 8;
     public static int Damage = 20;
@@ -27,7 +26,7 @@ public class Meteor : Spell
     public override void Cast()
     {
         base.Cast();
-        InvokeRepeating("Instantiate", 0, SpawnDuration);
+        InvokeRepeating("Instantiate", 0, 0.1f);
     }
 
     private void Instantiate()
@@ -62,7 +61,6 @@ public class Meteor : Spell
     public override void Upgrade()
     {
         MeteorNum += 10;
-        SpawnDuration = 1 / (MeteorNum/2);
     }
 
     public static string GetNewDescription()

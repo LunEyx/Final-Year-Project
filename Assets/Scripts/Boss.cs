@@ -7,7 +7,7 @@ using UnityEngine.UI;
 
 public class Boss : Enemy
 {
-    private const int MaxHp = 100;
+    private const int MaxHp = 500;
     private int AttackDamage = 10;
     private const int AttackCooldown = 5;
     private const int SpellCooldown = 5;
@@ -17,12 +17,13 @@ public class Boss : Enemy
     private int mode = 1;
     private bool currentSpell = false;
     public Image ScreenHpBar;
+    public static int Difficulty = 1;
 
     protected override void Start()
     {
         base.Start();
         animator = GetComponentInChildren<Animator>();
-        hpSystem = new HpSystem(MaxHp);
+        hpSystem = new HpSystem(MaxHp * (1 + Difficulty / 10));
         bubbleOffset = new Vector3(0, 0.6f, 0);
         bubbleScale = 2;
         spells[0] = gameObject.AddComponent<BossFireball>() as Spell;
@@ -77,7 +78,7 @@ public class Boss : Enemy
 
     protected override void HandleDying() {
         if (mode == 1) {
-            hpSystem = new HpSystem(MaxHp);
+            hpSystem = new HpSystem(MaxHp * (1 + Difficulty / 10));
             hpBar.fillAmount = hpSystem.CurrentLifePercentage();
             ScreenHpBar.fillAmount = hpSystem.CurrentLifePercentage();
             mode = 2;

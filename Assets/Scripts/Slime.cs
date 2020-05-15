@@ -12,12 +12,13 @@ public class Slime : Enemy
     private int AttackDamage;
     private const int AttackCooldown = 5;
     private bool isAttackReady = true;
+    public static int Difficulty = 1;
 
     protected override void Start()
     {
         base.Start();
         animator = GetComponentInChildren<Animator>();
-        hpSystem = new HpSystem(MaxHp * GameObject.Find("GameManager").GetComponent<GameManager>().level);
+        hpSystem = new HpSystem(MaxHp * GameObject.Find("GameManager").GetComponent<GameManager>().level * (1 + Difficulty / 10));
         bubbleOffset = new Vector3(0, 1, 0);
         bubbleScale = 4;
         CmdUpdateColor();

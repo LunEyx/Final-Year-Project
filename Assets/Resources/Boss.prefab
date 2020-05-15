@@ -216,7 +216,7 @@ NavMeshAgent:
   m_Enabled: 1
   m_AgentTypeID: 0
   m_Radius: 0.3
-  m_Speed: 3.5
+  m_Speed: 11
   m_Acceleration: 8
   avoidancePriority: 50
   m_AngularSpeed: 120
@@ -279,6 +279,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   enemyHpBar: {fileID: 2538684085472092142}
   model: {fileID: 1111084942782338}
+  ScreenHpBar: {fileID: 0}
 --- !u!114 &2393318137117617493
 MonoBehaviour:
   m_ObjectHideFlags: 0
