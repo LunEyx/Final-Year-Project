@@ -8,6 +8,9 @@ public class StartMenu : MonoBehaviour
 {
     public void GameStart()
     {
+        GameManager.Clear();
+        NetworkManager.singleton.networkPort = 7778;
+        NetworkManager.singleton.StopHost();
         SceneManager.LoadScene("StoryScene");
     }
 
@@ -19,18 +22,24 @@ public class StartMenu : MonoBehaviour
     public void HostNormal()
     {
         GameManager.Clear();
+        NetworkManager.singleton.networkPort = 7777;
+        NetworkManager.singleton.StopHost();
         NetworkManager.singleton.StartHost();
     }
 
     public void HostAdvanced()
     {
         GameManager.Clear();
-        NetworkManager.singleton.StartHost();
+        NetworkManager.singleton.networkPort = 7777;
+        NetworkManager.singleton.StopHost();
+        NetworkManager.singleton.StartHost();;
     }
 
     public void Join()
     {
         GameManager.Clear();
+        NetworkManager.singleton.networkPort = 7777;
+        NetworkManager.singleton.StopHost();
         NetworkManager.singleton.StartClient();
     }
 }

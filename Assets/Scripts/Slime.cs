@@ -38,6 +38,28 @@ public class Slime : Enemy
         renderer.material.SetColor("_Color", color);
     }
 
+    protected override void NoTargetAction()
+    {
+        List<Player> players = GameManager.GetPlayers();
+        if (players.Count == 0)
+        {
+            NoPlayerAction();
+            return;
+        }
+        Player nearestPlayer = players[0];
+        float minDistance = Mathf.Infinity;
+        foreach (Player player in players)
+        {
+            float distance = Vector3.Distance(player.transform.position, transform.position);
+            if (distance < minDistance)
+            {
+                nearestPlayer = player;
+                minDistance = distance;
+            }
+        }
+        navmesh.destination = nearestPlayer.transform.position;
+    }
+
     protected override void TargetFoundAction()
     {
         base.TargetFoundAction();

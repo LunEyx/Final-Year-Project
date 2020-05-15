@@ -1,0 +1,23 @@
+﻿using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+using UnityEngine.UI;
+using UnityEngine.Networking;
+
+public class GameOver : MonoBehaviour
+{
+    public void GameOverClick()
+    {
+        Text text = GetComponentsInChildren<Text>()[1];
+        if (GameManager.GetPlayers().Count > 0 && text.text == "Watch other player")
+        {
+            Camera.main.GetComponent<CameraFollow>().SetTarget(GameManager.GetPlayers()[0].transform);
+            Destroy(gameObject);
+            Camera.main.GetComponent<Grayscale>().Increase(-1f);
+        }
+        else
+        {
+            NetworkManager.singleton.StopClient();
+        }
+    }
+}

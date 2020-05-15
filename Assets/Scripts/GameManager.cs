@@ -94,7 +94,14 @@ public class GameManager : NetworkBehaviour
     public static void Clear()
     {
         players = new List<Player>();
-    }
+        localPlayer = null;
+        CameraMove = true;
+        isGifted = false;
+        itemList = new List<Item>();
+        unlearntSpellList = new List<string>();
+        learntSpellList = new List<string>();
+        dataLoaded = false;
+}
 
     public static List<Player> GetPlayers()
     {
@@ -143,6 +150,11 @@ public class GameManager : NetworkBehaviour
     public static void AddPlayer(Player player)
     {
         players.Add(player);
+    }
+
+    public static void RemovePlayer(Player player)
+    {
+        players.Remove(player);
     }
 
     private void NextStage()

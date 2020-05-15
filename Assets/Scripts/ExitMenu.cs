@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.Networking;
 
 public class ExitMenu : MonoBehaviour
 {
@@ -12,7 +13,7 @@ public class ExitMenu : MonoBehaviour
 
     public void BackToTitle()
     {
-        SceneManager.LoadScene("TitleScreen");
+        NetworkManager.singleton.StopClient();
     }
 
     

@@ -17,6 +17,7 @@ public abstract class Enemy : Actor
     public GameObject model;
     protected Vector3 bubbleOffset = Vector3.zero;
     protected float bubbleScale = 1;
+    private Vector3 finalDest = Vector3.zero;
 
     protected override void Start()
     {
@@ -118,7 +119,11 @@ public abstract class Enemy : Actor
     protected virtual void NoTargetAction()
     {
         List<Player> players = GameManager.GetPlayers();
-        if (players.Count == 0) return;
+        if (players.Count == 0)
+        {
+            NoPlayerAction();
+            return;
+        }
         Player nearestPlayer = players[0];
         float minDistance = Mathf.Infinity;
         foreach (Player player in players)
@@ -135,9 +140,25 @@ public abstract class Enemy : Actor
 
     protected virtual void TargetFoundAction()
     {
+        if (GameManager.GetPlayers().Count == 0)
+        {
+            NoPlayerAction();
+            return;
+        }
         Vector3 targetPos = sightOfView.visibleTargets[0].position;
         Quaternion targetRotation = Quaternion.LookRotation(targetPos - transform.position);
         navmesh.transform.rotation = Quaternion.Slerp(transform.rotation, targetRotation, 10f * Time.deltaTime);
+    }
+
+    protected virtual void NoPlayerAction()
+    {
+        if (Vector3.Distance(transform.position, navmesh.destination) < 2)
+        {
+            Vector3 newDest = Random.insideUnitSphere * 100 + transform.position;
+            NavMeshHit hit;
+
+            navmesh.destination = newDest;
+        }
     }
 
     public override void TakeDamage(int value)
