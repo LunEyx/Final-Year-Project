@@ -220,9 +220,9 @@ public class Player : Actor
         {
             Destroy(spells[index]);
         }
-        gameObject.AddComponent(spellType);
         Spell spell = GetComponent(spellType) as Spell;
         spells[index] = spell;
+        Debug.Log("learn " + spellType.Name + " " + index);
         spell.SetIconContainer(spellIcons[index]);
         GameManager.UnlearntSpellList.Remove(spell.GetType().Name);
         GameManager.LearntSpellList.Add(spell.GetType().Name);

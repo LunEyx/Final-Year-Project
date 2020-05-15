@@ -13,7 +13,7 @@ public class SkillItemController : MonoBehaviour
     void Start()
     {
         gameObject.GetComponentsInChildren<Text>()[0].text = spellName;
-        if ((player.GetComponent(spellName) as Spell)!= null)
+        if (GameManager.LearntSpellList.Contains(spellName))
         {
             gameObject.GetComponentsInChildren<Image>()[1].sprite = (player.GetComponent(spellName) as Spell).GetIcon();
             gameObject.GetComponentsInChildren<Text>()[1].text = "Upgrade!";
@@ -37,12 +37,10 @@ public class SkillItemController : MonoBehaviour
     {
         if (gameObject.GetComponentsInChildren<Text>()[1].text == "New!")
         {
-            Debug.Log("Learn");
             player.LearnSpell(Type.GetType(spellName), player.skillLearntCounter);
         }
         else
         {
-            Debug.Log("Upgrade");
             (player.GetComponent(spellName) as Spell).Upgrade();
         }
 
