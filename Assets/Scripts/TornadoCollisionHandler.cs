@@ -5,13 +5,13 @@ using UnityEngine;
 public class TornadoCollisionHandler : MonoBehaviour
 {
     private const int FireDamage = 20;
-    private int damage = 0;
+    private int damage = Tornado.Damage;
 
     private void OnTriggerEnter(Collider other)
     {
-        damage = Tornado.Damage;
         if (other.gameObject.CompareTag("Enemy"))
         {
+            Debug.Log(damage);
             Enemy enemy = other.gameObject.GetComponent<Enemy>();
             enemy.TakeDamage(damage);
         }
