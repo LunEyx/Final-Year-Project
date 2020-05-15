@@ -2,8 +2,8 @@
 Healing Potion, 80, Heals your HP by 50!,0
 Magic Shield,100,decreases damage taken by 5!,1
 Monster's Heart,150,Increases maximum health by 50!,2
-Spell Book,180,Increases all spell damage by 10!,3
+Spell Book,300,Increases all spell damage by 10!,3
 Boots, 40, Increases movement speed by 10!,4
 Nuclear Torch, 300, Greatly reduces fireball's cooldown!,5
 Wizard Hat, 130, Reduces all spells' cooldown!,6
-Ruby Staff, 220, Upgrade all spells once!,7
+Ruby Staff, 120, Upgrade all spells once!,7

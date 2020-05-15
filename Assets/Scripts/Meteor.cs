@@ -27,11 +27,20 @@ public class Meteor : Spell
     {
         base.Cast();
         InvokeRepeating("Instantiate", 0, 0.1f);
+        StartCoroutine("StopInvoke");
     }
 
     private void Instantiate()
     {
         CmdInstantiate(prefab.name);
+
+
+        meteorCounter++;
+        if (meteorCounter >= MeteorNum)
+        {
+            CancelInvoke();
+            meteorCounter = 0;
+        }
     }
 
     [Command]
@@ -44,14 +53,7 @@ public class Meteor : Spell
             new Vector3(transform.position.x + randPosX, transform.position.y + 10f, transform.position.z + randPosZ),
             Quaternion.Euler(90, 0, 0));
         meteor.GetComponent<Rigidbody>().velocity = transform.up * -20;
-        meteorCounter++;
-
-        if (meteorCounter >= MeteorNum)
-        {
-            CancelInvoke();
-            meteorCounter = 0;
-        }
-
+        
         NetworkServer.Spawn(meteor);
 
 
