@@ -40,13 +40,11 @@ public class GameManager : NetworkBehaviour
         if (localPlayer == null)
         {
             ClientScene.AddPlayer(0);
-            Debug.Log("Add: " + players.Count);
         }
         else
         {
             localPlayer.Reload();
         }
-        Debug.Log(players.Count);
 
         if (!dataLoaded)
         {

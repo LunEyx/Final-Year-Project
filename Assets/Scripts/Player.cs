@@ -262,16 +262,15 @@ public class Player : Actor
         switch (itemID)
         {
             case 0:
-                hpSystem.HealHp(50);
                 hpText.text = $"{hpSystem.GetHp()} / {hpSystem.GetMaxHp()}";
-                TakeDamage(0);
+                TakeDamage(-50);
                 break;
             case 1:
                 gotArmor = true;
                 break;
             case 2:
                 hpSystem.IncreaseMaxHp(50);
-                hpSystem.HealHp(50);
+                TakeDamage(-50);
                 hpText.text = $"{hpSystem.GetHp()} / {hpSystem.GetMaxHp()}";
                 TakeDamage(0);
                 break;
@@ -295,8 +294,6 @@ public class Player : Actor
                     (gameObject.GetComponent(GameManager.LearntSpellList[i]) as Spell).DecreaseCooldown(1);
                 break;
             case 7:
-                for (int i = 0; i < GameManager.UnlearntSpellList.Count; i++)
-                    (gameObject.GetComponent(GameManager.UnlearntSpellList[i]) as Spell).Upgrade();
                 for (int i = 0; i < GameManager.LearntSpellList.Count; i++)
                     (gameObject.GetComponent(GameManager.LearntSpellList[i]) as Spell).Upgrade();
                 break;
