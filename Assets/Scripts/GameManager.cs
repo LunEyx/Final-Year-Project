@@ -220,7 +220,7 @@ public class GameManager : NetworkBehaviour
     private IEnumerator Level1()
     {
         yield return new WaitForSeconds(10);
-        for (int i = 0; i < 3; i++)
+        for (int i = 0; i < 1; i++) // TODO: 3
         {
             SpawnPoint.EnableSpawn = true;
             yield return new WaitForSeconds(20);
@@ -234,7 +234,7 @@ public class GameManager : NetworkBehaviour
     private IEnumerator Level2()
     {
         yield return new WaitForSeconds(10);
-        for (int i=0; i< 5; i++)
+        for (int i=0; i< 1; i++) // TODO: 5
         {  
             SpawnPoint.EnableSpawn = true;
             SpawnPoint.spawnTime = 2f;

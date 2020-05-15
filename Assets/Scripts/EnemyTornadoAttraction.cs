@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class EnemyTornadoAttraction : TornadoAttraction
 {
-    public static int Damage = 1;
+    public static int Damage = 0; // TODO: 1
 
     protected override void OnTriggerEnter(Collider obj){
         if (obj.GetComponent<Rigidbody>() != null && obj.gameObject.tag != "Enemy") {
