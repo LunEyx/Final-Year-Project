@@ -178,20 +178,23 @@ public class Player : Actor
         isDead = true;
         GameManager.RemovePlayer(this);
         rb.isKinematic = true;
-        Transform transform = gameObject.GetComponentInChildren<Animator>().transform;
-        for (int i = 0; i < 10; i++)
+        if (isLocalPlayer)
         {
-            yield return new WaitForSeconds(0.1f);
-            Camera.main.GetComponent<Grayscale>().Increase(0.1f);
-            transform.eulerAngles = new Vector3(transform.eulerAngles.x, transform.eulerAngles.y, transform.eulerAngles.z + 9);
+            Transform transform = gameObject.GetComponentInChildren<Animator>().transform;
+            for (int i = 0; i < 10; i++)
+            {
+                yield return new WaitForSeconds(0.1f);
+                Camera.main.GetComponent<Grayscale>().Increase(0.1f);
+                transform.eulerAngles = new Vector3(transform.eulerAngles.x, transform.eulerAngles.y, transform.eulerAngles.z + 9);
+            }
+            yield return new WaitForSeconds(3);
+            GameObject gameover = Resources.Load<GameObject>("GameOver");
+            if (GameManager.GetPlayers().Count > 0)
+            {
+                gameover.GetComponentsInChildren<Text>()[1].text = "Watch other player";
+            }
+            GameObject.Instantiate(gameover);
         }
-        yield return new WaitForSeconds(3);
-        GameObject gameover = Resources.Load<GameObject>("GameOver");
-        if (GameManager.GetPlayers().Count > 0)
-        {
-            gameover.GetComponentsInChildren<Text>()[1].text = "Watch other player";
-        }
-        GameObject.Instantiate(gameover);
     }
 
     private IEnumerator Jump()
@@ -224,7 +227,6 @@ public class Player : Actor
         GameManager.UnlearntSpellList.Remove(spell.GetType().Name);
         GameManager.LearntSpellList.Add(spell.GetType().Name);
         skillLearntCounter++;
-        Debug.Log(skillLearntCounter);
     } 
 
     public bool CanAfford(int value)

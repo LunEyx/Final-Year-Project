@@ -12,6 +12,8 @@ public class GameOver : MonoBehaviour
         if (GameManager.GetPlayers().Count > 0 && text.text == "Watch other player")
         {
             Camera.main.GetComponent<CameraFollow>().SetTarget(GameManager.GetPlayers()[0].transform);
+            Destroy(gameObject);
+            Camera.main.GetComponent<Grayscale>().Increase(-1f);
         }
         else
         {

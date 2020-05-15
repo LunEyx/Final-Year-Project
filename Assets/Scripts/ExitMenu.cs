@@ -4,7 +4,7 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.Networking;
 
-public class ExitMenu : NetworkBehaviour
+public class ExitMenu : MonoBehaviour
 {
     public void ExitGame()
     {
@@ -13,14 +13,7 @@ public class ExitMenu : NetworkBehaviour
 
     public void BackToTitle()
     {
-        if (isServer)
-        {
-            NetworkManager.singleton.StopHost();
-        }
-        else
-        {
-            NetworkManager.singleton.StopClient();
-        }
+        NetworkManager.singleton.StopClient();
     }
 
     

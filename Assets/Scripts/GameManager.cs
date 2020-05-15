@@ -40,11 +40,13 @@ public class GameManager : NetworkBehaviour
         if (localPlayer == null)
         {
             ClientScene.AddPlayer(0);
+            Debug.Log("Add: " + players.Count);
         }
         else
         {
             localPlayer.Reload();
         }
+        Debug.Log(players.Count);
 
         if (!dataLoaded)
         {
@@ -94,7 +96,14 @@ public class GameManager : NetworkBehaviour
     public static void Clear()
     {
         players = new List<Player>();
-    }
+        localPlayer = null;
+        CameraMove = true;
+        isGifted = false;
+        itemList = new List<Item>();
+        unlearntSpellList = new List<string>();
+        learntSpellList = new List<string>();
+        dataLoaded = false;
+}
 
     public static List<Player> GetPlayers()
     {
