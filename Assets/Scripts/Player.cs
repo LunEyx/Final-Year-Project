@@ -176,7 +176,8 @@ public class Player : Actor
     private IEnumerator Death()
     {
         isDead = true;
-
+        GameManager.RemovePlayer(this);
+        rb.isKinematic = true;
         Transform transform = gameObject.GetComponentInChildren<Animator>().transform;
         for (int i = 0; i < 10; i++)
         {
@@ -185,7 +186,12 @@ public class Player : Actor
             transform.eulerAngles = new Vector3(transform.eulerAngles.x, transform.eulerAngles.y, transform.eulerAngles.z + 9);
         }
         yield return new WaitForSeconds(3);
-        // TODO: GameOver Scene
+        GameObject gameover = Resources.Load<GameObject>("GameOver");
+        if (GameManager.GetPlayers().Count > 0)
+        {
+            gameover.GetComponentsInChildren<Text>()[1].text = "Watch other player";
+        }
+        GameObject.Instantiate(gameover);
     }
 
     private IEnumerator Jump()

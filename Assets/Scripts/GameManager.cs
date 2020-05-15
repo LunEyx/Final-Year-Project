@@ -145,6 +145,11 @@ public class GameManager : NetworkBehaviour
         players.Add(player);
     }
 
+    public static void RemovePlayer(Player player)
+    {
+        players.Remove(player);
+    }
+
     private void NextStage()
     {
         switch (level)
