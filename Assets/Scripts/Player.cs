@@ -329,4 +329,9 @@ public class Player : Actor
             spells[i].SetIconContainer(spellIcons[i]);
         }
     }
+
+    public int getMaxHp()
+    {
+        return hpSystem.GetMaxHp();
+    }
 }

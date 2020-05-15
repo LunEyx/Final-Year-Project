@@ -21,6 +21,8 @@ public class StartMenu : MonoBehaviour
 
     public void HostNormal()
     {
+        Slime.Difficulty = 1;
+        Boss.Difficulty = 1;
         GameManager.Clear();
         NetworkManager.singleton.networkPort = 7777;
         NetworkManager.singleton.StopHost();
@@ -29,6 +31,8 @@ public class StartMenu : MonoBehaviour
 
     public void HostAdvanced()
     {
+        Slime.Difficulty = 2;
+        Slime.Difficulty = 2;
         GameManager.Clear();
         NetworkManager.singleton.networkPort = 7777;
         NetworkManager.singleton.StopHost();
