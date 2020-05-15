@@ -74,7 +74,7 @@ public class Player : Actor
         if (!isLocalPlayer)
         {
             clientHpBar.SetActive(true);
-            hpBar = clientHpBar.GetComponentInChildren<Image>().GetComponentInChildren<Image>();
+            hpBar = clientHpBar.transform.Find("hp_background").Find("hp_filled").GetComponentInChildren<Image>();
             GameManager.AddPlayer(this);
         }
         DontDestroyOnLoad(this);

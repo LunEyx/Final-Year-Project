@@ -23,7 +23,7 @@ public class Boss : Enemy
     {
         base.Start();
         animator = GetComponentInChildren<Animator>();
-        hpSystem = new HpSystem(MaxHp * (1 + Difficulty / 10));
+        hpSystem = new HpSystem((int) (MaxHp * (1 + Difficulty / 10f) * (GameManager.isMultiplayer ? 1.5 : 1)));
         bubbleOffset = new Vector3(0, 0.6f, 0);
         bubbleScale = 2;
         spells[0] = gameObject.AddComponent<BossFireball>() as Spell;

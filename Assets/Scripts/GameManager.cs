@@ -21,6 +21,7 @@ public class GameManager : NetworkBehaviour
     private static List<string> unlearntSpellList = new List<string>();
     private static List<string> learntSpellList = new List<string>();
     public int level = 0;
+    public static bool isMultiplayer = false;
     public static bool CameraMove = true;
     
     public static List<Item> ItemList {
@@ -101,6 +102,7 @@ public class GameManager : NetworkBehaviour
         unlearntSpellList = new List<string>();
         learntSpellList = new List<string>();
         dataLoaded = false;
+        isMultiplayer = false;
 }
 
     public static List<Player> GetPlayers()

@@ -8,7 +8,7 @@ public class ShopTriggerCollider : MonoBehaviour
     private void OnTriggerEnter(Collider collider)
     {
         Player player = collider.GetComponent<Player>();
-        if (player != null)
+        if (player != null && player.isLocalPlayer)
         {
             shop_UI.Show(player);
             GameManager.CameraMove = false;
@@ -18,7 +18,7 @@ public class ShopTriggerCollider : MonoBehaviour
     private void OnTriggerExit(Collider collider)
     {
         Player player = collider.GetComponent<Player>();
-        if (player != null)
+        if (player != null && player.isLocalPlayer)
         {
             shop_UI.Hide();
             GameManager.CameraMove = true;
