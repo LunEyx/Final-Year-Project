@@ -6,8 +6,20 @@ using UnityEngine.Networking;
 
 public class StartMenu : MonoBehaviour
 {
-    public void GameStart()
+    public void GameStartNormal()
     {
+        Slime.Difficulty = 1;
+        Boss.Difficulty = 1;
+        GameManager.Clear();
+        NetworkManager.singleton.networkPort = 7778;
+        NetworkManager.singleton.StopHost();
+        SceneManager.LoadScene("StoryScene");
+    }
+
+    public void GameStartAdvanced()
+    {
+        Slime.Difficulty = 2;
+        Boss.Difficulty = 2;
         GameManager.Clear();
         NetworkManager.singleton.networkPort = 7778;
         NetworkManager.singleton.StopHost();
