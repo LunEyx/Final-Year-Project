@@ -20,7 +20,6 @@ public class FireNovaCollisionHandler : MonoBehaviour
             Transform target = targetsInViewRadius[i].transform;
             
             target.GetComponent<Actor>().TakeDamage(FireNova.Damage);
-            Debug.Log("found");
         }
     }
 }

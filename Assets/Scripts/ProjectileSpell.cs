@@ -19,6 +19,7 @@ public abstract class ProjectileSpell : Spell
     [Command]
     protected void CmdInstantiate(string prefabName)
     {
+        Debug.Log(prefabName);
         GameObject prefab = Resources.Load<GameObject>(prefabName);
         projectile = Instantiate(prefab, transform.position + transform.forward * 2, transform.rotation);
         projectile.GetComponent<Rigidbody>().velocity = transform.forward * projectileSpeed;

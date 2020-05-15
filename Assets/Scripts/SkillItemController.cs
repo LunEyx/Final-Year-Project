@@ -37,12 +37,10 @@ public class SkillItemController : MonoBehaviour
     {
         if (gameObject.GetComponentsInChildren<Text>()[1].text == "New!")
         {
-            Debug.Log("Learn");
             player.LearnSpell(Type.GetType(spellName), player.skillLearntCounter);
         }
         else
         {
-            Debug.Log("Upgrade");
             (player.GetComponent(spellName) as Spell).Upgrade();
         }
 
