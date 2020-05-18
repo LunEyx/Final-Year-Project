@@ -25,7 +25,9 @@ public class ShopUIController : MonoBehaviour
 
     private void Update()
     {
-        tooltip.transform.position = Input.mousePosition + new Vector3(widthOffset,heightOffset,0);
+        if (Input.mousePosition.x + tooltip.transform.GetComponent<RectTransform>().sizeDelta.x <= Screen.width)
+            tooltip.transform.position = Input.mousePosition + new Vector3(widthOffset,heightOffset,0);
+        else tooltip.transform.position = Input.mousePosition + new Vector3(-widthOffset, heightOffset, 0);
     }
 
     private void CreateItemContainer(Item item, int offset)
