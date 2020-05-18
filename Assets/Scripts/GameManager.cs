@@ -103,7 +103,12 @@ public class GameManager : NetworkBehaviour
         learntSpellList = new List<string>();
         dataLoaded = false;
         isMultiplayer = false;
-}
+        Fireball.Damage = 5;
+        Bubble.Damage = 0;
+        Tornado.Damage = 0;
+        FireNova.Damage = 10;
+        Meteor.Damage = 20;
+    }
 
     public static List<Player> GetPlayers()
     {

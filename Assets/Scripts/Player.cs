@@ -328,6 +328,8 @@ public class Player : Actor
         {
             spells[i].SetIconContainer(spellIcons[i]);
         }
+        TakeDamage(0);
+        GainExp(0);
     }
 
     public int getMaxHp()
