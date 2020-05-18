@@ -4,7 +4,6 @@ using UnityEngine;
 
 public class TornadoCollisionHandler : MonoBehaviour
 {
-    private const int FireDamage = 20;
     private int damage = Tornado.Damage;
 
     private void OnTriggerEnter(Collider other)
@@ -20,7 +19,7 @@ public class TornadoCollisionHandler : MonoBehaviour
             {
                 Material mat = Resources.Load<Material>("Materials/glow_volumetric_alpha_red");
                 gameObject.GetComponent<ParticleSystemRenderer>().material = mat;
-                damage += FireDamage;
+                damage += Fireball.Damage;
             }
         }
     }
