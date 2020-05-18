@@ -38,8 +38,9 @@ public class LevelUpUIController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        //if (screen.Contains(new Vector2(tooltip.transform))
-        tooltip.transform.position = Input.mousePosition + new Vector3(widthOffset, heightOffset, 0);
+        if (Input.mousePosition.x + tooltip.transform.GetComponent<RectTransform>().sizeDelta.x <= Screen.width)
+            tooltip.transform.position = Input.mousePosition + new Vector3(widthOffset, heightOffset, 0);
+        else tooltip.transform.position = Input.mousePosition + new Vector3(-widthOffset, heightOffset, 0);
     }
 
     private void createSkillItemTemplate(string spellName, int offset)
